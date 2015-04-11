@@ -1,6 +1,7 @@
 # Fantastic4
-# Team Name
-Fantastic4
+# Project Description
+Fantastic visual voting application for events.
+Create a event-based online polling platform that allow users to share, vote and discover new ideas.
 
 # Members
 * autekroy
