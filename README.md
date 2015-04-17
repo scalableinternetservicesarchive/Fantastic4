@@ -12,6 +12,8 @@ Fantastic visual voting application for events. Create an event-based online pol
 
 
 
-
 ## Pivotal Tracker Link
 https://www.pivotaltracker.com/n/projects/1321156
+
+## Tools
+ 1. Ruby on Rails
