@@ -7,11 +7,13 @@ Fantastic visual voting application for events. Create an event-based online pol
 
 | ![muxin](https://github.com/scalableinternetservices/Fantastic4/raw/master/res/yuxi.jpg) | ![Tiffanyyny](https://github.com/scalableinternetservices/Fantastic4/raw/master/res/niyan.jpg) | ![autekroy](https://github.com/scalableinternetservices/Fantastic4/raw/master/res/yaoren.jpg) | ![sunnyuny](https://github.com/scalableinternetservices/Fantastic4/raw/master/res/qianyun.jpg) |
 | :------------: | :------------: | :------------: | :------------: |
-| Yuxi Chen | Niyan Ying | Yaoren Zhang | Qianyun Zhu |
+| Yuxi Chen | Niyan Ying | Yao-Jen Chang | Qianyun Zhu |
 | [@muxin](https://github.com/muxin) | [@Tiffanyyny](https://github.com/Tiffanyyny) | [@autekroy](https://github.com/autekroy) | [@sunnyuny](https://github.com/sunnyuny) |
-
 
 
 
 ## Pivotal Tracker Link
 https://www.pivotaltracker.com/n/projects/1321156
+
+## Tools
+ 1. Ruby on Rails
