@@ -742,3 +742,120 @@ Processing by Devise::SessionsController#new as HTML
   Rendered devise/shared/_links.html.erb (1.8ms)
   Rendered devise/sessions/new.html.erb within layouts/application (15.5ms)
 Completed 200 OK in 74ms (Views: 57.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/posts/new" for ::1 at 2015-04-24 16:45:48 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PostsController#new as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT "events".* FROM "events"
+  Rendered posts/_form.html.erb (33.6ms)
+  Rendered posts/new.html.erb within layouts/application (37.4ms)
+Completed 200 OK in 230ms (Views: 213.2ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/posts" for ::1 at 2015-04-24 16:45:53 -0700
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Dz35d4/AiAKfa/nvhoFJ/iXiSC+7lq1dN05AlDgh4qtK8rQFJ5ZyUvWuv/zZMnLunpxR+/ZQEZev+ogKPbz0zg==", "event"=>{"event_id"=>"2"}, "post"=>{"date(1i)"=>"2015", "date(2i)"=>"4", "date(3i)"=>"24", "date(4i)"=>"23", "date(5i)"=>"45", "text_content"=>"", "vote_count"=>""}, "commit"=>"Create Post"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered posts/_form.html.erb (9.4ms)
+  Rendered posts/new.html.erb within layouts/application (10.7ms)
+Completed 200 OK in 72ms (Views: 63.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts" for ::1 at 2015-04-24 16:48:36 -0700
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered posts/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 68ms (Views: 66.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/posts/new" for ::1 at 2015-04-24 16:48:41 -0700
+Processing by PostsController#new as HTML
+  [1m[35mEvent Load (0.1ms)[0m  SELECT "events".* FROM "events"
+  Rendered posts/_form.html.erb (8.6ms)
+  Rendered posts/new.html.erb within layouts/application (10.9ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (undefined method `event_id' for #<Event:0x007f8f3ea7a768>):
+    13: 
+    14:   <div class="field">
+    15:     <%= f.label :event_id %><br>
+    16:     <%= collection_select(:event, :event_id, Event.all, :event_id, :title) %>
+    17:   </div>
+    18:   <div class="field">
+    19:     <%= f.label :date %><br>
+  app/views/posts/_form.html.erb:16:in `block in _app_views_posts__form_html_erb__2863591352924058620_70126603601840'
+  app/views/posts/_form.html.erb:1:in `_app_views_posts__form_html_erb__2863591352924058620_70126603601840'
+  app/views/posts/new.html.erb:3:in `_app_views_posts_new_html_erb___4076831606278941705_70126589823820'
+
+
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.0ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (60.2ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (55.2ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (117.3ms)
+
+
+Started GET "/posts/new" for ::1 at 2015-04-24 16:48:41 -0700
+Processing by PostsController#new as HTML
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered posts/_form.html.erb (4.4ms)
+  Rendered posts/new.html.erb within layouts/application (5.8ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (undefined method `event_id' for #<Event:0x007f8f402ec940>):
+    13: 
+    14:   <div class="field">
+    15:     <%= f.label :event_id %><br>
+    16:     <%= collection_select(:event, :event_id, Event.all, :event_id, :title) %>
+    17:   </div>
+    18:   <div class="field">
+    19:     <%= f.label :date %><br>
+  app/views/posts/_form.html.erb:16:in `block in _app_views_posts__form_html_erb__2863591352924058620_70126617060940'
+  app/views/posts/_form.html.erb:1:in `_app_views_posts__form_html_erb__2863591352924058620_70126617060940'
+  app/views/posts/new.html.erb:3:in `_app_views_posts_new_html_erb___4076831606278941705_70126603443320'
+
+
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.2ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (50.3ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (38.8ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/sunnyzhu/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (86.0ms)
+
+
+Started GET "/posts/new" for ::1 at 2015-04-24 16:49:12 -0700
+Processing by PostsController#new as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT "events".* FROM "events"
+  Rendered posts/_form.html.erb (5.8ms)
+  Rendered posts/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 54ms (Views: 53.6ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/posts" for ::1 at 2015-04-24 16:49:15 -0700
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VMZuMgAy155EElef2btCum85zv3vk75Rg/y2VKkgTicRCSNAqGQtzi7XEYyGCHmq1EfXKaJVApsbSH7KrL1YQg==", "event"=>{"event_id"=>"1"}, "post"=>{"date(1i)"=>"2015", "date(2i)"=>"4", "date(3i)"=>"24", "date(4i)"=>"23", "date(5i)"=>"49", "text_content"=>"", "vote_count"=>""}, "commit"=>"Create Post"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered posts/_form.html.erb (4.7ms)
+  Rendered posts/new.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 38ms (Views: 33.4ms | ActiveRecord: 0.3ms)
