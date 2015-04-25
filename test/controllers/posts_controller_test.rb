@@ -21,7 +21,7 @@ class PostsControllerTest < ActionController::TestCase
       post :create, post: { date: @post.date, event_id: @post.event_id, text_content: @post.text_content, vote_count: @post.vote_count }
     end
 
-    assert_redirected_to event_path(assigns(:post).event)
+    assert_redirected_to post_path(assigns(:post))
   end
 
   test "should show post" do
