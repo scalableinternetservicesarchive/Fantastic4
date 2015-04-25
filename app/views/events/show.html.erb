@@ -14,6 +14,8 @@
   <strong>Tags:</strong>
   <%= @event.tags %>
 </p>
-
+<div>
+  <%= link_to("Post to this event", controller: "posts", action: "new", post: {event_id: @event.id} ) %>
+</div>
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

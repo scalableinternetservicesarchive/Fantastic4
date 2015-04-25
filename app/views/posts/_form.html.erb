@@ -11,9 +11,10 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :event_id %><br>
-    <%= collection_select(:post, :event_id, Event.all, :id, :title) %>
+  <div>
+    On Event:<br>
+    <%= @post.event.title %>
+    <%= f.hidden_field :event_id, value: @post.event.id %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
