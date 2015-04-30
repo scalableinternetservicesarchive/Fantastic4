@@ -1,19 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Events Library</h1>
+<h1 class="sub-header">Events Library</h1>
 
-<table>
-   <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= link_to "#{event.title}", event %></td>
-        <td><%= event.description %></td>
-		<td><%= "#{event.posts.count} posts" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Votes</th>
+		</thead>
+		<tbody>
+			<% @events.each do |event| %>
+			<tr>
+        		<td><%= link_to "#{event.title}", event %></td>
+        		<td><%= event.description %></td>
+				<td><%= "#{event.posts.count} posts" %></td>
+      		</tr>
+    	 	<% end %>
+  	  	</tbody>
+	</table>
+</div>
 <br>
 
 <%= link_to 'New Event', new_event_path %>

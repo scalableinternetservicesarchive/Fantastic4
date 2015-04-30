@@ -67,9 +67,9 @@ class PostsController < ApplicationController
     from = params[:from]
     respond_to do |format|
       if from.to_i == 1
-        format.html { redirect_to @post.event, notice: 'vote 1.' }
+        format.html { redirect_to @post.event, notice: "successfully vote for post #{@post.id}." }
       else
-        format.html { redirect_to @post, notice: "#{from} sdjkfsdlfba" }
+        format.html { redirect_to @post, notice: "successfully vote for post #{@post.id}." }
       end
     end
   end

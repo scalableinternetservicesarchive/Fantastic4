@@ -14,20 +14,27 @@
   <strong>Tags:</strong>
   <%= @event.tags %>
 </p>
-<div>
-  <%= link_to("Post to this event", controller: "posts", action: "new", post: {event_id: @event.id} ) %>
-</div>
 
-<table>
-	<% @event.posts.each do |post|%>
+<!-- <%= link_to 'Edit', edit_event_path(@event) %> | -->
+
+<%= link_to("Post to this event", controller: "posts", action: "new", post: {event_id: @event.id} ) %>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<th>Post content</th>
+			<th>Current vote</th>
+		</thead>
+		<% @event.posts.each do |post|%>
 		<tr>
-			<td><%= post.text_content%></td>
+			<td><%= link_to "#{post.text_content}", post%></td>
 			<td><%= post.vote_count%></td>
-			<td><%= link_to "see detail", post%></td>
 			<td><%= button_to "vote", post, action: "vote", params: {from: 1}%></td>
 		</tr>
-	<% end %>
-</table>
+		<% end %>
+	</table>
+</div>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+
+
