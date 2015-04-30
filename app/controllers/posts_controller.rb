@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
 
   # GET /posts
   # GET /posts.json
@@ -60,7 +60,20 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  def vote
+    @post.vote_count += 1
+    @post.save
+    from = params[:from]
+    respond_to do |format|
+      if from.to_i == 1
+        format.html { redirect_to @post.event, notice: 'vote 1.' }
+      else
+        format.html { redirect_to @post, notice: "#{from} sdjkfsdlfba" }
+      end
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -69,6 +82,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:event_id, :text_content, :vote_count)
+      params.require(:post).permit(:event_id, :text_content, :vote_count, :from)
     end
 end

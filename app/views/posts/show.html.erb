@@ -20,5 +20,6 @@
   <%= @post.created_at %>
 </p>
 
+<%= button_to "vote", action: "vote", params: {from: 2}%>
 <%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', event_path(@post.event) %>
