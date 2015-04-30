@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150424231558) do
+ActiveRecord::Schema.define(version: 20150430000404) do
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20150424231558) do
 
   create_table "posts", force: :cascade do |t|
     t.integer  "event_id"
-    t.datetime "date"
     t.text     "text_content"
     t.integer  "vote_count"
     t.datetime "created_at",   null: false

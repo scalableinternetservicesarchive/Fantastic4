@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :tags %><br>
-    <%= f.text_field :tags %>
+    <%= f.select :tags, Event::TAG_TYPES %>
   </div>
   <div class="actions">
     <%= f.submit class: 'btn btn-primary' %>

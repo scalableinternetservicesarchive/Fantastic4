@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @post.date %>
-</p>
-
-<p>
   <strong>Text content:</strong>
   <%= @post.text_content %>
 </p>
@@ -18,6 +13,11 @@
 <p>
   <strong>Vote count:</strong>
   <%= @post.vote_count %>
+</p>
+
+<p>
+  <strong>Post at:</strong>
+  <%= @post.created_at %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

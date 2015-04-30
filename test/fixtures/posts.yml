@@ -2,12 +2,10 @@
 
 one:
   event: one
-  date: 2015-04-24 16:15:58
   text_content: 'MyText'
   vote_count: 1
 
 two:
   event: one
-  date: 2015-04-24 16:15:58
   text_content: 'MyText'
   vote_count: 1
