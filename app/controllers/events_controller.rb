@@ -5,11 +5,15 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    @events = @events.sort_by {|event| -event.posts.count}
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    if @event != nil
+      @posts = @event.posts.sort_by {|p| -p.vote_count}
+    end
   end
 
   # GET /events/new

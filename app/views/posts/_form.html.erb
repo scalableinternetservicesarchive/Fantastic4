@@ -12,17 +12,13 @@
   <% end %>
 
   <div>
-    On Event:<br>
+    On Event:
     <%= @post.event.title %>
     <%= f.hidden_field :event_id, value: @post.event.id %>
   </div>
   <div class="field">
     <%= f.label :text_content %><br>
     <%= f.text_area :text_content %>
-  </div>
-  <div class="field">
-    <%= f.label :vote_count %><br>
-    <%= f.number_field :vote_count %>
   </div>
   <div class="actions">
     <%= f.submit %>

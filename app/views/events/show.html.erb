@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <p>
   <strong>Title:</strong>
@@ -25,7 +25,7 @@
 			<th>Post content</th>
 			<th>Current vote</th>
 		</thead>
-		<% @event.posts.each do |post|%>
+		<% @posts.each do |post|%>
 		<tr>
 			<td><%= link_to "#{post.text_content}", post%></td>
 			<td><%= post.vote_count%></td>
