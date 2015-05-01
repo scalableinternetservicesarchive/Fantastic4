@@ -23,15 +23,25 @@
 		    	<span class="icon-bar"></span>
 		    	<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Fantastic Events</a>
+			<a class="navbar-brand" href="/">Fantastic Events</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-  	        	<li><a href="#">Homepage</a></li>
-  	            <li><a href="#">Settings</a></li>
-  	            <li><a href="#">Profile</a></li>
-  	            <li><a href="#">Help</a></li>
+  	        	<li><a href="/">Homepage</a></li>
+  	            <li><a href="/users/edit">Profile</a></li>
   	        </ul>
+          
+            <% unless user_signed_in? %>
+                <%= link_to "Login", new_user_session_path, :id => "login-btn", 
+                    :class => "btn btn-default navbar-btn", :method => :get %>
+                <%= link_to "Sign up", new_user_registration_path, :id => "sign-up-btn",
+                    :class => "btn btn-default navbar-btn", :method => :get %>
+            <% else %>
+                <%= link_to "Logout", destroy_user_session_path, :id => "sign-up-btn",
+                    :class => "btn btn-default navbar-btn", :method => :delete %>
+                <p class="navbar-text"><b><%= current_user.email %></b></p>
+            <% end %>
+			
           	<form class="navbar-form navbar-right">
             	<input type="text" class="form-control" placeholder="Search...">	
           	</form>
@@ -44,9 +54,9 @@
 		<div class="sidebar">
 			<ul class="nav nav-sidebar">
             	<li class="active"><a href="#">Campus <span class="sr-only">(current)</span></a></li>
-            	<li><a href="#">Life</a></li>
-            	<li><a href="#">Movies</a></li>
-            	<li><a href="#">Music</a></li>
+            	<li><a href="/">Life</a></li>
+            	<li><a href="/">Movies</a></li>
+            	<li><a href="/">Music</a></li>
           	</ul>
 		</div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
