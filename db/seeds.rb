@@ -1,6 +1,3 @@
-Event.delete_all
-Post.delete_all
-
 
 event1 = Event.create(
 	title: 'School Queen',
@@ -23,25 +20,25 @@ event3 = Event.create(
 post1 = Post.create(
   event_id: event1.id,
   text_content: 'Emma',
-  vote_count: 15,
+  vote_count: 3,
 )
 
 post2 = Post.create(
   event_id: event1.id,
   text_content: 'Julia',
-  vote_count: 12,
+  vote_count: 2,
 )
 
 post3 = Post.create(
   event_id: event2.id,
   text_content: 'Harry Potter',
-  vote_count: 80,
+  vote_count: 2,
 )
 
 post4 = Post.create(
   event_id: event3.id,
   text_content: 'Adele',
-  vote_count: 20,
+  vote_count: 1,
 )
 
 user1 = User.create(
@@ -65,3 +62,4 @@ user3 = User.create(
 user1.posts << [post1, post3]
 user2.posts << [post1, post2]
 user3.posts << [post1, post2, post3, post4]
+

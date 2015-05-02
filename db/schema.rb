@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502001607) do
+ActiveRecord::Schema.define(version: 20150502101835) do
 
   create_table "events", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",       null: false
     t.text     "description"
     t.string   "tags"
     t.datetime "created_at",  null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20150502001607) do
   create_table "posts", force: :cascade do |t|
     t.integer  "event_id"
     t.text     "text_content"
-    t.integer  "vote_count",   default: 0
+    t.integer  "vote_count",   default: 0, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20150502001607) do
   add_index "posts", ["event_id"], name: "index_posts_on_event_id"
 
   create_table "user_posts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "user_id",    null: false
+    t.integer  "post_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
