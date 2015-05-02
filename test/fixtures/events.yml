@@ -1,16 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: Music
-  description: 'Party'
-  tags: Music
+event1:
+  title: School Queen
+  description: 'Vote for the school queen'
+  tags: School Life
 
-two:
-  title: night
-  description: 'Party'
+event2:
+  title: Best Movie
+  description: 'Vote for the best movie 2014'
   tags: Movie
 
-three:
-  title: Gmail
-  description: 'Party'
-  tags: email
+event3:
+  title: Pop Star
+  description: 'best singer ever'
+  tags: Music

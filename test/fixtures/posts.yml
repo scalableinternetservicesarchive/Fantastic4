@@ -1,11 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  event: one
-  text_content: 'MyText'
-  vote_count: 1
+post1:
+  event: event1
+  text_content: 'Emma'
+  vote_count: 3
 
-two:
-  event: one
-  text_content: 'MyText'
-  vote_count: 1
+
+post2:
+  event: event1
+  text_content: 'Julia'
+  vote_count: 2
+
+
+post3:
+  event: event2
+  text_content: 'Harry Potter'
+  vote_count: 2

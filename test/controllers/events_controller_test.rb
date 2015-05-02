@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventsControllerTest < ActionController::TestCase
   setup do
-    @event = events(:one)
+    @event = events(:event1)
     @update = {
       title: 'Hello',
       description: 'World',
