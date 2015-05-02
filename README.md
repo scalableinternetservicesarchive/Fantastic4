@@ -1,4 +1,5 @@
-# Fantastic4
+# Fantastic4 [![Build Status](https://travis-ci.org/scalableinternetservices/Fantastic4.svg?branch=master)](https://travis-ci.org/scalableinternetservices/Fantastic4)
+
 
 ## Project Description
 Fantastic visual voting application for events. Create an event-based online polling platform that allow users to share, vote and discover interesting things.
