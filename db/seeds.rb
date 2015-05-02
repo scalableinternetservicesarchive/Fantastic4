@@ -20,27 +20,48 @@ event3 = Event.create(
 	tags: 'Music',
 )
 
-Post.create!(
+post1 = Post.create(
   event_id: event1.id,
   text_content: 'Emma',
   vote_count: 15,
 )
 
-Post.create(
+post2 = Post.create(
   event_id: event1.id,
   text_content: 'Julia',
   vote_count: 12,
 )
 
-Post.create(
+post3 = Post.create(
   event_id: event2.id,
   text_content: 'Harry Potter',
   vote_count: 80,
 )
 
-Post.create(
+post4 = Post.create(
   event_id: event3.id,
   text_content: 'Adele',
   vote_count: 20,
 )
 
+user1 = User.create(
+  email: 'a@a.com',
+  password: '88888888',
+  password_confirmation: '88888888',
+)
+
+user2 = User.create(
+  email: 'b@b.com',
+  password: '88888888',
+  password_confirmation: '88888888',
+)
+
+user3 = User.create(
+  email: 'c@c.com',
+  password: '88888888',
+  password_confirmation: '88888888',
+)
+
+user1.posts << [post1, post3]
+user2.posts << [post1, post2]
+user3.posts << [post1, post2, post3, post4]
