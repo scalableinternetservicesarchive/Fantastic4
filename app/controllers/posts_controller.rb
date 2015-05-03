@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @users = @post.users
+    @voters = @post.voters
   end
 
   # GET /posts/new
@@ -63,13 +63,14 @@ class PostsController < ApplicationController
   end
   
   def vote
+    @post.voters << [User.find(params[:voter])]
     @post.vote_count += 1
     @post.save
-    from = params[:from]
+    click_page = params[:click_page]
     respond_to do |format|
-      if from.to_i == 1
+      if click_page == 'event_show'
         format.html { redirect_to @post.event, notice: "successfully vote for post #{@post.id}." }
-      else
+      elsif click_page == 'post_show'
         format.html { redirect_to @post, notice: "successfully vote for post #{@post.id}." }
       end
     end
@@ -83,6 +84,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:event_id, :text_content, :vote_count, :from)
+      params.require(:post).permit(:event_id, :text_content, :vote_count, :click_page, :voter)
     end
 end

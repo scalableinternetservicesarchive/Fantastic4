@@ -59,7 +59,7 @@ user3 = User.create(
   password_confirmation: '88888888',
 )
 
-user1.posts << [post1, post3]
-user2.posts << [post1, post2]
-user3.posts << [post1, post2, post3, post4]
+user1.voted_posts << [post1, post3]
+user2.voted_posts << [post1, post2]
+user3.voted_posts << [post1, post2, post3, post4]
 

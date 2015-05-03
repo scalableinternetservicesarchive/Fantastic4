@@ -6,34 +6,34 @@
 #
 
 t1:
-  user: user1
-  post: post1
+  voter: user1
+  voted_post: post1
 
 t2:
-  user: user1
-  post: post3
+  voter: user1
+  voted_post: post3
 
 t3:
-  user: user2
-  post: post1
+  voter: user2
+  voted_post: post1
 
 t4:
-  user: user2
-  post: post2
+  voter: user2
+  voted_post: post2
 
 t5:
-  user: user3
-  post: post1
+  voter: user3
+  voted_post: post1
 
 t6:
-  user: user3
-  post: post2
+  voter: user3
+  voted_post: post2
 
 t7:
-  user: user3
-  post: post3
+  voter: user3
+  voted_post: post3
 
 t8:
-  user: user3
-  post: post4
+  voter: user3
+  voted_post: post4
 

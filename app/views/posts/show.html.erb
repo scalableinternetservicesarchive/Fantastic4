@@ -22,18 +22,22 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <th>Users</th>
+            <th>Voters</th>
         </thead>
         <tbody>
-            <% @users.each do |user| %>
+            <% @voters.each do |voter| %>
             <tr>
-                <td><%= user.email %></td>
+                <td><%= voter.email %></td>
             </tr>
             <% end %>
         </tbody>
     </table>
 </div>
+<% unless user_signed_in? %>
+  <p>not signed in, cannot vote</p>
+<% else %>
+  <%= button_to "vote", action: "vote", params: {voter: current_user, click_page: 'post_show'}%>
+<% end %>
 
-<%= button_to "vote", action: "vote", params: {from: 2}%>
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', event_path(@post.event) %>
