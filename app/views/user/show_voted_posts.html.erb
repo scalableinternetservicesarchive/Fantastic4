@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <th>Voted Posts</th>
+        </thead>
+        <tbody>
+			<% @voted_posts.group_by(&:event_id).each do |event, posts| %>
+					<tr>
+						<td><%= event %></td>
+						<%= render :partial => 'post', :collection => posts %>
+					</tr>
+			    	
+			<% end %>
+        </tbody>
+    </table>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="sidebar">
+			<ul class="nav nav-sidebar">
+            	<li class="active">
+            	<li><a href="/user/events">Event</a></li>
+            	<li><a href="/user/posts">Post</a></li>
+            	<li><a href="/users/edit">Profile</a></li>
+          	</ul>
+		</div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<%= yield %>
+		</div>		
+	</div>
+</div>
