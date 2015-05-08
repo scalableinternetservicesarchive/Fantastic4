@@ -28,14 +28,20 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-
-    # bug cannot find current_user
-    # current_user.organized_events << @event
+    success = false
+    notice = ""
+    if current_user != nil
+      @event = Event.new(event_params)
+      if @event.save
+        success = true
+        current_user.organized_events << @event
+        notice = "Event was successfully created"
+      end
+    end
     
     respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+      if success == true
+        format.html { redirect_to @event, notice: "#{notice}" }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }

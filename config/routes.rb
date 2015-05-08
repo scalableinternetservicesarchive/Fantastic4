@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'events#index'
   
-  get '/user/events' => 'user#show_organized_events'
-  get '/user/posts' => 'user#show_voted_posts'
-  get '/user' => 'user#show'
+  get '/profile/events' => 'user#show_organized_events'
+  get '/profile/posts' => 'user#show_created_posts'
+  get '/profile/votes' => 'user#show_voted_posts'
+  get '/profile' => 'user#show'
+
   post 'posts/:id' => 'posts#vote'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

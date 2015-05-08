@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<h1 class="sub-header">My Voting History</h1>
+
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <th>Voted Posts</th>
+			<th>Events</th>
+			<th>Vote time</th>
         </thead>
         <tbody>
 			<% @voted_posts.group_by(&:event_id).each do |event, posts| %>
@@ -22,8 +25,9 @@
 		<div class="sidebar">
 			<ul class="nav nav-sidebar">
             	<li class="active">
-            	<li><a href="/user/events">Event</a></li>
-            	<li><a href="/user/posts">Post</a></li>
+            	<li><a href="/profile/events">Event</a></li>
+            	<li><a href="/profile/posts">Post</a></li>
+				<li><a href="/profile/votes">Vote</a></li>
             	<li><a href="/users/edit">Profile</a></li>
           	</ul>
 		</div>

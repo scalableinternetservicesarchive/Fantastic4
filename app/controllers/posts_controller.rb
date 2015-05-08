@@ -25,11 +25,20 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-
-    respond_to do |format|
+    success = false
+    notice = ""
+    if current_user != nil
+      @post = Post.new(post_params)
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        success = true
+        current_user.created_posts << @post
+        notice = "Post was successfully created"
+      end
+    end
+    
+    respond_to do |format|
+      if success == true
+        format.html { redirect_to @post, notice: "#{notice}" }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -65,12 +74,14 @@ class PostsController < ApplicationController
   def vote
     click_page = params[:click_page]
     notice = ""
-    if @post.voters.select {|v| v[:id] == current_user.id.to_i}.empty?
+    if @post.creaters.include?(current_user)
+      notice = "You can not vote for your own post"
+    elsif @post.voters.include?(current_user)
+      notice = "You've voted before."
+    else
       @post.voters << [current_user]
       @post.vote_count += 1
       @post.save
-    else
-      notice += "You've voted before."
     end
 
     respond_to do |format|
