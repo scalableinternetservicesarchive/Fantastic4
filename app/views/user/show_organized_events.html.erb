@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <th>Organized Events</th>
+        </thead>
+        <tbody>
+            <% @organized_events.each do |event| %>
+            <tr>
+                <td><%= event.title%></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
