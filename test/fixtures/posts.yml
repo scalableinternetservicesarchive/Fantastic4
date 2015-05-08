@@ -16,3 +16,8 @@ post3:
   event: event2
   text_content: 'Harry Potter'
   vote_count: 2
+
+post4:
+  event: event3
+  text_content: 'Adele'
+  vote_count: 1

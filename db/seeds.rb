@@ -63,3 +63,6 @@ user1.voted_posts << [post1, post3]
 user2.voted_posts << [post1, post2]
 user3.voted_posts << [post1, post2, post3, post4]
 
+user1.organized_events << [event1]
+user2.organized_events << [event1, event2]
+user3.organized_events << [event3]

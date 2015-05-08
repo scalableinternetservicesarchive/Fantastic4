@@ -4,8 +4,20 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+
+t1:
+  organizer: user1
+  organized_event: event1
+
+t2:
+  organizer: user2
+  organized_event: event1
+
+t3:
+  organizer: user2
+  organized_event: event2
+
+t4:
+  organizer: user3
+  organized_event: event3
+
