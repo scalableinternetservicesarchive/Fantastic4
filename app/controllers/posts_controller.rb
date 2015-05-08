@@ -64,10 +64,9 @@ class PostsController < ApplicationController
   
   def vote
     click_page = params[:click_page]
-    @current_user_id = params[:voter]
     notice = ""
-    if @post.voters.select {|v| v[:id] == @current_user_id.to_i}.empty?
-      @post.voters << [User.find(@current_user_id)]
+    if @post.voters.select {|v| v[:id] == current_user.id.to_i}.empty?
+      @post.voters << [current_user]
       @post.vote_count += 1
       @post.save
     else
@@ -91,6 +90,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:event_id, :text_content, :vote_count, :click_page, :voter)
+      params.require(:post).permit(:event_id, :text_content, :vote_count, :click_page)
     end
 end

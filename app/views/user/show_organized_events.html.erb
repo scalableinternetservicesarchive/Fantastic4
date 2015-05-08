@@ -1,14 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+<h1 class="sub-header">Events organized by me</h1>
+
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <th>Organized Events</th>
+            <th>Title</th>
+			<th>Create Time</th>
+			<th>Total posts</th>
+			<th>Total vosts</th>
         </thead>
         <tbody>
             <% @organized_events.each do |event| %>
             <tr>
-                <td><%= event.title%></td>
+                <td><%= link_to "#{event.title}", event%></td>
+				<td><%= event.created_at%></td>
+				<td><%= event.posts.count%></td>
+				<td><%= event.posts.map {|post| post.vote_count}.sum%></td>
             </tr>
             <% end %>
         </tbody>

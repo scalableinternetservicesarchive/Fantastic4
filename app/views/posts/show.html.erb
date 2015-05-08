@@ -36,7 +36,7 @@
 <% unless user_signed_in? %>
   <p>not signed in, cannot vote</p>
 <% else %>
-  <%= button_to "vote", action: "vote", params: {voter: current_user, click_page: 'post_show'}%>
+  <%= button_to "vote", action: "vote", params: {click_page: 'post_show'}%>
 <% end %>
 
 <br>
