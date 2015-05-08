@@ -1,4 +1,4 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Event:</strong>
@@ -39,5 +39,6 @@
   <%= button_to "vote", action: "vote", params: {voter: current_user, click_page: 'post_show'}%>
 <% end %>
 
+<br>
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', event_path(@post.event) %>

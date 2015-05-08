@@ -63,15 +63,22 @@ class PostsController < ApplicationController
   end
   
   def vote
-    @post.voters << [User.find(params[:voter])]
-    @post.vote_count += 1
-    @post.save
     click_page = params[:click_page]
+    @current_user_id = params[:voter]
+    notice = ""
+    if @post.voters.select {|v| v[:id] == @current_user_id.to_i}.empty?
+      @post.voters << [User.find(@current_user_id)]
+      @post.vote_count += 1
+      @post.save
+    else
+      notice += "You've voted before."
+    end
+
     respond_to do |format|
       if click_page == 'event_show'
-        format.html { redirect_to @post.event, notice: "successfully vote for post #{@post.id}." }
+        format.html { redirect_to @post.event, notice: "#{notice}" }
       elsif click_page == 'post_show'
-        format.html { redirect_to @post, notice: "successfully vote for post #{@post.id}." }
+        format.html { redirect_to @post, notice: "#{notice}" }
       end
     end
   end

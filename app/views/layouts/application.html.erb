@@ -32,6 +32,7 @@
   	        </ul>
           
             <% unless user_signed_in? %>
+				<p class="navbar-text"><b>Cannot Vote? Please</b></p>
                 <%= link_to "Login", new_user_session_path, :id => "login-btn", 
                     :class => "btn btn-default navbar-btn", :method => :get %>
                 <%= link_to "Sign up", new_user_registration_path, :id => "sign-up-btn",

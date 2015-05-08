@@ -1,4 +1,4 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Title:</strong>
@@ -17,7 +17,8 @@
 
 <!-- <%= link_to 'Edit', edit_event_path(@event) %> | -->
 
-<%= link_to("Post to this event", controller: "posts", action: "new", post: {event_id: @event.id} ) %>
+<%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%>
+
 
 <div class="table-responsive">
 	<table class="table table-striped">
