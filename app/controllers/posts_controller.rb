@@ -74,9 +74,7 @@ class PostsController < ApplicationController
   def vote
     click_page = params[:click_page]
     notice = ""
-    if @post.creaters.include?(current_user)
-      notice = "You can not vote for your own post"
-    elsif @post.voters.include?(current_user)
+    if @post.voters.include?(current_user)
       notice = "You've voted before."
     else
       @post.voters << [current_user]

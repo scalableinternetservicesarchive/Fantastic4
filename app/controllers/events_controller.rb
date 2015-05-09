@@ -4,8 +4,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-    @events = @events.sort_by {|event| -event.posts.count}
+    if params[:search]
+      # @events = Event.search(params[:search]).order("created_at DESC")
+      @events = Event.search(params[:search]).sort_by {|event| -event.posts.count}
+    else
+      # @events = Event.order("posts_count DESC")
+      @events = Event.all.sort_by {|event| -event.posts.count}
+    end
   end
 
   # GET /events/1

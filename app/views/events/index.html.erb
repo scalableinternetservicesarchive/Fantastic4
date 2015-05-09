@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="sub-header">Events Library</h1>
+<% unless params[:search] %>
+	<h1 class="sub-header">Events Library</h1>
+<% else %>
+	<h1 class="sub-header">Search Result</h1>
+<% end %>
 
 <div class="table-responsive">
 	<table class="table table-striped">
