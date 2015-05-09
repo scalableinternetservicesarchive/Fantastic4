@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+      @posts = Post.all
   end
 
   # GET /posts/1
@@ -12,6 +12,8 @@ class PostsController < ApplicationController
   def show
     @voters = @post.voters
   end
+  
+  
 
   # GET /posts/new
   def new
@@ -21,7 +23,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
   end
-
+  
   # POST /posts
   # POST /posts.json
   def create

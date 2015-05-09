@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  TAG_TYPES = ["school life", "movies", "music", "relationship"]
+  TAG_TYPES = ["School", "Movie", "Music", "Reading", "Health"]
   
   has_many :posts, dependent: :destroy
   has_many :user_organize_events

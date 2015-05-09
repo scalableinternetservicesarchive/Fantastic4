@@ -54,10 +54,12 @@
 	<div class="row">
 		<div class="sidebar">
 			<ul class="nav nav-sidebar">
-            	<li class="active"><a href="#">Campus <span class="sr-only">(current)</span></a></li>
-            	<li><a href="/">Life</a></li>
-            	<li><a href="/">Movies</a></li>
-            	<li><a href="/">Music</a></li>
+            	<li class="active"><a href="/">All</a></li>
+				<li><%= link_to "School", events_path(:tag => 'School')%><li>
+            	<li><%= link_to "Movie", events_path(:tag => 'Movie')%><li>
+            	<li><%= link_to "Music", events_path(:tag => 'Music')%><li>
+				<li><%= link_to "Reading", events_path(:tag => 'Reading')%><li>
+				<li><%= link_to "Health", events_path(:tag => 'Health') %><li>
           	</ul>
 		</div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

@@ -3,15 +3,16 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <th>Voted Posts</th>
+			<th>Post content</th>
+			<th>Current vote</th>
         </thead>
         <tbody>
-			<% @voted_posts.group_by(&:event_id).each do |event, posts| %>
+			<% @posts.each do |post| %>
 					<tr>
-						<td><%= event %></td>
-						<%= render :partial => 'post', :collection => posts %>
+						<td><%= link_to "#{post.text_content}", post%></td>
+						<td><%= post.vote_count%></td>
+						
 					</tr>
-			    	
 			<% end %>
         </tbody>
     </table>
@@ -23,12 +24,12 @@
 			<ul class="nav nav-sidebar">
             	<li class="active">
             	<li><a href="/user/events">Event</a></li>
-            	<li><a href="/user/posts">Post</a></li>
+            	<li><a href="/user/vote/events">Post</a></li>
             	<li><a href="/users/edit">Profile</a></li>
           	</ul>
 		</div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<%= yield %>
-		</div>		
+		</div>	
 	</div>
 </div>

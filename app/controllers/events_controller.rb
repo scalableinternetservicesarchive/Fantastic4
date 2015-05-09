@@ -4,8 +4,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-    @events = @events.sort_by {|event| -event.posts.count}
+    if params[:tag]
+      @events = Event.where(tags: params[:tag]).sort_by {|event| -event.posts.count}
+      @tag = params[:tag]
+    else
+      @events = Event.all
+      @events = @events.sort_by {|event| -event.posts.count}
+    end
   end
 
   # GET /events/1
@@ -24,7 +29,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
   end
-
+  
   # POST /events
   # POST /events.json
   def create

@@ -1,24 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="sub-header">Events organized by me</h1>
-
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <th>Title</th>
-			<th>Create Time</th>
-			<th>Total posts</th>
-			<th>Total vosts</th>
+            <th>Voted Events</th>
         </thead>
         <tbody>
-            <% @organized_events.each do |event| %>
-            <tr>
-                <td><%= link_to "#{event.title}", event%></td>
-				<td><%= event.created_at%></td>
-				<td><%= event.posts.count%></td>
-				<td><%= event.posts.map {|post| post.vote_count}.sum%></td>
-            </tr>
-            <% end %>
+			<% @voted_posts.group_by(&:event_id).each do |event_id, posts| %>
+					<tr>
+						<% @event = Event.find(event_id) %>
+						<td><%= link_to @event.title, controller: "user", action: "show_voted_posts", params: {:voted_posts => posts} %> </td>
+					</tr>
+			    	
+			<% end %>
         </tbody>
     </table>
 </div>
@@ -35,7 +29,6 @@
 		</div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<%= yield %>
-		</div>	
+		</div>		
 	</div>
 </div>
-

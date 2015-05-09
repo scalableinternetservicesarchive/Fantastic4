@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :posts
-  resources :events
+  resources :events 
   devise_for :users
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -10,7 +12,8 @@ Rails.application.routes.draw do
   root 'events#index'
   
   get '/user/events' => 'user#show_organized_events'
-  get '/user/posts' => 'user#show_voted_posts'
+  get '/user/vote/events' => 'user#show_voted_events'
+  get '/user/vote/event/posts' => 'user#show_voted_posts'
   get '/user' => 'user#show'
   post 'posts/:id' => 'posts#vote'
   # Example of regular route:

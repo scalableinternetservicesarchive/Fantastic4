@@ -2,7 +2,7 @@
 event1 = Event.create(
 	title: 'School Queen',
 	description: 'Vote for the school queen',
-	tags: 'School Life',
+	tags: 'School',
 )
 
 event2 = Event.create(
