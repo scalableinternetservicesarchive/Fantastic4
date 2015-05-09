@@ -28,7 +28,7 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
   	        	<li><a href="/">Homepage</a></li>
-  	            <li><a href="/user">Activity</a></li>
+  	            <li><a href="/profile">Profile</a></li>
   	        </ul>
           
             <% unless user_signed_in? %>
@@ -43,10 +43,10 @@
                 <p class="navbar-text"><b><%= current_user.email %></b></p>
             <% end %>
 			
-          	<form class="navbar-form navbar-right">
-            	<input type="text" class="form-control" placeholder="Search...">	
-          	</form>
-		</div>
+			<%= form_tag(events_path, method: "get", class:"navbar-form navbar-right", id:"search-form") do%>
+			<%= text_field_tag :search, params[:search], class: "form-control",placeholder: "Search.."%>
+			<% end %>
+		</div> 
 	</div>
 </nav>
 

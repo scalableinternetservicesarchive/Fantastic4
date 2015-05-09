@@ -1,22 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="sub-header">Events organized by me</h1>
+<h1 class="sub-header">Posts created by me</h1>
 
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <th>Title</th>
-			<th>Create Time</th>
-			<th>Total posts</th>
+			<th>Event</th>
 			<th>Total vosts</th>
+			<th>Create Time</th>
         </thead>
         <tbody>
-            <% @organized_events.each do |event| %>
+            <% @created_posts.each do |post| %>
             <tr>
-                <td><%= link_to "#{event.title}", event%></td>
-				<td><%= event.created_at%></td>
-				<td><%= event.posts.count%></td>
-				<td><%= event.posts.map {|post| post.vote_count}.sum%></td>
+                <td><%= link_to "#{post.text_content}", post%></td>
+				<td><%= link_to "#{post.event.title}", post.event%></td>
+				<td><%= post.vote_count%></td>
+				<td><%= post.created_at%></td>
             </tr>
             <% end %>
         </tbody>
@@ -36,7 +36,8 @@
 		</div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<%= yield %>
-		</div>	
+		</div>		
 	</div>
 </div>
+
 

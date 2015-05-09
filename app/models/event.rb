@@ -7,5 +7,11 @@ class Event < ActiveRecord::Base
   
   validates :title, :description, presence: true
   validates :title, uniqueness: true
+  
+  def self.search(search)
+    search_condition = "%"+search+"%"
+    where("title LIKE ? OR description LIKE ?", search_condition, search_condition)
+  end
 end
+
 

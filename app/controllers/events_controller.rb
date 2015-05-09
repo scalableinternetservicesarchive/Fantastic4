@@ -4,12 +4,17 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+
     if params[:tag]
       @events = Event.where(tags: params[:tag]).sort_by {|event| -event.posts.count}
       @tag = params[:tag]
+
+    elsif params[:search]
+      # @events = Event.search(params[:search]).order("created_at DESC")
+      @events = Event.search(params[:search]).sort_by {|event| -event.posts.count}
     else
-      @events = Event.all
-      @events = @events.sort_by {|event| -event.posts.count}
+      # @events = Event.order("posts_count DESC")
+      @events = Event.all.sort_by {|event| -event.posts.count}
     end
   end
 
@@ -33,14 +38,20 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-
-    # bug cannot find current_user
-    # current_user.organized_events << @event
+    success = false
+    notice = ""
+    if current_user != nil
+      @event = Event.new(event_params)
+      if @event.save
+        success = true
+        current_user.organized_events << @event
+        notice = "Event was successfully created"
+      end
+    end
     
     respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+      if success == true
+        format.html { redirect_to @event, notice: "#{notice}" }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }

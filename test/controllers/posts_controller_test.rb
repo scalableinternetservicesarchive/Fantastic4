@@ -16,13 +16,13 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create post" do
-    assert_difference('Post.count') do
-      post :create, post: { event_id: @post.event_id, text_content: @post.text_content, vote_count: @post.vote_count }
-    end
-
-    assert_redirected_to post_path(assigns(:post))
-  end
+  # test "should create post" do
+#     assert_difference('Post.count') do
+#       post :create, post: { event_id: @post.event_id, text_content: @post.text_content, vote_count: @post.vote_count }
+#     end
+#
+#     assert_redirected_to post_path(assigns(:post))
+#   end
 
   test "should show post" do
     get :show, id: @post
