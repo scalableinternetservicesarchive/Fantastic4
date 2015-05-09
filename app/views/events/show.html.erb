@@ -30,6 +30,7 @@
 		<tr>
 			<td><%= link_to "#{post.text_content}", post%></td>
 			<td><%= post.vote_count%></td>
+		<td>
         <% unless user_signed_in? %>
           <p>cannot vote</p>
         <% else %>

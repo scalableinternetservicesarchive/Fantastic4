@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<h1 class="sub-header">Events voted by me</h1>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <th>Voted Events</th>
+            <th>Event title</th>
         </thead>
         <tbody>
 			<% @voted_posts.group_by(&:event_id).each do |event_id, posts| %>
