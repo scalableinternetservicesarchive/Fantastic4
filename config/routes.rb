@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/profile/votes/posts' => 'user#show_voted_posts'
   get '/profile' => 'user#show'
 
-  post 'posts/:id' => 'posts#vote'
+  post '/posts/:id' => 'posts#vote'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

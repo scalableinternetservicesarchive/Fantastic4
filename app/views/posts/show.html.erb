@@ -19,26 +19,16 @@
   <strong>Post at:</strong>
   <%= @post.created_at %>
 </p>
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <th>Voters</th>
-        </thead>
-        <tbody>
-            <% @voters.each do |voter| %>
-            <tr>
-                <td><%= voter.email %></td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
-</div>
+
 <% unless user_signed_in? %>
-  <p>not signed in, cannot vote</p>
+  <p>cannot vote</p>
 <% else %>
   <%= button_to "vote", action: "vote", params: {click_page: 'post_show'}%>
 <% end %>
 
 <br>
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<% if @post.creaters.include?(current_user)%>
+	<%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+
 <%= link_to 'Back', event_path(@post.event) %>

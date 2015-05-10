@@ -40,9 +40,10 @@
             <% else %>
                 <%= link_to "Logout", destroy_user_session_path, :id => "sign-up-btn",
                     :class => "btn btn-default navbar-btn", :method => :delete %>
-                <p class="navbar-text"><b><%= current_user.email %></b></p>
+                <p class="navbar-text"><b><a href="/profile"><%= current_user.email %></a></b></p>
             <% end %>
 			
+			<!-- Search -->
 			<%= form_tag(events_path, method: "get", class:"navbar-form navbar-right", id:"search-form") do%>
 			<%= text_field_tag :search, params[:search], class: "form-control",placeholder: "Search.."%>
 			<% end %>
@@ -54,7 +55,7 @@
 	<div class="row">
 		<div class="sidebar">
 			<ul class="nav nav-sidebar">
-            	<li class="active"><a href="/">All</a></li>
+            	<li class="active"><a href="/">All Events</a></li>
 				<li><%= link_to "School", events_path(:tag => 'School')%><li>
             	<li><%= link_to "Movie", events_path(:tag => 'Movie')%><li>
             	<li><%= link_to "Music", events_path(:tag => 'Music')%><li>
