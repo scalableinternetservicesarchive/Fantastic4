@@ -28,7 +28,9 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
   	        	<li><a href="/">Homepage</a></li>
+				<% if user_signed_in? %>
   	            <li><a href="/profile">Profile</a></li>
+				<% end %>
   	        </ul>
           
             <% unless user_signed_in? %>
