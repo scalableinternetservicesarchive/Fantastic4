@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 #Use paperclip
-gem 'paperclip', "~> 4.2"
+gem 'paperclip', '~> 4.2'
 gem 'aws-sdk', '< 2.0'
 gem 'fog'
 # Use ActiveModel has_secure_password
