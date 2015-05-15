@@ -10,9 +10,9 @@
 
 
 <% unless params[:search] %>
-	<h1 class="sub-header">Events Library</h1>
+	<h1>Events Library</h1>
 <% else %>
-	<h1 class="sub-header">Search Result</h1>
+	<h1>Search Result</h1>
 <% end %>
 
 
@@ -29,7 +29,11 @@
 	                  <div class="thumbnail">
 	                             <h4 ><%= event.title %></h4>
 								 <p><%= event.description%></p>	 
-								 <p><%= link_to(image_tag("http://goo.gl/0sX3jq"), event) %></p>
+								 <% if event.image.exists? %>
+								 	<p><%= link_to(image_tag(event.image.url(:medium)), event) %></p>
+								<% else %>
+									<p><%= link_to(image_tag("http://goo.gl/0sX3jq"), event) %></p>
+								<% end %>
 	                             <p><%= "#{event.posts.count} posts" %></p>
 	                  </div>
             		</div><!--/.col-xs-6.col-lg-4-->
@@ -41,25 +45,6 @@
 <%= link_to 'New Event', new_event_path(tag: @tag) if user_signed_in?%>
 </div><!--/.container-->
 
-
-<!-- <div class="table-responsive">
-	<table class="table table-striped">
-		<thead>
-			<th>Title</th>
-			<th>Description</th>
-			<th>Votes</th>
-		</thead>
-		<tbody>
-			<% @events.each do |event| %>
-			<tr>
-        		<td><%= link_to "#{event.title}", event %></td>
-        		<td><%= event.description %></td>
-				<td><%= "#{event.posts.count} posts" %></td>
-      		</tr>
-    	 	<% end %>
-  	  	</tbody>
-	</table>
-</div> -->
 
 
 

@@ -1,5 +1,5 @@
 <%if @post != nil%>
-<%= form_for(@post) do |f| %>
+<%= form_for(@post, url: posts_path, html: {multipart: true}) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -21,6 +21,11 @@
     <%= f.label :text_content %><br>
     <%= f.text_area :text_content %>
   </div>
+  <div>
+	  <%= f.label :image %>
+      <%= f.file_field :image %><br>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
