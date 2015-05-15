@@ -1,6 +1,44 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div class="col-xs-12 col-sm-12">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+		  <div class="jumbotron">
+		             <h1><%= @event.title %></h1>
+		             <p><%= @event.description %></p>
+					 <p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>
+		   </div>
+          <!-- <div class="row">
+             <div class="thumbnail">
+                     <h4 ><%= @event.title %></h4>
+					 <p><%= @event.description %></p>
+					 <p><%= image_tag("http://goo.gl/0sX3jq")%></p>
+                     <p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>
+             </div>
+          </div> -->
+          <div class="row">
+			<% @posts.each do |post|%> 
+            <div class="col-xs-6 col-lg-3">
+				<div class="thumbnail">
+					<p><%= link_to "#{post.text_content}", post%></p>
+					<P><%= "#{post.vote_count} votes"%></p>
+					<% unless user_signed_in? %>
+	            		<p>cannot vote</p>
+					<% else %>
+	            		<%= button_to "vote", post, action: "vote", params: {click_page: 'event_show'}%>
+	        		<% end %>
+		  	  </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+			<% end %>
+          </div><!--/row-->
+
+		  <br>
+		  <%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%>
+		  <p><button onclick="window.history.back()">Back</button></p>
+	   </div><!--/.col-xs-12.col-sm-9-->
+
+<!-- <p>
   <strong>Title:</strong>
   <%= @event.title %>
 </p>
@@ -13,14 +51,13 @@
 <p>
   <strong>Tags:</strong>
   <%= @event.tags %>
-</p>
+</p> -->
 
 <!-- <%= link_to 'Edit', edit_event_path(@event) %> | -->
 
-<%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%>
 
 
-<div class="table-responsive">
+<!-- <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>
 			<th>Post content</th>
@@ -40,8 +77,8 @@
 		</tr>
 		<% end %>
 	</table>
-</div>
+</div> -->
 
-<button onclick="window.history.back()">Back</button>
+
 
 

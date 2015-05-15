@@ -53,9 +53,41 @@
 	</div>
 </nav>
 
-<div class="container-fluid">
+<!-- <div class="jumbotron">
+      <div class="container">
+        <h1>Post and Vote for Event</h1>
+        <p>Create an event-based online polling platform that allow users to share, vote and discover interesting things.</p>
+      </div>
+</div>  -->
+
+
+<div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+		  
+        <div class="col-xs-6 col-sm-2 sidebar-offcanvas">
+			<ul class="nav nav-sidebar">
+          		<li><a href="/">All Events</a></li>
+				<li><%= link_to "School", events_path(:tag => 'School')%><li>
+          		<li><%= link_to "Movie", events_path(:tag => 'Movie')%><li>
+          		<li><%= link_to "Music", events_path(:tag => 'Music')%><li>
+				<li><%= link_to "Reading", events_path(:tag => 'Reading')%><li>
+				<li><%= link_to "Health", events_path(:tag => 'Health') %><li>
+        	</ul>
+        </div><!--/.sidebar-offcanvas-->
+        <div class="col-xs-12 col-sm-10">
+			<%= yield %>
+		</div>
+      <hr>
+</div><!--/.container-->
+
+
+
+
+
+<!-- <div class="container-fluid">
 	<div class="row">
-		<div class="sidebar">
+		<div class="col-md-2">
 			<ul class="nav nav-sidebar">
             	<li class="active"><a href="/">All Events</a></li>
 				<li><%= link_to "School", events_path(:tag => 'School')%><li>
@@ -65,11 +97,65 @@
 				<li><%= link_to "Health", events_path(:tag => 'Health') %><li>
           	</ul>
 		</div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<%= yield %>
-		</div>		
+
+		<div class="col-md-10">
+			<div class="container">
+			     <div class="row">
+					 <div class = "col-md-3">
+		                  <div class="thumbnail">
+		                      <div class="caption">
+		                          <h4 class="pull-left">All events</h4>
+		                          <p></p>
+		                      </div>
+							  <a href="/">
+								  <img src="http://goo.gl/0sX3jq">
+		                       </a>
+		                  </div>
+		                  <div class="thumbnail">
+		                      <div class="caption">
+		                          <h4 class="pull-left">School</h4>
+		                          <p></p>
+		                      </div>
+							   <%= link_to(image_tag("http://goo.gl/0sX3jq"), events_path(:tag => 'School')) %>
+		                  </div>
+		            </div>
+					 <div class = "col-md-3">
+		                  <div class="thumbnail">
+		                       <div class="caption">
+		                           <h4 class="pull-left">Movie</h4>
+		                           <p></p>
+		                       </div>
+		 					   <%= link_to(image_tag("http://goo.gl/0sX3jq"), events_path(:tag => 'Movie')) %>
+		                  </div>
+		                  <div class="thumbnail">
+		                         <div class="caption">
+		                             <h4 class="pull-left">Music</h4>
+		                             <p></p>
+		                         </div>
+		   					   	 <%= link_to(image_tag("http://goo.gl/0sX3jq"), events_path(:tag => 'Music')) %>
+		                  </div>
+		            </div>
+					 <div class = "col-md-3">
+		                  <div class="thumbnail">
+		                      <div class="caption">
+		                          <h4 class="pull-left">Reading</h4>
+		                          <p></p>
+		                      </div>
+							   <%= link_to(image_tag("http://goo.gl/0sX3jq"), events_path(:tag => 'Reading')) %>
+		                  </div>
+		                  <div class="thumbnail">
+		                         <div class="caption">
+		                             <h4 class="pull-left">Health</h4>
+		                             <p></p>
+		                         </div>
+		   					   <%= link_to(image_tag("http://goo.gl/0sX3jq"), events_path(:tag => 'Health')) %>
+		                  </div>
+		            </div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
+</div> -->
 
 </body>
 </html>
