@@ -19,7 +19,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 80px;
+  padding-top: 30px;
 }
 
 
@@ -100,20 +100,30 @@ body {
   margin-top: 0;
 }
 
+.container{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+li {
+  display: inline;
+}
 
 .jumbotron {
-  background-image:url('http://www.psdgraphics.com/file/colorful-triangles-background.jpg');
-  height: 300px;
+  background-image: url("background.jpg");
+  height: 200px;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .jumbotron .container {
   position: relative;
-  top:100px;
+  top:0px;
 }
 
 .jumbotron h1 {
+  margin-left: auto;
+  margin-right: auto;
   color: #fff;
   font-size: 48px;  
   font-family: 'Shift', sans-serif;

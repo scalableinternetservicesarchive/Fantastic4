@@ -52,20 +52,10 @@
 		</div> 
 	</div>
 </nav>
-
-<!-- <div class="jumbotron">
-      <div class="container">
-        <h1>Post and Vote for Event</h1>
-        <p>Create an event-based online polling platform that allow users to share, vote and discover interesting things.</p>
-      </div>
-</div>  -->
-
-
-<div class="container">
-
-      <div class="row row-offcanvas row-offcanvas-right">
-		  
-        <div class="col-xs-6 col-sm-2 sidebar-offcanvas">
+<!--/.container-->
+<div class="container-fluid" >
+	<div class="row">
+		<div class="sidebar">
 			<ul class="nav nav-sidebar">
           		<li><a href="/">All Events</a></li>
 				<li><%= link_to "School", events_path(:tag => 'School')%><li>
@@ -73,13 +63,14 @@
           		<li><%= link_to "Music", events_path(:tag => 'Music')%><li>
 				<li><%= link_to "Reading", events_path(:tag => 'Reading')%><li>
 				<li><%= link_to "Health", events_path(:tag => 'Health') %><li>
-        	</ul>
-        </div><!--/.sidebar-offcanvas-->
-        <div class="col-xs-12 col-sm-10">
+          	</ul>
+		</div>
+        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1.5 main">
 			<%= yield %>
 		</div>
-      <hr>
-</div><!--/.container-->
+	</div>
+</div>
+
 
 
 </body>

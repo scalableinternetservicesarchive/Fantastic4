@@ -1,48 +1,50 @@
 <p id="notice"><%= notice %></p>
 
+<div class="jumbotron">
+	<div class="container">
+	<% unless params[:search] %>
+		<h1>Events Library</h1>
+		<p><%= link_to 'New Event', new_event_path(tag: @tag) if user_signed_in?%></p>
+	<% else %>
+		<h1>Search Result</h1>
+	<% end %>
+    </div>
+</div>
 
-
-
-
-
-
-
-
-
-<% unless params[:search] %>
-	<h1>Events Library</h1>
-<% else %>
-	<h1>Search Result</h1>
-<% end %>
 
 
 
 <div class="container">
-	<div class="row row-offcanvas row-offcanvas-right">
+  	<!-- <div class="row row-offcanvas row-offcanvas-left">
+	  <div class="col-xs-12 col-sm-10">
+		<div class="col-xs-6 col-lg-12">
+		<% unless params[:search] %>
+			<li><h1>Events Library</h1></li>
+			<li><%= link_to 'New Event', new_event_path(tag: @tag) if user_signed_in?%></li>
+		<% else %>
+			<h1>Search Result</h1>
+		<% end %>
+	    </div>
+	  </div>
+	</div> -->
+	<div class="row row-offcanvas row-offcanvas-left">
         <div class="col-xs-12 col-sm-10">
-          <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-          </p>
-          	<div class="row">
 				<% @events.each do |event| %>
             		<div class="col-xs-6 col-lg-4">
 	                  <div class="thumbnail">
 	                             <h4 ><%= event.title %></h4>
 								 <p><%= event.description%></p>	 
 								 <% if event.image.exists? %>
-								 	<p><%= link_to(image_tag(event.image.url(:medium)), event) %></p>
+								 	<p><%= link_to(image_tag(event.image.url(:thumb)), event) %></p>
 								<% else %>
-									<p><%= link_to(image_tag("http://goo.gl/0sX3jq"), event) %></p>
+									<p><%= link_to(image_tag("default.jpg"), event) %></p>
 								<% end %>
 	                             <p><%= "#{event.posts.count} posts" %></p>
 	                  </div>
             		</div><!--/.col-xs-6.col-lg-4-->
 				<% end %>
-          	</div><!--/row-->
        </div><!--/.col-xs-12.col-sm-10-->
    </div><!--/row-->
-<br>
-<%= link_to 'New Event', new_event_path(tag: @tag) if user_signed_in?%>
 </div><!--/.container-->
 
 
