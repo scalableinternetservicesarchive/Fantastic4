@@ -21,7 +21,7 @@ event3 = Event.create(
 )
 
 post1 = Post.create(
-  event_id: event1.id,
+  event_id: event2.id,
   text_content: 'Big Hero 6',
   vote_count: 3,
   image: File.new("test/fixtures/images/bighero.jpeg")
@@ -42,10 +42,38 @@ post3 = Post.create(
 )
 
 post4 = Post.create(
-  event_id: event3.id,
+  event_id: event2.id,
   text_content: 'Transformer',
   vote_count: 1,
   image: File.new("test/fixtures/images/transformer.jpg")
+)
+
+post5 = Post.create(
+  event_id: event1.id,
+  text_content: 'queen 1',
+  vote_count: 0,
+  image: File.new("test/fixtures/images/sd1.jpg")
+)
+
+post6 = Post.create(
+  event_id: event1.id,
+  text_content: 'queen 2',
+  vote_count: 0,
+  image: File.new("test/fixtures/images/sd2.jpg")
+)
+
+post7 = Post.create(
+  event_id: event1.id,
+  text_content: 'queen 3',
+  vote_count: 0,
+  image: File.new("test/fixtures/images/sd3.jpg")
+)
+
+post8 = Post.create(
+  event_id: event3.id,
+  text_content: 'Music',
+  vote_count: 0,
+  image: File.new("test/fixtures/images/musicpost.jpg")
 )
 
 user1 = User.create(
