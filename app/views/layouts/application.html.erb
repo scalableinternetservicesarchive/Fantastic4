@@ -18,11 +18,11 @@
               <div class="span3" id="left-side">
                 <h1 class="logo"><a href="/">Fantastic4</a></h1>
                 <!-- Search -->
-                <p>
-                <%= form_tag(events_path, method: "get", class:"navbar-form navbar-right", id:"search-form") do%>
-                <%= text_field_tag :search, params[:search], class: "form-control",placeholder: "Search.."%>
+
+                <%= form_tag(events_path, method: "get", class:"form-search", id:"search-form") do%>
+                <%= text_field_tag :search, params[:search], class:"input-medium search-query", placeholder: "Search.."%>
                 <% end %>
-                </p>
+
                 
                 <% unless user_signed_in? %>
                 <p><b>Cannot Vote? Please</b></p>
@@ -54,10 +54,10 @@
                       <%= link_to events_path(:tag => 'School'), class: "badge badge-info" do %>
                         <i class="icon-tag icon-white"></i> School
                       <% end %>
-                      <%= link_to events_path(:tag => 'Movie'), class: "badge badge-info" do %>
+                      <%= link_to events_path(:tag => 'Movie'), class: "badge badge-inverse" do %>
                         <i class="icon-tag icon-white"></i> Movie
                       <% end %>
-                      <%= link_to events_path(:tag => 'Music'), class: "badge badge-info" do %>
+                      <%= link_to events_path(:tag => 'Music'), class: "badge badge-success" do %>
                         <i class="icon-tag icon-white"></i> Music
                       <% end %>
                       <%= link_to events_path(:tag => 'Reading'), class: "badge badge-info" do %>
