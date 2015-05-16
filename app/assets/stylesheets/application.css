@@ -105,10 +105,6 @@ body {
     padding-left: 0px;
 }
 
-li {
-  display: inline;
-}
-
 .jumbotron {
   background-image: url("background.jpg");
   height: 200px;

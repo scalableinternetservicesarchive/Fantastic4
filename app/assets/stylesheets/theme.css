@@ -1,0 +1,47 @@
+body{padding-top: 30px;background: url(../img/body.gif)}
+h1.logo {
+ 
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 1px 1px #CCC;
+}
+#main h1,#main h2,#main h3 {
+    font-weight: bold;
+    text-shadow: 1px 1px #CCC;
+}
+#left-side h2{
+    font-size: 2em;
+    color: #08C
+}
+h1,h2,h3,h4{font-family: Impact, sans-serif;font-weight: normal}
+
+h1.logo a:hover{text-decoration: none}
+h1.logo {text-shadow: 1px 1px #CCC}
+#main .thumbnails .span2{background: #fff;}
+#main .thumbnails .span2 img{width: 100%; float: left}
+#main .thumbnails .span2 a{color: #333}
+#main .thumbnails .span2 a:hover{text-decoration: none}
+#main .thumbnails .thumbnail:hover{
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+}
+.form-search{padding-top: 30px}
+.dropdown.open .dropdown-toggle {
+    background: none ;
+    color: #333;
+}
+.margin{margin: 5px !important}
+.padding{padding: 10px}
+#message {width: 240px}
+.confirm,.confirm-comment{display: none}
+.thumbnail {background: #fff}
+.margin-rb{margin: 0 5px 5px 0}
+.margin-lb{margin: 0 0px 5px 5px}
+.edito{text-align: justify}
+.badge{margin: 2px;float: left}
+footer{background: #333;color: #fff;}
+p.padding{float: left;}
+footer a,footer a:hover{color: #FFF;text-decoration: underline}
+.comment-list li{margin: 4px 0}
+footer .row{padding: 0 10px}
