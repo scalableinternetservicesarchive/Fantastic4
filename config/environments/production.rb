@@ -85,7 +85,7 @@ Rails.application.configure do
         :region => 'us-west-2'
       },
       :fog_directory => 'scalableinternetservices',
-      :path => 'Fantastic4/',
-      :url => "/images/:id/:filename"
+      :path => 'Fantastic4/'
+      #:url => "/images/:id/:filename"
     }
 end
