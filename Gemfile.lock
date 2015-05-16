@@ -278,7 +278,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
-  fog
+  fog (~> 1.30)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
