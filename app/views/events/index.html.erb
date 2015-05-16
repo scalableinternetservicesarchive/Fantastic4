@@ -12,7 +12,7 @@
 		<div class="thumbnail">
 			<h4 ><%= event.title %></h4>
 			<p><%= event.description%></p>	 
-			<% if event.image.exists? %>
+			<% if event.image.present? %>
 			<p><%= link_to(image_tag(event.image.url(:thumb)), event) %></p>
 			<% else %>
 			<p><%= link_to(image_tag("default.jpg"), event) %></p>

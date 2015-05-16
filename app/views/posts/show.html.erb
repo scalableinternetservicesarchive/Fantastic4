@@ -9,8 +9,8 @@
 <%= button_to "vote", action: "vote", params: {click_page: 'post_show'}%>
 <% end %>
 
-<% if @post.image.exists? %>
-<p><%= image_tag(@post.image.url)%></p>
+<% if @post.image.present? %>
+<p><%= image_tag(@post.image.url(:medium))%></p>
 <% end %>
 
 <p>

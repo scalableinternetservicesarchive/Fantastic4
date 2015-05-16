@@ -3,8 +3,8 @@
 <p><%= @event.description %></p>
 <p> <%= "Created at #{@event.created_at}" %></p>
 <p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>
-<% if @event.image.exists? %>
-<p><%= image_tag(@event.image.url)%></p>
+<% if @event.image.present? %>
+<p><%= image_tag(@event.image.url(:medium))%></p>
 <% end %>
 
 <ul class="thumbnails">
@@ -13,7 +13,7 @@
 		<div class="thumbnail">
 			<p><%= link_to "#{post.text_content}", post%></p>
 			<P><%= "#{post.vote_count} votes"%></p>
-			<% if post.image.exists? %>
+			<% if post.image.present? %>
 			<p><%= link_to(image_tag(post.image.url(:medium)), post) %></p>
 			<% else %>
 			<p><%= link_to(image_tag("default.jpg"), post) %></p>
