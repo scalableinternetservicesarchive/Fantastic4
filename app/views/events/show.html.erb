@@ -4,23 +4,12 @@
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
-		  <div class="container">
-		  <div class="row">
-						<div class="col-xs-6 col-sm-4">
-			             	<h1><%= @event.title %></h1>
-			             	<p><%= @event.description %></p>
-						    <p> <%= "Created at #{@event.created_at}" %></p>
-							<br>
-							<p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>
-						</div>
-						<div class="col-xs-6 col-sm-5">
-							 <% if @event.image.exists? %>
-								<p><%= image_tag(@event.image.url)%></p>
-							<% end %>
-						</div>
-		  </div>
-	     </div>
-		 <hr>
+		  <div class="jumbotron" id = "event">
+		             <h1><%= @event.title %></h1>
+		             <p><%= @event.description %></p>
+					 
+					 <p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>
+		   </div>
           <div class="row">
 			<% @posts.each do |post|%> 
             <div class="col-xs-6 col-lg-3">
@@ -30,7 +19,7 @@
 					 <% if post.image.exists? %>
 					 	<p><%= link_to(image_tag(post.image.url(:medium)), post) %></p>
 					<% else %>
-						<p><%= link_to(image_tag("default.jpg"), post) %></p>
+						<p><%= link_to(image_tag("http://goo.gl/0sX3jq"), post) %></p>
 					<% end %>
 					
 					<% unless user_signed_in? %>
@@ -41,10 +30,16 @@
 		  	  </div>
             </div><!--/.col-xs-6.col-lg-4-->
 			<% end %>
-        </div><!--/row-->
-		<p><button onclick="window.history.back()">Back</button></p>
+          </div><!--/row-->
+
+		  <br>
+		  <%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%>
+		  <p><button onclick="window.history.back()">Back</button></p>
 </div><!--/.col-xs-12.col-sm-9-->
 
+<script type="text/javascript">
+document.getElementById("event").style.backgroundImage = "#{@event.image.url%>}";
+</script>
 
 
 
