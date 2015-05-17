@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get '/profile' => 'user#show'
 
   post '/posts/:id' => 'posts#vote'
+  
+  get '/timeline/:month' => 'events#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

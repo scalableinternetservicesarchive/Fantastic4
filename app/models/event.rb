@@ -18,7 +18,13 @@ class Event < ActiveRecord::Base
   
   def self.search(search)
     search_condition = "%"+search+"%"
-    where("title LIKE ? OR description LIKE ?", search_condition, search_condition)
+    where("title LIKE ? OR description LIKE ? OR tags LIKE ?", search_condition, search_condition, search_condition)
+  end
+  
+  def self.timeline(month)
+    time_interval = DateTime.now - month.to_i.month
+    start_time = time_interval.at_end_of_month.midnight
+    where(created_at: start_time..DateTime.now)
   end
 end
 

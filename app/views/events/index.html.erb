@@ -9,14 +9,16 @@
 	<% @events.each do |event| %>
 	<li class="span2">
 		<div class="thumbnail">
-			<h4 ><%= event.title %></h4>
-			<p><%= event.description%></p>	 
 			<% if event.image.present? %>
 			<p><%= link_to(image_tag(event.image.url(:thumb)), event) %></p>
 			<% else %>
 			<p><%= link_to(image_tag("default.jpg"), event) %></p>
 			<% end %>
+			<br>
+			<h4><%= event.title %></h4>
+			<p><%= event.description%></p>	 
 			<p><%= "#{event.posts.count} posts" %></p>
+			<p><%= event.created_at.month%></p>
 		</div>
 	</li>
 	<% end %>
