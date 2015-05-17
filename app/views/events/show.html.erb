@@ -1,5 +1,5 @@
-<p id="notice"><%= notice %></p>
 
+<<<<<<< HEAD
 <div class="col-xs-12 col-sm-12">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
@@ -36,6 +36,40 @@
 		  <%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%>
 		  <p><button onclick="window.history.back()">Back</button></p>
 </div><!--/.col-xs-12.col-sm-9-->
+=======
+<h1><%= @event.title %></h1>
+<p><%= @event.description %></p>
+<p> <%= "Created at #{@event.created_at}" %></p>
+<p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>
+<% if @event.image.present? %>
+<p><%= image_tag(@event.image.url(:medium))%></p>
+<% end %>
+
+<ul class="thumbnails">
+	<% @posts.each do |post|%> 
+	<li class="span2">
+		<div class="thumbnail">
+			<p><%= link_to "#{post.text_content}", post%></p>
+			<P><%= "#{post.vote_count} votes"%></p>
+			<% if post.image.present? %>
+			<p><%= link_to(image_tag(post.image.url(:medium)), post) %></p>
+			<% else %>
+			<p><%= link_to(image_tag("default.jpg"), post) %></p>
+			<% end %>
+
+			<% unless user_signed_in? %>
+			<p>cannot vote</p>
+			<% else %>
+			<%= button_to "vote", post, action: "vote", params: {click_page: 'event_show'}%>
+			<% end %>
+		</div>
+	</li>
+	<% end %>
+</ul>
+<p><button onclick="window.history.back()">Back</button></p>
+
+<p id="notice"><%= notice %></p>
+>>>>>>> origin/master
 
 <script type="text/javascript">
 document.getElementById("event").style.backgroundImage = "#{@event.image.url%>}";
