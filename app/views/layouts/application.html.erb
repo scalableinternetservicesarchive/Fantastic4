@@ -9,80 +9,72 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- Le styles -->
+  <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %>
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
-        </head>
-        <body>
-          <div class="container-fluid">
-            <div class="row-fluid">
-              <div class="span3" id="left-side">
-                <h1 class="logo"><a href="/">Fantastic4</a></h1>
-                <!-- Search -->
+</head>
 
-                <%= form_tag(events_path, method: "get", class:"form-search", id:"search-form") do%>
-                <%= text_field_tag :search, params[:search], class:"input-medium search-query", placeholder: "Search.."%>
-                <% end %>
+<body>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">Fantastic Events</a>
+		</div>
 
-                
-                <% unless user_signed_in? %>
-                <p><b>Cannot Vote? Please</b></p>
-                <ul>
-                <li><%= link_to "Login", new_user_session_path, :method => :get %></li>
-                <li><%= link_to "Sign up", new_user_registration_path, :method => :get %></li>
-                </ul>
-                <% else %>
-                <h2><%= current_user.email %></h2>
-                <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
-                
-                <% end %>
-                
-                <% if user_signed_in? %>
-                <h2>Profile</h2>
-                <!-- <li><a href="/profile">Profile</a></li> -->
-                <ul>
-                  <li><a href="/profile/events">Event</a></li>
-                  <li><a href="/profile/posts">Post</a></li>
-                  <li><a href="/profile/votes">Vote</a></li>
-                  <li><a href="/users/edit">Edit</a></li>
-                </ul>
-                <% end %>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/">Discover <span class="sr-only">(current)</span></a></li>
+				<li><a href="#">Categories</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Timeline <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">This month</a></li>
+						<li><a href="#">April</a></li>
+						<li><a href="#">March</a></li>
+						<li><a href="#">Febrary</a></li>
+						<li><a href="#">January</a></li>
+						<li><a href="#">December</a></li>
+					</ul>
+				</li>
+			</ul>
+			
+			<!-- search -->
+			<%= form_tag(events_path, method: "get", class:"navbar-form navbar-left", role:"search") do%>
+			<div class="form-group">
+			<%= text_field_tag :search, params[:search], class: "form-control",placeholder: "Search.."%>
+			<% end %>
+			</div>
+			<!-- user -->
+			<ul class="nav navbar-nav navbar-right">
+	            <% unless user_signed_in? %>
+					<p class="navbar-text"><b>Cannot Vote? Please</b></p>
+					<li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		        <% else %>
+					<li><a href="/profile"><span class="glyphicon glyphicon-th"></span> <b><%=  current_user.email %></b></a></li>
 
-                <h2>Tags</h2>
-                <div class="row">
-                  <div class="span3">
-                      <a href="/" class="badge badge-info"><i class="icon-tag icon-white"></i>All Events</a>
-                      <%= link_to events_path(:tag => 'School'), class: "badge badge-info" do %>
-                        <i class="icon-tag icon-white"></i> School
-                      <% end %>
-                      <%= link_to events_path(:tag => 'Movie'), class: "badge badge-inverse" do %>
-                        <i class="icon-tag icon-white"></i> Movie
-                      <% end %>
-                      <%= link_to events_path(:tag => 'Music'), class: "badge badge-success" do %>
-                        <i class="icon-tag icon-white"></i> Music
-                      <% end %>
-                      <%= link_to events_path(:tag => 'Reading'), class: "badge badge-info" do %>
-                        <i class="icon-tag icon-white"></i> Reading
-                      <% end %>
-                      <%= link_to events_path(:tag => 'Health'), class: "badge badge-info" do %>
-                        <i class="icon-tag icon-white"></i> Health
-                      <% end %>
-
-                    <!-- <a href="index-2.html" class="badge badge-info"><i class="icon-tag icon-white"></i> iPhone</a>
-                    <a href="index-2.html" class="badge badge-inverse"><i class="icon-tag icon-white"></i>  iPad</a>
-                    <a href="index-2.html" class="badge badge-success"><i class="icon-tag icon-white"></i> hml5</a>
-                    <a href="index-2.html" class="badge badge-warning"><i class="icon-tag icon-white"></i> chrome</a>
-                    <a href="index-2.html" class="badge"><i class="icon-tag icon-white"></i>  css</a>
-                    <a href="index-2.html" class="badge"><i class="icon-tag icon-white"></i>  Bootstrap</a> -->
-                  </div>
-                </div>
-              </div>
-              <div class="span9" id="main">
-                <%= yield %>
-
-              </div>
-            </div>
-          </div>
-          <footer>
+	                <li><%= link_to destroy_user_session_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Logout
+						<%end%>
+					</li>
+	            <% end %>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+		  
+<div class="span12" id="main">
+	<%= yield %>
+</div>
+            
+          <!-- <footer>
             <hr/>
             <div class="row">
               <div class="span12">
@@ -90,12 +82,11 @@
                 <p>&COPY; 2015</p>
               </div>
             </div>
-          </footer>
-        <!-- Le javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <%= javascript_include_tag "application" %>
+          </footer> -->
+        
+	<%= javascript_include_tag "application" %>
+	<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>
 
-      </body>
+</body>
 
-      </html>
+</html>

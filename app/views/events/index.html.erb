@@ -1,6 +1,5 @@
 
 <% unless params[:search] %>
-<h1>Events Library</h1>
 <p><%= link_to 'New Event', new_event_path(tag: @tag) if user_signed_in?%></p>
 <% else %>
 <h2>Search Result</h2>
