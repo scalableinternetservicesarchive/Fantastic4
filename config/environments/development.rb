@@ -41,7 +41,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {host:'localhost',port:3000}
 
   config.paperclip_defaults = {
-        :path => ":rails_root/public/images/:class/:attachment/:id/:style/:filename",
-        :url => "/images/:class/:attachment/:id/:style/:filename"
-      }
+    :path => ":rails_root/public/images/:class/:attachment/:id/:style/:filename",
+    :url => "/images/:class/:attachment/:id/:style/:filename"
+  }
 end
