@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/profile/posts' => 'user#show_created_posts'
   get '/profile/votes' => 'user#show_voted_events'
   get '/profile/votes/posts' => 'user#show_voted_posts'
-  get '/profile' => 'user#show'
+  get '/profile' => 'user#show', as: :profile
 
   post '/posts/:id' => 'posts#vote'
   

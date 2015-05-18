@@ -42,7 +42,7 @@
 						<td><%= event.created_at%></td>
 						<td><%= event.posts.count%></td>
 						<td><%= event.posts.map {|post| post.vote_count}.sum%></td>
-						<td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+						<td><%= link_to 'Destroy', event, method: :delete %></td>
 		            </tr>
 		            <% end %>
 		        </tbody>
@@ -65,7 +65,7 @@
 						<td><%= link_to "#{post.event.title}", post.event%></td>
 						<td><%= post.vote_count%></td>
 						<td><%= post.created_at%></td>
-						<td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+						<td><%= link_to 'Destroy', post, method: :delete%></td>
 		            </tr>
 		            <% end %>
 		        </tbody>
