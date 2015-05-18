@@ -17,6 +17,7 @@
 				<td><%= link_to "#{post.event.title}", post.event%></td>
 				<td><%= post.vote_count%></td>
 				<td><%= post.created_at%></td>
+				<td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
             <% end %>
         </tbody>
