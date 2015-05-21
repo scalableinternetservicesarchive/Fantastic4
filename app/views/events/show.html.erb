@@ -1,5 +1,7 @@
 
 <h1><%= @event.title %></h1>
+<p><a href="../tagevent/<%=@event.tags%>" class="badge"><i class="icon-tag icon-white"></i><%= @event.tags %> </a></p>
+<br>
 <p><%= @event.description %></p>
 <p> <%= "Created at #{@event.created_at}" %></p>
 <p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>

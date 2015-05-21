@@ -7,18 +7,19 @@
 
 <ul class="thumbnails">
 	<% @events.each do |event| %>
-	<li class="span2">
-		<div class="thumbnail">
+	<li class="span3">
+		<div class="thumbnail" style="background-color: rgba(255,255,255,0.5);">
 			<% if event.image.present? %>
-			<p><%= link_to(image_tag(event.image.url(:thumb)), event) %></p>
+			<p><%= link_to(image_tag(event.image.url(:medium)), event) %></p>
 			<% else %>
 			<p><%= link_to(image_tag("default.jpg"), event) %></p>
 			<% end %>
-			<br>
-			<h4><%= event.title %></h4>
-			<p><%= event.description%></p>	 
 			<p><%= "#{event.posts.count} posts" %></p>
+			<hr>
+			<strong><%= event.title %></strong>
 			<p><%= event.created_at.month%></p>
+			<p><%= event.description%></p>	
+
 		</div>
 	</li>
 	<% end %>

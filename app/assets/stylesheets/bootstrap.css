@@ -3540,7 +3540,7 @@ input[type="submit"].btn.btn-mini {
   padding: 4px;
   margin: 0px;
   line-height: 1;
-  border: 1px solid #ddd;
+  border: 0.5px solid #ddd;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
