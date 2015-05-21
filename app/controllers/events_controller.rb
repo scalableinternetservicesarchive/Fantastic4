@@ -7,7 +7,6 @@ class EventsController < ApplicationController
     if params[:tag]
       @events = Event.where(tags: params[:tag]).sort_by {|event| -event.posts.count}
       @tag = params[:tag]
-
     elsif params[:search]
       # @events = Event.search(params[:search]).order("created_at DESC")
       @events = Event.search(params[:search]).sort_by {|event| -event.posts.count}

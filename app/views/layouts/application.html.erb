@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wbpreview.com/previews/WB001HJ32/ by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 16 May 2013 15:15:59 GMT -->
 <head>
   <meta charset="utf-8">
   <title>Fantastic4</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-  <!-- Le styles -->
+
   <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' %>
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
@@ -16,6 +15,7 @@
 </head>
 
 <body>
+<!-- navigation top bar	 -->
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -33,9 +33,19 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/">Discover <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Categories</a></li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" onclick="getTimeLine()">Timeline <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/tagevent/School">School</a></li>
+						<li><a href="/tagevent/Movie">Movie</a></li>
+						<li><a href="/tagevent/Music">Music</a></li>
+						<li><a href="/tagevent/Technology">Technology</a></li>
+						<li><a href="/tagevent/Reading">Reading</a></li>
+						<li><a href="/tagevent/Health">Health</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Timeline <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="/timeline/1">Within This Month</a></li>
 						<li><a href="/timeline/3">Recent Three Months</a></li>
@@ -53,37 +63,29 @@
 			<%= text_field_tag :search, params[:search], class: "form-control",placeholder: "Search.."%>
 			<% end %>
 			</div>
-			<!-- user -->
+			
+			<!-- login/logout -->
 			<ul class="nav navbar-nav navbar-right">
 	            <% unless user_signed_in? %>
-					<p class="navbar-text"><b>Cannot Vote? Please</b></p>
-					<li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-					<li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<p class="navbar-text"><b>Cannot Vote? Please</b></p>
+				<li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 		        <% else %>
-					<li><a href="/profile"><span class="glyphicon glyphicon-th"></span> <b><%=  current_user.email %></b></a></li>
-
-	                <li><%= link_to destroy_user_session_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Logout
-						<%end%>
-					</li>
-	            <% end %>
+				<li><a href="/profile"><span class="glyphicon glyphicon-th"></span> <b><%=  current_user.email %></b></a></li>
+				<li><%= link_to destroy_user_session_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Logout <% end %></li>	
+				<% end %>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
-		  
-<div class="span12" id="main">
-	<%= yield %>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12" id="main">
+			<%= yield %>
+		</div>
+	</div>
 </div>
-            
-          <!-- <footer>
-            <hr/>
-            <div class="row">
-              <div class="span12">
-                <p>Fantastic 4 </p>
-                <p>&COPY; 2015</p>
-              </div>
-            </div>
-          </footer> -->
         
 	<%= javascript_include_tag "application" %>
 	<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js' %>

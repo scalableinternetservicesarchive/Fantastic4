@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   post '/posts/:id' => 'posts#vote'
   
   get '/timeline/:month' => 'events#index'
+  get '/tagevent/:tag' => 'events#index'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
