@@ -1,3 +1,4 @@
+require 'open-uri'
 class Event < ActiveRecord::Base
   TAG_TYPES = ["School", "Movie", "Music", "Technology","Reading", "Health"]
   
@@ -9,9 +10,9 @@ class Event < ActiveRecord::Base
   validates :title, uniqueness: true
   
   has_attached_file :image, styles: {
-    # thumb: '100x100#',
-#     square: '200x200#',
-#     medium: '300x300#'
+    thumb: '100x100#',
+    square: '200x200#',
+    medium: '300x300#'
   }
   
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
@@ -27,8 +28,8 @@ class Event < ActiveRecord::Base
     where(created_at: start_time..DateTime.now)
   end
 
-  def create_from_url(url)
-    self.image = URI.parse(url)
+  def image_from_url(url)
+    self.image = open(URI.parse(url))
     #self.image = open(url)
   end
 end
