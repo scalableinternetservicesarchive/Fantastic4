@@ -64,7 +64,7 @@
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
-	  
+
 	  <!-- user sign up -->
       <request>
 		<dyn_variable name="authenticity_token"/>
@@ -100,10 +100,7 @@
 
      <!-- wait for up to 2 seconds, user is looking at post -->
      <thinktime value="2" random="true"></thinktime>
-	  
-	  
 
-      
 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
       <!--
@@ -116,7 +113,6 @@
 
       <!-- delete the community we created -->
 
-      
     </session>
   </sessions>
 </tsung>
