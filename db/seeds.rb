@@ -3,11 +3,11 @@ event1 = Event.create(
 	title: 'School Queen',
 	description: 'Vote for the school queen',
 	tags: 'School',
-  image: URI.parse("http://www.google.com/images/logos/ps_logo2.png")
+  #image: URI.parse("http://www.google.com/images/logos/ps_logo2.png")
 )
 #event1.image = URI.parse("http://www.google.com/images/logos/ps_logo2.png")
-#event1.create_from_url("http://www.google.com/images/logos/ps_logo2.png")
-#event1.save
+event1.create_from_url("http://www.google.com/images/logos/ps_logo2.png")
+event1.save
 
 event2 = Event.create(
 	title: 'Best Movie',
