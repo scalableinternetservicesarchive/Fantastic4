@@ -3,8 +3,10 @@ event1 = Event.create(
 	title: 'School Queen',
 	description: 'Vote for the school queen',
 	tags: 'School',
-  #image: File.open("#{Rails.root}/test/fixtures/images/school.jpeg")
+  #image: File.open("assets/images/school.jpeg")
 )
+event1.create_from_url("http://www.google.com/images/logos/ps_logo2.png")
+event1.save
 
 event2 = Event.create(
 	title: 'Best Movie',

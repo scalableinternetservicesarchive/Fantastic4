@@ -26,6 +26,11 @@ class Event < ActiveRecord::Base
     start_time = time_interval.at_end_of_month.midnight
     where(created_at: start_time..DateTime.now)
   end
+
+  def create_from_url(url)
+    self.image = URI.parse(url)
+    #self.image = open(url)
+  end
 end
 
 
