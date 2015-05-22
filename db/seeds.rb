@@ -6,7 +6,7 @@ event1 = Event.create(
   #image: URI.parse("http://www.google.com/images/logos/ps_logo2.png")
 )
 #event1.image = URI.parse("http://www.google.com/images/logos/ps_logo2.png")
-event1.image_from_url("http://www.google.com/images/logos/ps_logo2.png")
+event1.create_from_url("http://www.google.com/images/logos/ps_logo2.png")
 event1.save
 
 event2 = Event.create(

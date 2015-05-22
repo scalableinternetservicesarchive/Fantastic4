@@ -1,4 +1,3 @@
-require 'open-uri'
 class Event < ActiveRecord::Base
   TAG_TYPES = ["School", "Movie", "Music", "Technology","Reading", "Health"]
   
@@ -28,9 +27,8 @@ class Event < ActiveRecord::Base
     where(created_at: start_time..DateTime.now)
   end
 
-  def image_from_url(url)
-    self.image = open(URI.parse(url))
-    #self.image = open(url)
+  def create_from_url(url)
+    self.image = URI.parse(url)
   end
 end
 
