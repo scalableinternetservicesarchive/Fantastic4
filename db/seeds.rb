@@ -3,77 +3,80 @@ event1 = Event.create(
 	title: 'School Queen',
 	description: 'Vote for the school queen',
 	tags: 'School',
-  image: File.open("#{Rails.root}/test/fixtures/images/school.jpeg")
+  image: URI.parse("http://www.google.com/images/logos/ps_logo2.png")
 )
+#event1.image = URI.parse("http://www.google.com/images/logos/ps_logo2.png")
+#event1.create_from_url("http://www.google.com/images/logos/ps_logo2.png")
+#event1.save
 
 event2 = Event.create(
 	title: 'Best Movie',
 	description: 'Vote for the best movie 2014',
 	tags: 'Movie',
-  image: File.open("#{Rails.root}/test/fixtures/images/movie.jpg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/movie.jpg")
 )
 
 event3 = Event.create(
 	title: 'Pop Star',
 	description: 'best singer ever',
 	tags: 'Music',
-  image: File.open("#{Rails.root}/test/fixtures/images/music.png")
+  #image: File.open("#{Rails.root}/test/fixtures/images/music.png")
 )
 
 post1 = Post.create(
   event_id: event2.id,
   text_content: 'Big Hero 6',
   vote_count: 3,
-  image: File.open("#{Rails.root}/test/fixtures/images/bighero.jpeg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/bighero.jpeg")
 )
 
 post2 = Post.create(
   event_id: event2.id,
   text_content: 'Avenger',
   vote_count: 2,
-  image: File.open("#{Rails.root}/test/fixtures/images/avenger.jpg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/avenger.jpg")
 )
 
 post3 = Post.create(
   event_id: event2.id,
   text_content: 'Harry Potter',
   vote_count: 2,
-  image: File.open("#{Rails.root}/test/fixtures/images/1.png")
+  #image: File.open("#{Rails.root}/test/fixtures/images/1.png")
 )
 
 post4 = Post.create(
   event_id: event2.id,
   text_content: 'Transformer',
   vote_count: 1,
-  image: File.open("#{Rails.root}/test/fixtures/images/transformer.jpg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/transformer.jpg")
 )
 
 post5 = Post.create(
   event_id: event1.id,
   text_content: 'queen 1',
   vote_count: 0,
-  image: File.open("#{Rails.root}/test/fixtures/images/sd1.jpg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/sd1.jpg")
 )
 
 post6 = Post.create(
   event_id: event1.id,
   text_content: 'queen 2',
   vote_count: 0,
-  image: File.open("#{Rails.root}/test/fixtures/images/sd2.jpg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/sd2.jpg")
 )
 
 post7 = Post.create(
   event_id: event1.id,
   text_content: 'queen 3',
   vote_count: 0,
-  image: File.open("#{Rails.root}/test/fixtures/images/sd3.jpg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/sd3.jpg")
 )
 
 post8 = Post.create(
   event_id: event3.id,
   text_content: 'Music',
   vote_count: 0,
-  image: File.open("#{Rails.root}/test/fixtures/images/musicpost.jpg")
+  #image: File.open("#{Rails.root}/test/fixtures/images/musicpost.jpg")
 )
 
 user1 = User.create(
