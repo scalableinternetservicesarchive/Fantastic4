@@ -1,8 +1,8 @@
 
 <% unless params[:search] %>
-<p><%= link_to 'New Event', new_event_path(tag: @tag),class: "btn btn-default" if user_signed_in?%></p>
+<p><%= link_to 'Create Your Own Event?', new_event_path(tag: @tag),class: "btn btn-default" if user_signed_in?%></p>
 <% else %>
-<h2>Search Result</h2>
+<h1>Search Result</h1>
 <% end %>
 
 <ul class="thumbnails">
