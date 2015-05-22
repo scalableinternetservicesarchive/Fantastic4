@@ -1,23 +1,29 @@
+<div class="edito span12">
+        <div class="row">
+               	<h1><%= @post.event.title %></h1>
+				<p><%= "#{@post.vote_count} votes" %></p>
+				<p> <%= "Created at #{@post.created_at}" %></p>
+				<% unless user_signed_in? %>
+				<p>cannot vote</p>
+				<% else %>
+				<%= button_to "vote", {action: "vote", params: {click_page: 'post_show'}},class: "btn btn-default"%>
+				<% end %>
+				<% if @post.image.present? %>
+					<div class="thumbnail pull-left margin-rb"><%= image_tag(@post.image.url(:medium))%></div>
+				<% end %>
+                <p><%= @post.text_content %></p>
+		</div>
+		<p>
+		  <% if @post.creaters.include?(current_user)%>
+		  <%= link_to 'Want to Edit the post?', edit_post_path(@post) %>
+		  <% end %>
+		</p>
+</div>
 
-<h1><%= @post.event.title %></h1>
-<h3><%= @post.text_content %></h3>
-<p><%= "#{@post.vote_count} votes" %></p>
-<p> <%= "Created at #{@post.created_at}" %></p>
-<% unless user_signed_in? %>
-<p>cannot vote</p>
-<% else %>
-<%= button_to "vote", action: "vote", params: {click_page: 'post_show'}%>
-<% end %>
 
-<% if @post.image.present? %>
-<p><%= image_tag(@post.image.url(:medium))%></p>
-<% end %>
 
-<p>
-  <% if @post.creaters.include?(current_user)%>
-  <%= link_to 'Want to Edit the post?', edit_post_path(@post) %>
-  <% end %>
-</p>
-<p><button onclick="window.history.back()">Back</button></p>
 
-<p id="notice"><%= notice %></p>
+
+<!--<p><button onclick="window.history.back()">Back</button></p>
+
+<p id="notice"><%= notice %></p> -->

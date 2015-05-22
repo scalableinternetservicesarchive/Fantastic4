@@ -1,43 +1,57 @@
-
-<h1><%= @event.title %></h1>
-<p><a href="../tagevent/<%=@event.tags%>" class="badge"><i class="icon-tag icon-white"></i><%= @event.tags %> </a></p>
-<br>
-<p><%= @event.description %></p>
-<p> <%= "Created at #{@event.created_at}" %></p>
-<p><%= link_to "Post to this event", controller: "posts", action: "new", post: {event_id: @event.id}%></p>
-<% if @event.image.present? %>
-<p><%= image_tag(@event.image.url(:medium))%></p>
-<% end %>
-
-<ul class="thumbnails">
-	<% @posts.each do |post|%> 
-	<li class="span2">
-		<div class="thumbnail">
-			<p><%= link_to "#{post.text_content}", post%></p>
-			<P><%= "#{post.vote_count} votes"%></p>
-			<% if post.image.present? %>
-			<p><%= link_to(image_tag(post.image.url(:medium)), post) %></p>
-			<% else %>
-			<p><%= link_to(image_tag("default.jpg"), post) %></p>
-			<% end %>
-
-			<% unless user_signed_in? %>
-			<p>cannot vote</p>
-			<% else %>
-			<%= button_to "vote", post, action: "vote", params: {click_page: 'event_show'}%>
-			<% end %>
+<div class="edito span12">
+        <div class="row">
+               	<h1><%= @event.title %></h1>
+				<!-- <p><a href="../tagevent/<%=@event.tags%>" class="badge"><%= @event.tags %> </a></p> -->
+				<br>
+				<p> <%= "Created at #{@event.created_at}" %></p>
+				<p><%= link_to "Post to this event", {controller: "posts", action: "new", post: {event_id: @event.id}},:class => "btn btn-default"%></p>
+				<% if @event.image.present? %>
+					<div class="thumbnail pull-left margin-rb"><%= image_tag(@event.image.url(:medium))%></div>
+				<% end %>
+                <p><%= @event.description %></p>
 		</div>
-	</li>
-	<% end %>
-</ul>
-
-<p><button onclick="window.history.back()">Back</button></p>
-
-<p id="notice"><%= notice %></p>
-
-<script type="text/javascript">
-document.getElementById("event").style.backgroundImage = "#{@event.image.url%>}";
-</script>
+</div>
+<div class="edito span12">
+	<div class="row">
+			<ul class="thumbnails">
+				<% @posts.each do |post|%> 
+				<li class="span2">
+					<div class="thumbnail">
+						<p><strong><%=post.text_content%></strong></p>
+						
+						<p><%= "#{post.vote_count} votes"%></p>
+						<% if post.image.present? %>
+						<p><%= link_to(image_tag(post.image.url), post) %></p>
+						<% else %>
+						<p><%= link_to(image_tag("default.jpg"), post) %></p>
+						<% end %>
+						<hr>
+						<% unless user_signed_in? %>
+						<p>cannot vote</p>
+						<% else %>
+						<%= button_to post, action: "vote", params: {click_page: 'event_show'}, class: "btn btn-default" do %>
+							Vote <i class="glyphicon glyphicon-thumbs-up"></i>
+						<% end %>
+						<% end %>
+					</div>
+				</li>
+				<% end %>
+			</ul>
+			<p><button onclick="window.history.back()">Back</button></p>
+			<p id="notice"><%= notice %></p>		
+	</div>
+</div>		
+				
+				
+				
+				
+				
+				
+			
+			
+			
+	
+		
 
 
 

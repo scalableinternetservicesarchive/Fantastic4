@@ -2424,6 +2424,12 @@ input[type="submit"].btn.btn-mini {
   opacity: 0.75;
   filter: alpha(opacity=75);
 }
+
+.btn-default{
+	margin-top: 10px;
+	color: #85107d;
+
+}
 .alert {
   padding: 8px 35px 8px 14px;
   margin-bottom: 18px;
@@ -3617,13 +3623,14 @@ a.thumbnail:hover {
   font-weight: bold;
   white-space: nowrap;
   color: #ffffff;
-  background-color: #999999;
+  background-color: rgba(0,0,0,0.3);
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
 }
 .badge:hover {
   color: #ffffff;
+  background-color: rgba(0,0,0,0.1);
   text-decoration: none;
   cursor: pointer;
 }

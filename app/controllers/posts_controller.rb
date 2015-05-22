@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
-
+  respond_to :xml, :json, :html
   # GET /posts
   # GET /posts.json
   def index
@@ -86,7 +86,6 @@ class PostsController < ApplicationController
       @post.vote_count += 1
       @post.save
     end
-
     respond_to do |format|
       if click_page == 'event_show'
         format.html { redirect_to @post.event, notice: "#{notice}" }
