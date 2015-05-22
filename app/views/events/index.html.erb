@@ -10,7 +10,7 @@
 	<li class="span3">
 		<div class="thumbnail" style="background-color: rgba(255,255,255,0.5);">
 			<% if event.image.present? %>
-			<p><%= link_to(image_tag(event.image.url), event) %></p>
+			<p><%= link_to(image_tag(event.image.url(:medium)), event) %></p>
 			<% else %>
 			<p><%= link_to(image_tag("default.jpg"), event) %></p>
 			<% end %>
@@ -19,7 +19,7 @@
 			<a href="../timeline/<%= event.created_at.month%>" class="badge"><%=event.created_at.month%> </a> -->
 			<p><%= "#{event.posts.count} posts" %></p>
 			<hr>
-			<p>
+			<p>z
 				<% if event.description.to_s.length > 200 %>
 					<%= event.description.to_s[0,200] + "..."  %>
 				<% else %>
