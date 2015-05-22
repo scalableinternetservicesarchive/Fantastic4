@@ -18,7 +18,7 @@
 				<% @posts.each do |post|%> 
 				<li class="span2">
 					<div class="thumbnail">
-						<p><strong><%=post.text_content%></strong></p>
+						<p><%=post.text_content%></p>
 						
 						<p><%= "#{post.vote_count} votes"%></p>
 						<% if post.image.present? %>
