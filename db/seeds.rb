@@ -1,4 +1,3 @@
-
 event1 = Event.create(
 	title: "Hot or Not",
 	description: "Who is the hottest girl at school?",

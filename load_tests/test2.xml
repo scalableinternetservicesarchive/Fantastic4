@@ -8,6 +8,7 @@
   </clients>
 
   <!-- Server side setup -->
+  <!-- app server is a different instance from the one tsung located -->
   <servers>
     <server host="ec2-54-148-61-114.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
@@ -59,6 +60,7 @@
 
   <sessions>
     <session name="http-example" probability="100" type="ts_http">
+	  <!-- in order to view "form-data" in browser, prevent mandatory file attachment -->
 
       <!-- start out at the dashboard. -->
       <request>
@@ -66,6 +68,7 @@
       </request>
 
 	  <!-- user sign up -->
+	  <!-- authenticity_token differ because we uncomment the csfy exception in application-controller -->
       <request>
 		<dyn_variable name="authenticity_token"/>
         <http url='/users/sign_up' version='1.1' method='GET'></http>
