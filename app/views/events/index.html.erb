@@ -15,8 +15,6 @@
 			<p><%= link_to(image_tag("default.jpg"), event) %></p>
 			<% end %>
 			<p><strong><%= event.title %></strong></p>
-			<!-- <a href="../tagevent/<%= event.tags%>" class="badge"><%= event.tags%></a>
-			<a href="../timeline/<%= event.created_at.month%>" class="badge"><%=event.created_at.month%> </a> -->
 			<p><%= "#{event.posts.count} posts" %></p>
 			<hr>
 			<p>

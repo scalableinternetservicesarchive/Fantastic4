@@ -1,4 +1,4 @@
-body{padding-top: 30px;background: url(../img/body.gif)}
+body{padding-top: 30px;}
 h1.logo {
  
     font-size: 4em;
@@ -8,12 +8,13 @@ h1.logo {
 #main h1,#main h2,#main h3 {
     font-weight: bold;
     text-shadow: 1px 1px #CCC;
+	font-size: x-large;
 }
 #left-side h2{
     font-size: 2em;
     color: #08C
 }
-h1,h2,h3,h4{font-family: Impact, sans-serif;font-weight: normal}
+h1,h2,h3,h4{font-family: arial;font-weight: normal; color: #85107d;}
 
 h1.logo a:hover{text-decoration: none}
 h1.logo {text-shadow: 1px 1px #CCC}
