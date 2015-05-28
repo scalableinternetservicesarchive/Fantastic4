@@ -2,7 +2,9 @@
 				<!-- <p><a href="../tagevent/<%=@event.tags%>" class="badge"><%= @event.tags %> </a></p> -->
 <p> <%= "Created at #{@event.created_at}" %></p>
 <p><%= @event.description %></p>
+<% if user_signed_in? %>
 <p><%= link_to "Post to this event", {controller: "posts", action: "new", post: {event_id: @event.id}},:class => "btn btn-default"%></p>
+<% end %>
 <p id="notice"><%= notice %></p>
 <hr>
 
