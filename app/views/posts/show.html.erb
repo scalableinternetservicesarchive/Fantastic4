@@ -1,8 +1,10 @@
 <div class="edito span12">
         <div class="row">
                	<h1><%= @post.event.title %></h1>
-				<p><%= "#{@post.vote_count} votes" %></p>
 				<p> <%= "Created at #{@post.created_at}" %></p>
+				<p><%= @post.text_content %></p>
+				<p><%= "#{@post.vote_count} votes" %></p>
+				
 				<% unless user_signed_in? %>
 				<p>cannot vote</p>
 				<% else %>
@@ -11,7 +13,6 @@
 				<% if @post.image.present? %>
 					<div class="thumbnail pull-left margin-rb"><%= image_tag(@post.image.url(:medium))%></div>
 				<% end %>
-                <p><%= @post.text_content %></p>
 		</div>
 		<p>
 		  <% if @post.creaters.include?(current_user)%>
