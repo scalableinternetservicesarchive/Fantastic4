@@ -17,7 +17,7 @@
 			<p><strong><%= event.title %></strong></p>
 			<p><%= "#{event.posts.count} posts" %></p>
 			<hr>
-			<p>z
+			<p>
 				<% if event.description.to_s.length > 200 %>
 					<%= event.description.to_s[0,200] + "..."  %>
 				<% else %>

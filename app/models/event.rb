@@ -22,7 +22,21 @@ class Event < ActiveRecord::Base
   end
   
   def self.timeline(month)
-    time_interval = DateTime.now - month.to_i.month
+    m = month.to_i
+    if m == 2
+      m = 3
+    elsif m == 3
+      m = 6
+    elsif m == 4
+      m = 12
+    elsif m == 5
+      m = 60
+    elsif m == 6
+      m = 120
+    else
+      m = 0
+    end
+    time_interval = DateTime.now - m.month
     start_time = time_interval.at_end_of_month.midnight
     where(created_at: start_time..DateTime.now)
   end
