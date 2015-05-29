@@ -10,7 +10,7 @@
   <!-- Server side setup -->
   <!-- app server is a different instance from the one tsung located -->
   <servers>
-    <server host="ec2-52-25-200-22.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-220-94.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -84,21 +84,23 @@
       </request>
 	   	  
 	  <!-- authenticity_token differ because we uncomment the csfy exception in application-controller -->
-      <!-- <request>
+      <request>
 		<dyn_variable name="authenticity_token"/>
         <http url='/users/sign_up' version='1.1' method='GET'></http>
-      </request> -->
+      </request>
+	  
+	  <thinktime value="2" random="true"></thinktime>
 	  
 	  <!-- user sign up, when they notice they can't vote as a guest -->
 	  <setdynvars sourcetype="random_string" length="3">
 		  <var name="random_user_email"/>
 	  </setdynvars>
 	 <request subst="true">
-	 <http 
-	    url="/users" 
-	    version="1.1" 
+	 <http
+	    url="/users"
+	    version="1.1"
 	    method="POST" 	       contents="utf8=%E2%9C%93&amp;authenticity_token=YiCOqjy%2FSzTcVrgWXNbMHS4N7%2B3WEcl2RJ%2FEDv5EHFy1XdUO4JBO%2FTmAfBHOisDOv%2B2g7tB%2Be7jybqOu8FQ5MQ%3D%3D&amp;user%5Bemail%5D=user%%_random_user_email%%%40gmail.com&amp;user%5Bpassword%5D=12345678&amp;user%5Bpassword_confirmation%5D=12345678&amp;commit=Sign+up" />
-	 </request>	
+	 </request>
 	 
      <!-- wait for up to 2 seconds after log in, user is thinking what he want to do -->
      <thinktime value="2" random="true"></thinktime>
@@ -110,19 +112,21 @@
      <request subst="true">
         <http url='/posts/%%_vote_post_id%%' version='1.1' method='POST' contents="authenticity_token=2tG8jj1xt%2F7wTMeg3v%2FL9xOvEQaQSWduXrca6auKVZUNrOcq4V6yNxWaA6dMo8ckgk9eBZYm1aDoRn1JpZpw%2BA%3D%3D&amp;click_page=event_show"></http>
      </request>
+
+	 <thinktime value="2" random="true"></thinktime>
 	 
 	 <setdynvars sourcetype="eval" code='fun({Pid,DynVars})-> [[13, 10]] end.'>
 		 <var name="nl" />
 	 </setdynvars>
-	 
+
 	 <setdynvars sourcetype="eval"
 		 code='fun({Pid,DynVars})->
 		 {ok, Bin} = file:read_file("default.jpg"),
-		 Bin 
+		 Bin
 		 end.'>
 		 <var name="attached_file" />
 	 </setdynvars>
-	 
+
 	 <!-- user want to post to a event -->
 	 <setdynvars sourcetype="random_number" start="1" end="12">
 		 <var name="post_event"/>
@@ -131,66 +135,24 @@
 		 <var name="post_content"/>
 	 </setdynvars>
      <request subst="true">
-        <http url='/posts' version='1.1' method='POST' contents-type='multipart/form-data; boundary=----WebKitFormBoundary89pras31HIdqsXIb' contents='------WebKitFormBoundary89pras31HIdqsXIb
-Content-Disposition: form-data; name="utf8"
-✓
-------WebKitFormBoundary89pras31HIdqsXIb
-Content-Disposition: form-data; name="authenticity_token"
-LRsCVaT0Gt1E12GC+ShI2gwMnbISfEg8l0TUNE4IxMjxzxbD0xKskH+66hg3tnZ8dYxfyBMZ1fCm7D5ueu57Ng==
-------WebKitFormBoundary89pras31HIdqsXIb
-Content-Disposition: form-data; name="post[event_id]"
-%%post_event%%
-------WebKitFormBoundary89pras31HIdqsXIb
-Content-Disposition: form-data; name="post[text_content]"
-%%post_content%%
-------WebKitFormBoundary89pras31HIdqsXIb
-Content-Disposition: form-data; name="post[image]"; filename="default.jpg"
-Content-Type: image/jpeg
-%%attached_file%%
-------WebKitFormBoundary89pras31HIdqsXIb
-Content-Disposition: form-data; name="commit"
-Create Post
-------WebKitFormBoundary89pras31HIdqsXIb--'></http>
+        <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----WebKitFormBoundary89pras31HIdqsXIb' contents='------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[event_id]"%%_nl%%%%_nl%%%%_post_event%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[text_content]"%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Post%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb--%%_nl%%'></http>
      </request>
-	 
-	 <!-- user want to create a new event -->
+
+	 <!-- user want to create a new event, under tag school -->
 	 <setdynvars sourcetype="random_string" length="10">
 		 <var name="event_title"/>
 	 </setdynvars>
-	 
+
 	 <setdynvars sourcetype="random_string" length="30">
 		 <var name="event_description"/>
 	 </setdynvars>
-	 
-	 <setdynvars sourcetype="file" fileid="event_tags.csv" delimiter=";" order="random">
-		 <var name="event_tag"/>
-	 </setdynvars>
-	 
-     <request subst="true">
-        <http url='/events' version='1.1' method='POST' contents-type='ultipart/form-data; boundary=----WebKitFormBoundaryDYkgCqYY46LzTrHI' contents='------WebKitFormBoundaryDYkgCqYY46LzTrHI
-Content-Disposition: form-data; name="utf8"
-✓
-------WebKitFormBoundaryDYkgCqYY46LzTrHI
-Content-Disposition: form-data; name="authenticity_token"
 
-A5gEuTHQMyRUsGKILRJeCiwi2m48blbqYoqD++vAKobfTBAvRjaFaW/d6RLjjGCsVaIYFD0LyyZTImmh3yaVeA==
-------WebKitFormBoundaryDYkgCqYY46LzTrHI
-Content-Disposition: form-data; name="event[title]"
-%%event_title%%
-------WebKitFormBoundaryDYkgCqYY46LzTrHI
-Content-Disposition: form-data; name="event[description]"
-%%event_description%%
-------WebKitFormBoundaryDYkgCqYY46LzTrHI
-Content-Disposition: form-data; name="event[tags]"
-%%event_tag%%
-------WebKitFormBoundaryDYkgCqYY46LzTrHI
-Content-Disposition: form-data; name="event[image]"; filename="default.jpg"
-Content-Type: image/jpeg
-%%attached_file%%
-------WebKitFormBoundaryDYkgCqYY46LzTrHI
-Content-Disposition: form-data; name="commit"
-Create Event
-------WebKitFormBoundaryDYkgCqYY46LzTrHI--'></http>
+<!--	 <setdynvars sourcetype="file" fileid="event_tags.csv" delimiter=";" order="random">
+		 <var name="event_tag"/>
+	 </setdynvars> -->
+
+     <request subst="true">
+        <http url='/events' version='1.1' method='POST' content_type='ultipart/form-data; boundary=----WebKitFormBoundaryDYkgCqYY46LzTrHI' contents='------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[title]"%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[description]"%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[tags]"%%_nl%%%%_nl%%School%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Event%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI--%%_nl%%'></http>
      </request>
 	 
 	 <!-- search an event by keywords -->
@@ -202,20 +164,12 @@ Create Event
      </request>
 	 
 	 <!-- search an event by tags -->
-	 <setdynvars sourcetype="file" fileid="event_tags.csv" delimiter=";" order="random">
+	 <!-- <setdynvars sourcetype="file" fileid="event_tags.csv" delimiter=";" order="random">
 		 <var name="search_tag"/>
 	 </setdynvars>
      <request subst="true">
         <http url='/tagevent/%%_search_tag%%' version='1.1' method='GET'></http>
-     </request>
-	 
-	 <!-- search an event by tags -->
-	 <setdynvars sourcetype="file" fileid="event_tags.csv" delimiter=";" order="random">
-		 <var name="search_tag"/>
-	 </setdynvars>
-     <request subst="true">
-        <http url='/tagevent/%%_search_tag%%' version='1.1' method='GET'></http>
-     </request>
+     </request> -->
 	 
 	 <!-- search an event by timeline -->
 	 <setdynvars sourcetype="random_number" start="1" end="6">
@@ -225,11 +179,11 @@ Create Event
         <http url='/timeline/%%_search_time%%' version='1.1' method='GET'></http>
      </request>
 	 
-  <!-- user log out -->
+  	 <!-- user log out -->
 	 <request>
-	 <http 
-	    url="/users/sign_out" 
-	    version="1.1" 
+	 <http
+	    url="/users/sign_out"
+	    version="1.1"
 	    method="POST" 	       contents="_method=delete&amp;authenticity_token=36ft%2Fhs1KxCgbg%2BRzNPDoCUXg00xNlSOoOB9qPds6uII2rZaxxou2UW4y5Zej89ztPfMTjdZ5kAWERoI%2BXzPjw%3D%3D" />
 	 </request>
 	 
