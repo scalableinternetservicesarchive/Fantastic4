@@ -8,31 +8,35 @@
 <p id="notice"><%= notice %></p>
 <hr>
 
-<ul class="thumbnails">
-	<% @posts.each do |post|%> 
-	<li class="span2">
-		<div class="thumbnail">
-			<p><%=post.text_content%></p>
-			<p><%= "#{post.vote_count} votes"%></p>
-			<% if post.image.present? %>
-			<p><%= link_to(image_tag(post.image.url), post) %></p>
-			<% else %>
-			<p><%= link_to(image_tag("default.jpg"), post) %></p>
+<% cache(cache_key_for_post_table) do %>
+	<ul class="thumbnails">
+		<% @posts.each do |post|%> 
+			<% cache(cache_key_for_post_row(post)) do %>
+				<li class="span2">
+					<div class="thumbnail">
+						<p><%=post.text_content%></p>
+						<p><%= "#{post.vote_count} votes"%></p>
+						<% if post.image.present? %>
+						<p><%= link_to(image_tag(post.image.url), post) %></p>
+						<% else %>
+						<p><%= link_to(image_tag("default.jpg"), post) %></p>
+						<% end %>
+						<hr>
+						<div style="text-align:center;">
+							<% unless user_signed_in? %>
+							<p>cannot vote</p>
+							<% else %>
+							<%= button_to post, action: "vote", params: {click_page: 'event_show'}, class: "btn btn-default" do %>
+							Vote <i class="glyphicon glyphicon-thumbs-up"></i>
+							<% end %>
+							<% end %>
+						</div>
+					</div>
+				</li>
 			<% end %>
-			<hr>
-			<div style="text-align:center;">
-				<% unless user_signed_in? %>
-				<p>cannot vote</p>
-				<% else %>
-				<%= button_to post, action: "vote", params: {click_page: 'event_show'}, class: "btn btn-default" do %>
-				Vote <i class="glyphicon glyphicon-thumbs-up"></i>
-				<% end %>
-				<% end %>
-			</div>
-		</div>
-	</li>
-	<% end %>
-</ul>
+		<% end %>
+	</ul>
+<% end %>
 <!-- <p><button onclick="window.history.back()">Back</button></p> -->
 
 				
