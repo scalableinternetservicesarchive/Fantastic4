@@ -1,50 +1,39 @@
-<div class="edito span12">
-        <div class="row">
-               	<h1><%= @event.title %></h1>
-				<!-- <p><a href="../tagevent/<%=@event.tags%>" class="badge"><%= @event.tags %> </a></p> -->
-				<br>
-				<p> <%= "Created at #{@event.created_at}" %></p>
-				<p><%= @event.description %></p>
-				<p><%= link_to "Post to this event", {controller: "posts", action: "new", post: {event_id: @event.id}},:class => "btn btn-default"%></p>
-                <p id="notice"><%= notice %></p>
-				<br>
-				
-		</div>
-</div>
+<h1><%= @event.title %></h1>
+<p> <%= "Created at #{@event.created_at}" %></p>
+<p><%= @event.description %></p>
+<% if user_signed_in? %>
+<p><%= link_to "Post to this event", {controller: "posts", action: "new", post: {event_id: @event.id}},:class => "btn btn-default"%></p>
+<% end %>
+<p id="notice"><%= notice %></p>
+<hr>
 
-
-<div class="edito span12">
-	<div class="row">
-			<ul class="thumbnails">
-				<% @posts.each do |post|%> 
-				<li class="span2">
-					<div class="thumbnail">
-						<p><strong><%=post.text_content%></strong></p>
-						
-						<p><%= "#{post.vote_count} votes"%></p>
-						<% if post.image.present? %>
-						<p><%= link_to(image_tag(post.image.url), post) %></p>
-						<% else %>
-						<p><%= link_to(image_tag("default.jpg"), post) %></p>
-						<% end %>
-						<hr>
-						<div style="text-align:center;">
-						<% unless user_signed_in? %>
-						<p>cannot vote</p>
-						<% else %>
-						<%= button_to post, action: "vote", params: {click_page: 'event_show'}, class: "btn btn-default" do %>
-							Vote <i class="glyphicon glyphicon-thumbs-up"></i>
-						<% end %>
-						<% end %>
-						</div>
-					</div>
-				</li>
+<ul class="thumbnails">
+	<% @posts.each do |post|%> 
+	<li class="span2">
+		<div class="thumbnail">
+			<p><%=post.text_content%></p>
+			<p><%= "#{post.vote_count} votes"%></p>
+			<% if post.image.present? %>
+			<p><%= link_to(image_tag(post.image.url), post) %></p>
+			<% else %>
+			<p><%= link_to(image_tag("default.jpg"), post) %></p>
+			<% end %>
+			<hr>
+			<div style="text-align:center;">
+				<% unless user_signed_in? %>
+				<p>cannot vote</p>
+				<% else %>
+				<%= button_to post, action: "vote", params: {click_page: 'event_show'}, class: "btn btn-default" do %>
+				Vote <i class="glyphicon glyphicon-thumbs-up"></i>
 				<% end %>
-			</ul>
-			<!-- <p><button onclick="window.history.back()">Back</button></p> -->
-				
-	</div>
-</div>		
+				<% end %>
+			</div>
+		</div>
+	</li>
+	<% end %>
+</ul>
+<!-- <p><button onclick="window.history.back()">Back</button></p> -->
+
 				
 				
 				
