@@ -146,11 +146,9 @@ Content-Disposition: form-data; name="post[text_content]"
 ------WebKitFormBoundary89pras31HIdqsXIb
 Content-Disposition: form-data; name="post[image]"; filename="default.jpg"
 Content-Type: image/jpeg
-
-
+%%attached_file%%
 ------WebKitFormBoundary89pras31HIdqsXIb
 Content-Disposition: form-data; name="commit"
-
 Create Post
 ------WebKitFormBoundary89pras31HIdqsXIb--'></http>
      </request>
@@ -171,7 +169,6 @@ Create Post
      <request subst="true">
         <http url='/events' version='1.1' method='POST' contents-type='ultipart/form-data; boundary=----WebKitFormBoundaryDYkgCqYY46LzTrHI' contents='------WebKitFormBoundaryDYkgCqYY46LzTrHI
 Content-Disposition: form-data; name="utf8"
-
 ✓
 ------WebKitFormBoundaryDYkgCqYY46LzTrHI
 Content-Disposition: form-data; name="authenticity_token"
@@ -179,24 +176,19 @@ Content-Disposition: form-data; name="authenticity_token"
 A5gEuTHQMyRUsGKILRJeCiwi2m48blbqYoqD++vAKobfTBAvRjaFaW/d6RLjjGCsVaIYFD0LyyZTImmh3yaVeA==
 ------WebKitFormBoundaryDYkgCqYY46LzTrHI
 Content-Disposition: form-data; name="event[title]"
-
-12423
+%%event_title%%
 ------WebKitFormBoundaryDYkgCqYY46LzTrHI
 Content-Disposition: form-data; name="event[description]"
-
-a
+%%event_description%%
 ------WebKitFormBoundaryDYkgCqYY46LzTrHI
 Content-Disposition: form-data; name="event[tags]"
-
-School
+%%event_tag%%
 ------WebKitFormBoundaryDYkgCqYY46LzTrHI
 Content-Disposition: form-data; name="event[image]"; filename="default.jpg"
 Content-Type: image/jpeg
-
-
+%%attached_file%%
 ------WebKitFormBoundaryDYkgCqYY46LzTrHI
 Content-Disposition: form-data; name="commit"
-
 Create Event
 ------WebKitFormBoundaryDYkgCqYY46LzTrHI--'></http>
      </request>
