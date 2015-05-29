@@ -10,7 +10,7 @@
   <!-- Server side setup -->
   <!-- app server is a different instance from the one tsung located -->
   <servers>
-    <server host="ec2-54-148-61-114.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-200-22.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -67,41 +67,41 @@
         <http url='/' version='1.1' method='GET'></http>
       </request>
 
-	  <!-- user sign up -->
-	  <!-- authenticity_token differ because we uncomment the csfy exception in application-controller -->
+      <!-- wait for up to 2 seconds, user is looking at events -->
+      <thinktime value="2" random="true"></thinktime>
+	  
+      <!-- visit one event, as a user would do.  -->
+      <request>
+        <http url='/events/1' version='1.1' method='GET'></http>
+      </request>
+	  
+      <!-- wait for up to 2 seconds, user is looking at posts -->
+      <thinktime value="2" random="true"></thinktime>	  
+	  
+	  <!-- visit the post, as a user would do -->
+      <request>
+         <http url='/posts/5' version='1.1' method='GET'></http>
+      </request>
+	   
+	  <!-- user sign up, as they notice they can't vote as a visitor -->
       <request>
 		<dyn_variable name="authenticity_token"/>
         <http url='/users/sign_up' version='1.1' method='GET'></http>
       </request>
 	  
+	  <!-- authenticity_token differ because we uncomment the csfy exception in application-controller -->
 	  <setdynvars sourcetype="random_number" start="1000" end="9999999">
-	          <var name="random_email_id"/>
-	        </setdynvars>
+		  <var name="random_user_email"/>
+	  </setdynvars>
 	 <request subst="true">
 	 <http 
 	    url="/users" 
 	    version="1.1" 
 	    method="POST" 
-	            contents="user%5Bemail%5D=user%%_random_email_id%%@test.com&amp;user%5Bpassword%5D=88888888&amp; user%5Bpassword_confirmation%5D=88888888&amp;authenticity_token=%%_authenticity_token%%commit=Sign up" />
+	    contents="user%5Bemail%5D=user%%_random_user_email%%@test.com&amp;user%5Bpassword%5D=88888888&amp; user%5Bpassword_confirmation%5D=88888888&amp;authenticity_token=%%_authenticity_token%%commit=Sign up" />
 	 </request>	
-	 
-     <!-- wait for up to 2 seconds, user is looking at events -->
-     <thinktime value="2" random="true"></thinktime>
 
-     <!-- visit the event, as a user would do.  -->
-     <request>
-       <http url='/events/1' version='1.1' method='GET'></http>
-     </request>
-	 
-     <!-- wait for up to 2 seconds, user is looking at event -->
-     <thinktime value="2" random="true"></thinktime>
-  
-  	<!-- visit the post, as a user would do -->
-     <request>
-       <http url='/posts/2' version='1.1' method='GET'></http>
-     </request>
-
-     <!-- wait for up to 2 seconds, user is looking at post -->
+     <!-- wait for up to 2 seconds after log in -->
      <thinktime value="2" random="true"></thinktime>
 
 
