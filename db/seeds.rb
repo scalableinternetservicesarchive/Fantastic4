@@ -4,10 +4,10 @@ event1 = Event.create(
 	description: "Who is the hottest girl at school?",
 	tags: "School"
   # image_file_name: "default.jpg"
-  # image: URI.parse("http://www.beliefnet.com/columnists/moviemom/files/import/sydney.jpg")
 )
 event1.created_at = (rand*100).days.ago
-event1.create_from_url("http://www.beliefnet.com/columnists/moviemom/files/import/sydney.jpg")
+event1.image = File.open("#{Rails.root}/app/assets/images/sydney.jpg")
+#event1.create_from_url("http://www.beliefnet.com/columnists/moviemom/files/import/sydney.jpg")
 event1.save
 #event1.image = URI.parse("http://www.google.com/images/logos/ps_logo2.png")
 # event1.create_from_url("http://www.google.com/images/logos/ps_logo2.png")
@@ -20,7 +20,8 @@ event2 = Event.create(
   # image_file_name: "default.jpg"
 )
 event2.created_at = (rand*100).days.ago
-event2.create_from_url("http://static.tumblr.com/1e0391ef51a1f50ab21624884fa3ca08/tlicrj7/RXwn3hi5a/tumblr_static_best-posters-of-all-time.jpg")
+#event2.create_from_url("http://static.tumblr.com/1e0391ef51a1f50ab21624884fa3ca08/tlicrj7/RXwn3hi5a/tumblr_static_best-posters-of-all-time.jpg")
+event2.image = File.open("#{Rails.root}/app/assets/images/posters.jpg")
 event2.save
 
 event3 = Event.create(
@@ -32,7 +33,8 @@ event3 = Event.create(
   #image: File.open("#{Rails.root}/test/fixtures/images/music.png")
 )
 event3.created_at = (rand*100).days.ago
-event3.create_from_url("http://images.mstarz.com/data/images/full/13694/american-idol.jpg")
+event3.image = File.open("#{Rails.root}/app/assets/images/american-idol.jpg")
+#event3.create_from_url("http://images.mstarz.com/data/images/full/13694/american-idol.jpg")
 event3.save
 
 event4 = Event.create(
@@ -42,7 +44,8 @@ event4 = Event.create(
   # image_file_name: "default.jpg"
 )
 event4.created_at = (rand*100).days.ago
-event4.create_from_url("http://4.bp.blogspot.com/--UOeLKgD6rI/VVIXfCKV-5I/AAAAAAAAKnQ/o52nEuR031k/s1600/2e0802bd2bd308779697dc28db9cfb76.jpg")
+#event4.create_from_url("http://4.bp.blogspot.com/--UOeLKgD6rI/VVIXfCKV-5I/AAAAAAAAKnQ/o52nEuR031k/s1600/2e0802bd2bd308779697dc28db9cfb76.jpg")
+event4.image = File.open("#{Rails.root}/app/assets/images/book.jpg")
 event4.save
 
 event5 = Event.create(
@@ -52,7 +55,8 @@ event5 = Event.create(
   # image_file_name: "default.jpg"
 )
 event5.created_at = (rand*100).days.ago
-event5.create_from_url("http://www.cfah.org/hbns/images/070312mentalhealth.jpg")
+#event5.create_from_url("http://www.cfah.org/hbns/images/070312mentalhealth.jpg")
+event5.image = File.open("#{Rails.root}/app/assets/images/health.jpg")
 event5.save
 
 event6 = Event.create(
@@ -62,7 +66,8 @@ event6 = Event.create(
   # image_file_name: "default.jpg"
 )
 event6.created_at = (rand*100).days.ago
-event6.create_from_url("http://wallpapers111.com/wp-content/uploads/2015/05/Apple-Logo-Wallpapers-5.jpg")
+event6.image = File.open("#{Rails.root}/app/assets/images/tech.jpg")
+#event6.create_from_url("http://wallpapers111.com/wp-content/uploads/2015/05/Apple-Logo-Wallpapers-5.jpg")
 event6.save
 
 event7 = Event.create(
@@ -72,7 +77,8 @@ event7 = Event.create(
   # image_file_name: "default.jpg"
 )
 event7.created_at = (rand*100).days.ago
-event7.create_from_url("http://images.vcpost.com/data/images/full/33734/is-high-school-musical-4-happening.jpg")
+#event7.create_from_url("http://images.vcpost.com/data/images/full/33734/is-high-school-musical-4-happening.jpg")
+event7.image = File.open("#{Rails.root}/app/assets/images/music.jpg")
 event7.save
 
 event8 = Event.create(
@@ -82,7 +88,8 @@ event8 = Event.create(
   # image_file_name: "default.jpg"
 )
 event8.created_at = (rand*100).days.ago
-event8.create_from_url("http://weeva.com/blog/wp-content/uploads/2015/02/rose-love-letter.jpg")
+#event8.create_from_url("http://weeva.com/blog/wp-content/uploads/2015/02/rose-love-letter.jpg")
+event8.image = File.open("#{Rails.root}/app/assets/images/loveletter.jpg")
 event8.save
 
 event9 = Event.create(
@@ -92,7 +99,8 @@ event9 = Event.create(
   # image_file_name: "default.jpg"
 )
 event9.created_at = (rand*100).days.ago
-event9.create_from_url("https://img1.etsystatic.com/007/0/6551564/il_570xN.392360025_phb1.jpg")
+#event9.create_from_url("https://img1.etsystatic.com/007/0/6551564/il_570xN.392360025_phb1.jpg")
+event9.image = File.open("#{Rails.root}/app/assets/images/teacher.jpg")
 event9.save
 
 event10 = Event.create(
@@ -102,7 +110,8 @@ event10 = Event.create(
   # image_file_name: "default.jpg"
 )
 event10.created_at = (rand*100).days.ago
-event10.create_from_url("http://3.bp.blogspot.com/-VFdpsR2xcHs/ThJ_yHW6-ZI/AAAAAAAABJU/sDZxAwX_Xow/s1600/FlippedPoster.jpg")
+event10.image = File.open("#{Rails.root}/app/assets/images/flipped.jpg")
+#event10.create_from_url("http://3.bp.blogspot.com/-VFdpsR2xcHs/ThJ_yHW6-ZI/AAAAAAAABJU/sDZxAwX_Xow/s1600/FlippedPoster.jpg")
 event10.save
 
 event11 = Event.create(
@@ -112,7 +121,8 @@ event11 = Event.create(
   # image_file_name: "default.jpg"
 )
 event11.created_at = (rand*100).days.ago
-event11.create_from_url("http://www.solver.com/files/assets/img/companies.jpg")
+# event11.create_from_url("http://www.solver.com/files/assets/img/companies.jpg")
+event11.image = File.open("#{Rails.root}/app/assets/images/companies.jpg")
 event11.save
 
 event12 = Event.create(
@@ -122,7 +132,8 @@ event12 = Event.create(
   # image_file_name: "default.jpg"
 )
 event12.created_at = (rand*100).days.ago
-event12.create_from_url("https://xandddie.files.wordpress.com/2014/01/953.jpg")
+event12.image = File.open("#{Rails.root}/app/assets/images/star.jpg")
+# event12.create_from_url("https://xandddie.files.wordpress.com/2014/01/953.jpg")
 event12.save
 
 post1 = Post.create(
@@ -131,7 +142,8 @@ post1 = Post.create(
   vote_count: 7
   # image: URI.parse("http://www.impawards.com/1994/posters/shawshank_redemption_ver1.jpg")
 )
-post1.create_from_url("http://www.impawards.com/1994/posters/shawshank_redemption_ver1.jpg")
+post1.image = File.open("#{Rails.root}/app/assets/images/shawshank.jpg")
+#post1.create_from_url("http://www.impawards.com/1994/posters/shawshank_redemption_ver1.jpg")
 post1.save
 
 post2 = Post.create(
@@ -139,7 +151,8 @@ post2 = Post.create(
   text_content: "The Godfather(1972)",
   vote_count: 5
 )
-post2.create_from_url("http://ia.media-imdb.com/images/M/MV5BMjEyMjcyNDI4MF5BMl5BanBnXkFtZTcwMDA5Mzg3OA@@._V1_SX640_SY720_.jpg")
+#post2.create_from_url("http://ia.media-imdb.com/images/M/MV5BMjEyMjcyNDI4MF5BMl5BanBnXkFtZTcwMDA5Mzg3OA@@._V1_SX640_SY720_.jpg")
+post2.image = File.open("#{Rails.root}/app/assets/images/godfather.jpg")
 post2.save
 
 post3 = Post.create(
@@ -148,7 +161,8 @@ post3 = Post.create(
   vote_count: 3
   # image: URI.parse("http://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg")
 )
-post3.create_from_url("http://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg")
+post3.image = File.open("#{Rails.root}/app/assets/images/gump.jpg")
+#post3.create_from_url("http://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg")
 post3.save
 
 post4 = Post.create(
@@ -157,7 +171,8 @@ post4 = Post.create(
   vote_count: 2
   # image: URI.parse("")
 )
-post4.create_from_url("http://ia.media-imdb.com/images/M/MV5BMTk0MDQ3MzAzOV5BMl5BanBnXkFtZTgwNzU1NzE3MjE@._V1_SX640_SY720_.jpg")
+post4.image = File.open("#{Rails.root}/app/assets/images/gonegirl.jpg")
+#post4.create_from_url("http://ia.media-imdb.com/images/M/MV5BMTk0MDQ3MzAzOV5BMl5BanBnXkFtZTgwNzU1NzE3MjE@._V1_SX640_SY720_.jpg")
 post4.save
 
 post10 = Post.create(
@@ -166,7 +181,8 @@ post10 = Post.create(
   vote_count: 2
   # image: URI.parse("")
 )
-post10.create_from_url("http://cdn2.hubspot.net/hub/94958/file-1763390953-jpg/12-years-a-slave.jpg")
+post10.image = File.open("#{Rails.root}/app/assets/images/slave.jpg")
+#post10.create_from_url("http://cdn2.hubspot.net/hub/94958/file-1763390953-jpg/12-years-a-slave.jpg")
 post10.save
 
 post11 = Post.create(
@@ -175,7 +191,8 @@ post11 = Post.create(
   vote_count: 6
   # image: URI.parse("")
 )
-post11.create_from_url("http://upload.wikimedia.org/wikipedia/en/5/5e/The_Imitation_Game_poster.jpg")
+post11.image = File.open("#{Rails.root}/app/assets/images/imitation.jpg")
+#post11.create_from_url("http://upload.wikimedia.org/wikipedia/en/5/5e/The_Imitation_Game_poster.jpg")
 post11.save
 
 post12 = Post.create(
@@ -184,7 +201,8 @@ post12 = Post.create(
   vote_count: 10
   # image: URI.parse("")
 )
-post12.create_from_url("https://c1.staticflickr.com/5/4040/4561225293_088ac3c891_z.jpg")
+post12.image = File.open("#{Rails.root}/app/assets/images/inception.jpg")
+#post12.create_from_url("https://c1.staticflickr.com/5/4040/4561225293_088ac3c891_z.jpg")
 post12.save
 
 post5 = Post.create(
@@ -193,7 +211,8 @@ post5 = Post.create(
   vote_count: 19
   # image: URI.parse("")
 )
-post5.create_from_url("https://s-media-cache-ak0.pinimg.com/236x/df/a4/1a/dfa41af5c0f1ebe2d1ea0f2c20ca7751.jpg")
+post5.image = File.open("#{Rails.root}/app/assets/images/annie.jpg")
+#post5.create_from_url("https://s-media-cache-ak0.pinimg.com/236x/df/a4/1a/dfa41af5c0f1ebe2d1ea0f2c20ca7751.jpg")
 post5.save
 
 post6 = Post.create(
@@ -202,7 +221,8 @@ post6 = Post.create(
   vote_count: 18
   # image: URI.parse("")
 )
-post6.create_from_url("http://studiobportraits.com/blog/wp-content/uploads/2012/09/Outdoor-senior-pictures-of-pretty-Issaquah-High-School-girl-at-Studio-B-Seniors.jpg")
+post6.image = File.open("#{Rails.root}/app/assets/images/sally.jpg")
+#post6.create_from_url("http://studiobportraits.com/blog/wp-content/uploads/2012/09/Outdoor-senior-pictures-of-pretty-Issaquah-High-School-girl-at-Studio-B-Seniors.jpg")
 post6.save
 
 post7 = Post.create(
@@ -211,16 +231,18 @@ post7 = Post.create(
   vote_count: 15
   # image: URI.parse("")
 )
-post7.create_from_url("http://images.tenplay.com.au/~/media/The%20Insider%20blog/Article%20images/Modern%20Family%20100%20Episodes/ModernFamily_S5_About_ArielWinter_small.jpg")
+post7.image = File.open("#{Rails.root}/app/assets/images/alex.jpg")
+#post7.create_from_url("http://images.tenplay.com.au/~/media/The%20Insider%20blog/Article%20images/Modern%20Family%20100%20Episodes/ModernFamily_S5_About_ArielWinter_small.jpg")
 post7.save
 
 post13 = Post.create(
   event_id: event1.id,
-  text_content: "Alex's sister.",
+  text_content: "Haley.",
   vote_count: 17
   # image: URI.parse("")
 )
-post13.create_from_url("http://www.hercampus.com/sites/default/files/2014/04/19/Modern-Family.jpg")
+post13.image = File.open("#{Rails.root}/app/assets/images/haley.jpg")
+#post13.create_from_url("http://www.hercampus.com/sites/default/files/2014/04/19/Modern-Family.jpg")
 post13.save
 
 post14 = Post.create(
@@ -229,7 +251,8 @@ post14 = Post.create(
   vote_count: 12
   # image: URI.parse("")
 )
-post14.create_from_url("http://img.desktopsky.com/uploads/allimg/120801/Ai-Shinozaki-desktopsky_97384.jpg")
+post14.image = File.open("#{Rails.root}/app/assets/images/ai.jpg")
+#post14.create_from_url("http://img.desktopsky.com/uploads/allimg/120801/Ai-Shinozaki-desktopsky_97384.jpg")
 post14.save
 
 post15 = Post.create(
@@ -238,7 +261,8 @@ post15 = Post.create(
   vote_count: 11
   # image: URI.parse("")
 )
-post15.create_from_url("http://u.thsi.cn/2011/11/24/114302807_1322097823_-1408237429_d2000e3f9255a7e3.jpg")
+post15.image = File.open("#{Rails.root}/app/assets/images/linger.jpg")
+#post15.create_from_url("http://u.thsi.cn/2011/11/24/114302807_1322097823_-1408237429_d2000e3f9255a7e3.jpg")
 post15.save
 
 post16 = Post.create(
@@ -247,7 +271,8 @@ post16 = Post.create(
   vote_count: 16
   # image: URI.parse("")
 )
-post16.create_from_url("http://images1.fanpop.com/images/photos/1300000/Serena-serena-van-der-woodsen-1343881-858-1222.jpg")
+post16.image = File.open("#{Rails.root}/app/assets/images/serena.jpg")
+# post16.create_from_url("http://images1.fanpop.com/images/photos/1300000/Serena-serena-van-der-woodsen-1343881-858-1222.jpg")
 post16.save
 
 post8 = Post.create(
@@ -256,16 +281,18 @@ post8 = Post.create(
   vote_count: 22
   # image: URI.parse("http://kopr94.net/wp-content/uploads/sites/2/2014/12/Adele.jpg")
 )
-post8.create_from_url("http://kopr94.net/wp-content/uploads/sites/2/2014/12/Adele.jpg")
+post8.image = File.open("#{Rails.root}/app/assets/images/adele.jpg")
+# post8.create_from_url("http://kopr94.net/wp-content/uploads/sites/2/2014/12/Adele.jpg")
 post8.save
 
 post9 = Post.create(
   event_id: event3.id,
   text_content: "Can't help falling in love with him",
   vote_count: 19,
-  image: URI.parse("http://www.okayplayer.com/wp-content/uploads/2014/01/sam-smith-in-the-lonely-hour-track-list-album-cover.jpg")
+  #image: URI.parse("http://www.okayplayer.com/wp-content/uploads/2014/01/sam-smith-in-the-lonely-hour-track-list-album-cover.jpg")
 )
-post9.create_from_url("http://www.okayplayer.com/wp-content/uploads/2014/01/sam-smith-in-the-lonely-hour-track-list-album-cover.jpg")
+post9.image = File.open("#{Rails.root}/app/assets/images/sam.jpg")
+#post9.create_from_url("http://www.okayplayer.com/wp-content/uploads/2014/01/sam-smith-in-the-lonely-hour-track-list-album-cover.jpg")
 post9.save
 
 user1 = User.create(
