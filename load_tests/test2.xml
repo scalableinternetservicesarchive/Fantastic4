@@ -97,9 +97,9 @@
 	  </setdynvars>
 	 <request subst="true">
 	 <http
-	    url="/users"
-	    version="1.1"
-	    method="POST" 	       contents="utf8=%E2%9C%93&amp;authenticity_token=YiCOqjy%2FSzTcVrgWXNbMHS4N7%2B3WEcl2RJ%2FEDv5EHFy1XdUO4JBO%2FTmAfBHOisDOv%2B2g7tB%2Be7jybqOu8FQ5MQ%3D%3D&amp;user%5Bemail%5D=user%%_random_user_email%%%40gmail.com&amp;user%5Bpassword%5D=12345678&amp;user%5Bpassword_confirmation%5D=12345678&amp;commit=Sign+up" />
+	    url='/users'
+	    version='1.1'
+	    method='POST' 	       contents='utf8=%E2%9C%93&amp;authenticity_token=YiCOqjy%2FSzTcVrgWXNbMHS4N7%2B3WEcl2RJ%2FEDv5EHFy1XdUO4JBO%2FTmAfBHOisDOv%2B2g7tB%2Be7jybqOu8FQ5MQ%3D%3D&amp;user%5Bemail%5D=user%%_random_user_email%%%40gmail.com&amp;user%5Bpassword%5D=12345678&amp;user%5Bpassword_confirmation%5D=12345678&amp;commit=Sign+up'/>
 	 </request>
 	 
      <!-- wait for up to 2 seconds after log in, user is thinking what he want to do -->
@@ -110,7 +110,7 @@
 		 <var name="vote_post_id"/>
 	 </setdynvars>
      <request subst="true">
-        <http url='/posts/%%_vote_post_id%%' version='1.1' method='POST' contents="authenticity_token=2tG8jj1xt%2F7wTMeg3v%2FL9xOvEQaQSWduXrca6auKVZUNrOcq4V6yNxWaA6dMo8ckgk9eBZYm1aDoRn1JpZpw%2BA%3D%3D&amp;click_page=event_show"></http>
+        <http url='/posts/%%_vote_post_id%%' version='1.1' method='POST' contents='authenticity_token=2tG8jj1xt%2F7wTMeg3v%2FL9xOvEQaQSWduXrca6auKVZUNrOcq4V6yNxWaA6dMo8ckgk9eBZYm1aDoRn1JpZpw%2BA%3D%3D&amp;click_page=event_show'></http>
      </request>
 
 	 <thinktime value="2" random="true"></thinktime>
@@ -198,7 +198,7 @@
 	 <http
 	    url="/users/sign_out"
 	    version="1.1"
-	    method="POST" 	       contents="_method=delete&amp;authenticity_token=36ft%2Fhs1KxCgbg%2BRzNPDoCUXg00xNlSOoOB9qPds6uII2rZaxxou2UW4y5Zej89ztPfMTjdZ5kAWERoI%2BXzPjw%3D%3D" />
+	    method="POST" 	       contents='_method=delete&amp;authenticity_token=36ft%2Fhs1KxCgbg%2BRzNPDoCUXg00xNlSOoOB9qPds6uII2rZaxxou2UW4y5Zej89ztPfMTjdZ5kAWERoI%2BXzPjw%3D%3D'/>
 	 </request>
 	 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
