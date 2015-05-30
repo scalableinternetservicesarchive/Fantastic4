@@ -14,11 +14,13 @@
 					<div class="thumbnail pull-left margin-rb"><%= image_tag(@post.image.url(:medium))%></div>
 				<% end %>
 		</div>
-		<p>
-		  <% if @post.creaters.include?(current_user)%>
-		  <%= link_to 'Want to Edit the post?', edit_post_path(@post) %>
-		  <% end %>
-		</p>
+		<div class="row">
+			<p>
+		  	<% if @post.creaters.include?(current_user)%>
+		  	<%= link_to 'Want to Edit the post?', edit_post_path(@post) %>
+		  	<% end %>
+			</p>
+		</div>
 </div>
 
 
