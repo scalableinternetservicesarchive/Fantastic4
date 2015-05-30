@@ -135,6 +135,7 @@
 		 <var name="post_content"/>
 	 </setdynvars>
      <request subst="true">
+		 <dyn_variable name="created_post_url" re="[Ll]ocation: (http://.*)\r"/>
         <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----WebKitFormBoundary89pras31HIdqsXIb' contents='------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[event_id]"%%_nl%%%%_nl%%%%_post_event%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[text_content]"%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Post%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb--%%_nl%%'></http>
      </request>
 
@@ -152,6 +153,7 @@
 	 </setdynvars> -->
 
      <request subst="true">
+		 <dyn_variable name="created_event_url" re="[Ll]ocation: (http://.*)\r"/>
         <http url='/events' version='1.1' method='POST' content_type='ultipart/form-data; boundary=----WebKitFormBoundaryDYkgCqYY46LzTrHI' contents='------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[title]"%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[description]"%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[tags]"%%_nl%%%%_nl%%School%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Event%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI--%%_nl%%'></http>
      </request>
 	 
@@ -179,6 +181,18 @@
         <http url='/timeline/%%_search_time%%' version='1.1' method='GET'></http>
      </request>
 	 
+     <!-- user delete the event it created -->
+	 <request subst="true">
+	 	<http url="%%_created_event_url%%" method="DELETE">
+	 	</http>
+	 </request>
+	 
+  	 <!-- user delete the post it created -->
+	 <request subst="true">
+	 	<http url="%%_created_post_url%%" method="DELETE">
+	 	</http>
+	 </request>
+	 
   	 <!-- user log out -->
 	 <request>
 	 <http
@@ -194,10 +208,7 @@
         ok end.">
         <var name="dump" />
       </setdynvars>
-      -->
-
-      <!-- user delete the event it created -->
-	  <!-- user delete the post it created -->	 	
+      -->	 	
 
     </session>
   </sessions>
