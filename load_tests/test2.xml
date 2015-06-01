@@ -10,7 +10,7 @@
   <!-- Server side setup -->
   <!-- app server is a different instance from the one tsung located -->
   <servers>
-    <server host="ec2-52-25-193-11.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-216-220.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -84,10 +84,10 @@
       </request>
 	   	  
 	  <!-- authenticity_token differ because we uncomment the csfy exception in application-controller -->
-      <request>
+      <!-- <request>
 		<dyn_variable name="authenticity_token"/>
         <http url='/users/sign_up' version='1.1' method='GET'></http>
-      </request>
+      </request> -->
 	  
 	  <thinktime value="2" random="true"></thinktime>
 	  
@@ -104,17 +104,14 @@
 	 
      <!-- wait for up to 2 seconds after log in, user is thinking what he want to do -->
      <thinktime value="2" random="true"></thinktime>
-
-	 <!-- vote for a post -->
-	 <setdynvars sourcetype="random_number" start="1" end="16">
-		 <var name="vote_post_id"/>
-	 </setdynvars>
-     <request subst="true">
-        <http url='/posts/%%_vote_post_id%%' version='1.1' method='POST' contents='authenticity_token=2tG8jj1xt%2F7wTMeg3v%2FL9xOvEQaQSWduXrca6auKVZUNrOcq4V6yNxWaA6dMo8ckgk9eBZYm1aDoRn1JpZpw%2BA%3D%3D&amp;click_page=event_show'></http>
-     </request>
-
-	 <thinktime value="2" random="true"></thinktime>
 	 
+	 <request>
+		 <http url='/events/new' version='1.1' method='GET'></http>
+	 </request>
+	 
+	 <!-- wait for up to 2 seconds, user is filling some form -->
+	 
+	 <!-- user want to create a new event, with tag school -->
 	 <setdynvars sourcetype="eval" code='fun({Pid,DynVars})-> [[13, 10]] end.'>
 		 <var name="nl" />
 	 </setdynvars>
@@ -127,34 +124,41 @@
 		 <var name="attached_file" />
 	 </setdynvars>
 
-	 <!-- user want to post to a event -->
-	 <setdynvars sourcetype="random_number" start="1" end="12">
-		 <var name="post_event"/>
-	 </setdynvars>
-	 <setdynvars sourcetype="random_string" length="30">
-		 <var name="post_content"/>
-	 </setdynvars>
-     <request subst="true">
-		 <dyn_variable name="created_post_url" re="[Ll]ocation: (http://.*)\r"/>
-        <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----WebKitFormBoundary89pras31HIdqsXIb' contents='------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[event_id]"%%_nl%%%%_nl%%%%_post_event%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[text_content]"%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Post%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb--%%_nl%%'></http>
-     </request>
-
-	 <!-- user want to create a new event, under tag school -->
 	 <setdynvars sourcetype="random_string" length="10">
 		 <var name="event_title"/>
 	 </setdynvars>
 
-	 <setdynvars sourcetype="random_string" length="30">
+	 <setdynvars sourcetype="random_string" length="20">
 		 <var name="event_description"/>
 	 </setdynvars>
 
-<!--	 <setdynvars sourcetype="file" fileid="event_tags.csv" delimiter=";" order="random">
-		 <var name="event_tag"/>
-	 </setdynvars> -->
-
      <request subst="true">
 		 <dyn_variable name="created_event_url" re="[Ll]ocation: (http://.*)\r"/>
+		 <dyn_variable name="created_event_id" re="[Ll]ocation: http://.*/events/(.*)\r"/>
         <http url='/events' version='1.1' method='POST' content_type='ultipart/form-data; boundary=----WebKitFormBoundaryDYkgCqYY46LzTrHI' contents='------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[title]"%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[description]"%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[tags]"%%_nl%%%%_nl%%School%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="event[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Event%%_nl%%------WebKitFormBoundaryDYkgCqYY46LzTrHI--%%_nl%%'></http>
+     </request>
+	 
+	 <!-- user want to post to a event -->
+	 <request>
+		 <http url='/posts/new' version='1.1' method='GET'></http>
+	 </request>
+	 
+	 <thinktime value="2" random="true"></thinktime>
+	 
+	 <setdynvars sourcetype="random_string" length="10">
+		 <var name="post_content"/>
+	 </setdynvars>
+	 
+     <request subst="true">
+		 <dyn_variable name="created_post_url" re="[Ll]ocation: (http://.*)\r"/>
+		 <dyn_variable name="created_post_id" re="[Ll]ocation: http://.*/posts/(.*)\r"/>
+        <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----WebKitFormBoundary89pras31HIdqsXIb' contents='------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[event_id]"%%_nl%%%%_nl%%%%_created_event_id%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[text_content]"%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="post[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Post%%_nl%%------WebKitFormBoundary89pras31HIdqsXIb--%%_nl%%'></http>
+     </request>
+
+	 <!-- vote for a post -->
+     <request subst="true">
+        <http url='/posts/%%_created_post_id%%?click_page=post_show' version='1.1' method='POST'>
+        </http>
      </request>
 	 
 	 <!-- search an event by keywords -->
@@ -165,13 +169,8 @@
         <http url='/events?utf8=%E2%9C%93&amp;search=%%_keywords%%' version='1.1' method='GET'></http>
      </request>
 	 
-	 <!-- search an event by tags -->
-	 <!-- <setdynvars sourcetype="file" fileid="event_tags.csv" delimiter=";" order="random">
-		 <var name="search_tag"/>
-	 </setdynvars>
-     <request subst="true">
-        <http url='/tagevent/%%_search_tag%%' version='1.1' method='GET'></http>
-     </request> -->
+	 <!-- user is checking search result -->
+	 <thinktime value="2" random="true"></thinktime>
 	 
 	 <!-- search an event by timeline -->
 	 <setdynvars sourcetype="random_number" start="1" end="6">
@@ -181,15 +180,15 @@
         <http url='/timeline/%%_search_time%%' version='1.1' method='GET'></http>
      </request>
 	 
-     <!-- user delete the event it created -->
-	 <request subst="true">
-	 	<http url="%%_created_event_url%%" method="DELETE">
-	 	</http>
-	 </request>
-	 
   	 <!-- user delete the post it created -->
 	 <request subst="true">
 	 	<http url="%%_created_post_url%%" method="DELETE">
+	 	</http>
+	 </request>
+	 
+     <!-- user delete the event it created -->
+	 <request subst="true">
+	 	<http url="%%_created_event_url%%" method="DELETE">
 	 	</http>
 	 </request>
 	 
