@@ -121,7 +121,7 @@
 		 {ok, Bin} = file:read_file("default.jpg"),
 		 Bin
 		 end.'>
-		 <var name="attached_file" />
+		 <var name="attached_file"/>
 	 </setdynvars>
 
 	 <setdynvars sourcetype="random_string" length="10">
@@ -135,7 +135,7 @@
      <request subst="true">
 		 <dyn_variable name="created_event_url" re="[Ll]ocation: (http://.*)\r"/>
 		 <dyn_variable name="created_event_id" re="[Ll]ocation: http://.*/events/(.*)\r"/>
-        <http url='/events' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents='------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[title]"%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[description]"%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[tags]"%%_nl%%%%_nl%%School%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Event%%_nl%%------FormBoundary--%%_nl%%%%_nl%%'></http>
+         <http url='/events' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents='------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[title]"%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[description]"%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[tags]"%%_nl%%%%_nl%%School%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Event%%_nl%%------FormBoundary--%%_nl%%%%_nl%%'></http>
      </request>
 	 
 	 <!-- user want to post to a event -->
@@ -181,23 +181,27 @@
      </request>
 	 
   	 <!-- user delete the post it created -->
+	 <thinktime value="2" random="true"></thinktime>
+	 
 	 <request subst="true">
-	 	<http url="%%_created_post_url%%" method="DELETE">
+	 	<http url="%%_created_post_url%%" method='DELETE'>
 	 	</http>
 	 </request>
 	 
      <!-- user delete the event it created -->
+	 <thinktime value="2" random="true"></thinktime>
+	 
 	 <request subst="true">
-	 	<http url="%%_created_event_url%%" method="DELETE">
+	 	<http url="%%_created_event_url%%" method='DELETE'>
 	 	</http>
 	 </request>
 	 
   	 <!-- user log out -->
 	 <request>
 	 <http
-	    url="/users/sign_out"
-	    version="1.1"
-	    method="POST" 	       contents='_method=delete&amp;authenticity_token=36ft%2Fhs1KxCgbg%2BRzNPDoCUXg00xNlSOoOB9qPds6uII2rZaxxou2UW4y5Zej89ztPfMTjdZ5kAWERoI%2BXzPjw%3D%3D'/>
+	    url='/users/sign_out'
+	    version='1.1'
+	    method='DELETE'/>
 	 </request>
 	 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
