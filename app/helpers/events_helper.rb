@@ -1,6 +1,6 @@
 module EventsHelper
   def cache_key_for_event_table
-      "event-table-#{Event.maximum(:updated_at)}-#{Event.maximum(:updated_at)}"
+      "event-table-#{Event.maximum(:updated_at)}-#{Post.maximum(:updated_at)}"
   end
   
   

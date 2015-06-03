@@ -1,6 +1,6 @@
 module PostsHelper
   def cache_key_for_post_table
-      "post-table-#{Post.maximum(:updated_at)}-#{Post.maximum(:updated_at)}"
+      "post-table-#{Post.maximum(:updated_at)}"
   end
   
   def cache_key_for_post_row(post)
