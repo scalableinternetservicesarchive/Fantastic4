@@ -109,6 +109,7 @@
 		 <http url='/events/new' version='1.1' method='GET'></http>
 	 </request>
 	 
+	 <thinktime value="2" random="true"></thinktime>
 	 <!-- wait for up to 2 seconds, user is filling some form -->
 	 
 	 <!-- user want to create a new event, with tag school -->
