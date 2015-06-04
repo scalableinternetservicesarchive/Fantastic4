@@ -139,7 +139,6 @@ event12.save
 post1 = Post.create(
   event_id: event2.id,
   text_content: "The Shawshank Redemption(1994)",
-  vote_count: 7
   # image: URI.parse("http://www.impawards.com/1994/posters/shawshank_redemption_ver1.jpg")
 )
 post1.image = File.open("#{Rails.root}/app/assets/images/shawshank.jpg")
@@ -149,7 +148,6 @@ post1.save
 post2 = Post.create(
   event_id: event2.id,
   text_content: "The Godfather(1972)",
-  vote_count: 5
 )
 #post2.create_from_url("http://ia.media-imdb.com/images/M/MV5BMjEyMjcyNDI4MF5BMl5BanBnXkFtZTcwMDA5Mzg3OA@@._V1_SX640_SY720_.jpg")
 post2.image = File.open("#{Rails.root}/app/assets/images/godfather.jpg")
@@ -158,7 +156,6 @@ post2.save
 post3 = Post.create(
   event_id: event2.id,
   text_content: "Forrest Gump(1994)",
-  vote_count: 3
   # image: URI.parse("http://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg")
 )
 post3.image = File.open("#{Rails.root}/app/assets/images/gump.jpg")
@@ -168,7 +165,6 @@ post3.save
 post4 = Post.create(
   event_id: event2.id,
   text_content: "Gone Girl(2014)",
-  vote_count: 2
   # image: URI.parse("")
 )
 post4.image = File.open("#{Rails.root}/app/assets/images/gonegirl.jpg")
@@ -178,7 +174,6 @@ post4.save
 post10 = Post.create(
   event_id: event2.id,
   text_content: "12 Years a Slave(2013)",
-  vote_count: 2
   # image: URI.parse("")
 )
 post10.image = File.open("#{Rails.root}/app/assets/images/slave.jpg")
@@ -188,7 +183,6 @@ post10.save
 post11 = Post.create(
   event_id: event2.id,
   text_content: "Imitation Game(2014)",
-  vote_count: 6
   # image: URI.parse("")
 )
 post11.image = File.open("#{Rails.root}/app/assets/images/imitation.jpg")
@@ -198,7 +192,6 @@ post11.save
 post12 = Post.create(
   event_id: event2.id,
   text_content: "Inception(2011)",
-  vote_count: 10
   # image: URI.parse("")
 )
 post12.image = File.open("#{Rails.root}/app/assets/images/inception.jpg")
@@ -208,7 +201,6 @@ post12.save
 post5 = Post.create(
   event_id: event1.id,
   text_content: "Annie's smile is the best:)",
-  vote_count: 19
   # image: URI.parse("")
 )
 post5.image = File.open("#{Rails.root}/app/assets/images/annie.jpg")
@@ -218,7 +210,6 @@ post5.save
 post6 = Post.create(
   event_id: event1.id,
   text_content: "Sally is a pretty and kind girl. She never refuses to help anyone!",
-  vote_count: 18
   # image: URI.parse("")
 )
 post6.image = File.open("#{Rails.root}/app/assets/images/sally.jpg")
@@ -228,7 +219,6 @@ post6.save
 post7 = Post.create(
   event_id: event1.id,
   text_content: "Alex. Straight A student, no need for more talk.",
-  vote_count: 15
   # image: URI.parse("")
 )
 post7.image = File.open("#{Rails.root}/app/assets/images/alex.jpg")
@@ -238,7 +228,6 @@ post7.save
 post13 = Post.create(
   event_id: event1.id,
   text_content: "Haley.",
-  vote_count: 17
   # image: URI.parse("")
 )
 post13.image = File.open("#{Rails.root}/app/assets/images/haley.jpg")
@@ -248,7 +237,6 @@ post13.save
 post14 = Post.create(
   event_id: event1.id,
   text_content: "Ai loves nature!",
-  vote_count: 12
   # image: URI.parse("")
 )
 post14.image = File.open("#{Rails.root}/app/assets/images/ai.jpg")
@@ -258,7 +246,6 @@ post14.save
 post15 = Post.create(
   event_id: event1.id,
   text_content: "Ling er",
-  vote_count: 11
   # image: URI.parse("")
 )
 post15.image = File.open("#{Rails.root}/app/assets/images/linger.jpg")
@@ -268,7 +255,6 @@ post15.save
 post16 = Post.create(
   event_id: event1.id,
   text_content: "Serena",
-  vote_count: 16
   # image: URI.parse("")
 )
 post16.image = File.open("#{Rails.root}/app/assets/images/serena.jpg")
@@ -278,7 +264,6 @@ post16.save
 post8 = Post.create(
   event_id: event3.id,
   text_content: "Her voice killed me also saved me.",
-  vote_count: 22
   # image: URI.parse("http://kopr94.net/wp-content/uploads/sites/2/2014/12/Adele.jpg")
 )
 post8.image = File.open("#{Rails.root}/app/assets/images/adele.jpg")
@@ -288,7 +273,6 @@ post8.save
 post9 = Post.create(
   event_id: event3.id,
   text_content: "Can't help falling in love with him",
-  vote_count: 19,
   #image: URI.parse("http://www.okayplayer.com/wp-content/uploads/2014/01/sam-smith-in-the-lonely-hour-track-list-album-cover.jpg")
 )
 post9.image = File.open("#{Rails.root}/app/assets/images/sam.jpg")
@@ -317,9 +301,34 @@ user1.created_posts << [post1, post5]
 user2.created_posts << [post2, post3, post4]
 user3.created_posts << [post6, post7, post8, post9]
 
-user1.voted_posts << [post1, post2, post3, post6, post9, post13, post15]
-user2.voted_posts << [post2, post3, post5, post7, post10, post12, post16]
-user3.voted_posts << [post1, post2, post3, post4, post8, post11, post14]
+def user_vote_post(user, post)
+  user.voted_posts << [post]
+  post.vote_count += 1
+  post.save!
+end
+
+user_vote_post(user1, post1)
+user_vote_post(user1, post2)
+user_vote_post(user1, post3)
+user_vote_post(user1, post6)
+user_vote_post(user1, post9)
+user_vote_post(user1, post9)
+user_vote_post(user1, post13)
+user_vote_post(user1, post15)
+user_vote_post(user2, post2)
+user_vote_post(user2, post3)
+user_vote_post(user2, post5)
+user_vote_post(user2, post7)
+user_vote_post(user2, post10)
+user_vote_post(user2, post12)
+user_vote_post(user2, post16)
+user_vote_post(user3, post1)
+user_vote_post(user3, post2)
+user_vote_post(user3, post3)
+user_vote_post(user3, post4)
+user_vote_post(user3, post8)
+user_vote_post(user3, post11)
+user_vote_post(user3, post14)
 
 user1.organized_events << [event1, event4, event5, event6, event7]
 user2.organized_events << [event2, event8, event9, event10]
