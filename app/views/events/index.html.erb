@@ -1,7 +1,11 @@
 <% @marker = "" %>
 <% unless params[:search] %>
 	<p><%= link_to 'Create Your Own Event?', new_event_path(tag: @tag),class: "btn btn-default" if user_signed_in?%></p>
-	<% @marker =  "tag " + @tag.to_s %>
+	<% if params[:month]%>
+		<% @marker =  "month " + params[:month] %>
+	<% else %>
+		<% @marker =  "tag " + @tag.to_s %>
+	<% end %>
 <% else %>
 	<h1>Search Result</h1>
 	<% @marker =  "search " + params[:search] %>
