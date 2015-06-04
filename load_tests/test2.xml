@@ -10,20 +10,20 @@
   <!-- Server side setup -->
   <!-- app server is a different instance from the one tsung located -->
   <servers>
-    <server host="ec2-52-25-216-220.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-186-108.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
     <arrivalphase phase="1" duration="30" unit="second">
-      <users arrivalrate="0.25" unit="second"></users>
+		<users arrivalrate="1" unit="second"></users>
     </arrivalphase>
-    <!--<arrivalphase phase="2" duration="30" unit="second">-->
-    <!--  <users arrivalrate="2" unit="second"></users>-->
-    <!--</arrivalphase>-->
-    <!--<arrivalphase phase="3" duration="30" unit="second">-->
-    <!--  <users arrivalrate="4" unit="second"></users>-->
-    <!--</arrivalphase>-->
+    <arrivalphase phase="2" duration="30" unit="second">
+		<users arrivalrate="2" unit="second"></users>
+    </arrivalphase>
+    <arrivalphase phase="3" duration="30" unit="second">
+		<users arrivalrate="4" unit="second"></users>
+    </arrivalphase>
 <!--
    <arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
@@ -95,6 +95,7 @@
 	  <setdynvars sourcetype="random_string" length="3">
 		  <var name="random_user_email"/>
 	  </setdynvars>
+	  
 	 <request subst="true">
 	 <http
 	    url='/users'
@@ -112,13 +113,13 @@
 	 <!-- wait for up to 2 seconds, user is filling some form -->
 	 
 	 <!-- user want to create a new event, with tag school -->
-	 <setdynvars sourcetype="eval" code='fun({Pid,DynVars})-> [[13, 10]] end.'>
+	 <setdynvars sourcetype="eval" code='fun({Pid,DynVars})-&gt; [[13, 10]] end.'>
 		 <var name="nl" />
 	 </setdynvars>
 
 	 <setdynvars sourcetype="eval"
-		 code='fun({Pid,DynVars})->
-		 {ok, Bin} = file:read_file("default.jpg"),
+		 code='fun({Pid,DynVars})-&gt;
+		 {ok, Bin} = file:read_file(&quot;default.jpg&quot;),
 		 Bin
 		 end.'>
 		 <var name="attached_file"/>
@@ -135,8 +136,9 @@
      <request subst="true">
 		 <dyn_variable name="created_event_url" re="[Ll]ocation: (http://.*)\r"/>
 		 <dyn_variable name="created_event_id" re="[Ll]ocation: http://.*/events/(.*)\r"/>
-         <http url='/events' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents='------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[title]"%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[description]"%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[tags]"%%_nl%%%%_nl%%School%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="event[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Event%%_nl%%------FormBoundary--%%_nl%%%%_nl%%'></http>
+         <http url='/events' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[title]&quot;%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[description]&quot;%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[tags]&quot;%%_nl%%%%_nl%%School%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Event%%_nl%%------FormBoundary--%%_nl%%%%_nl%%"></http>
      </request>
+	 
 	 
 	 <!-- user want to post to a event -->
 	 <request subst="true">
@@ -152,7 +154,7 @@
      <request subst="true">
 		 <dyn_variable name="created_post_url" re="[Ll]ocation: (http://.*)\r"/>
 		 <dyn_variable name="created_post_id" re="[Ll]ocation: http://.*/posts/(.*)\r"/>
-        <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents='------FormBoundary%%_nl%%Content-Disposition: form-data; name="post[event_id]"%%_nl%%%%_nl%%%%_created_event_id%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="post[text_content]"%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="post[image]"; filename="default.jpg"%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name="commit"%%_nl%%%%_nl%%Create Post%%_nl%%------FormBoundary--%%_nl%%%%_nl%%'></http>
+        <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[event_id]&quot;%%_nl%%%%_nl%%%%_created_event_id%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[text_content]&quot;%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Post%%_nl%%------FormBoundary--%%_nl%%%%_nl%%"></http>
      </request>
 
 	 <!-- vote for a post -->
@@ -205,13 +207,13 @@
 	 </request>
 	 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
-      <!--
-      <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
+
+      <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) -&gt;
         io:format([126, $p, 126, $n, 126, $n], [DynVars]),
         ok end.">
         <var name="dump" />
       </setdynvars>
-      -->	 	
+ 	
 
     </session>
   </sessions>
