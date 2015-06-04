@@ -39,19 +39,19 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @success = false
+    success = false
     notice = ""
     if current_user != nil
       @event = Event.new(event_params)
       if @event.save
-        @success = true
+        success = true
         current_user.organized_events << @event
         notice = "Event was successfully created"
       end
     end
     
     respond_to do |format|
-      if @success == true
+      if success == true
         format.html { redirect_to @event, notice: "#{notice}" }
         format.json { render :show, status: :created, location: @event }
       else
