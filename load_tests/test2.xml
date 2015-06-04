@@ -153,7 +153,7 @@
 	 
      <request subst="true">
 		 <dyn_variable name="created_post_url" re="[Ll]ocation: (http://.*)\r"/>
-		 <dyn_variable name="created_post_id" re="[Ll]ocation: http://.*/(.*)\r"/>
+		 <dyn_variable name="created_post_id" re="[Ll]ocation: http://.*/posts/(.*)\r"/>
 		 <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[event_id]&quot;%%_nl%%%%_nl%%%%_created_event_id%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[text_content]&quot;%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Post%%_nl%%------FormBoundary--%%_nl%%%%_nl%%">
 		 </http>
      </request>
