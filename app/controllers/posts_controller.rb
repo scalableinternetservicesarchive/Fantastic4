@@ -27,19 +27,19 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @success = false
+    success = false
     notice = ""
     if current_user != nil
       @post = Post.new(post_params)
       if @post.save
-        @success = true
+        success = true
         current_user.created_posts << @post
         notice = "Post was successfully created"
       end
     end
     
     respond_to do |format|
-      if @success == true
+      if success == true
         format.html { redirect_to @post, notice: "#{notice}" }
         format.json { render :show, status: :created, location: @post }
       else
