@@ -10,7 +10,7 @@
   <!-- Server side setup -->
   <!-- app server is a different instance from the one tsung located -->
   <servers>
-    <server host="ec2-52-25-186-108.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-26-95-63.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -71,23 +71,23 @@
       <thinktime value="2" random="true"></thinktime>
 	  
       <!-- visit one event, as a user would do.  -->
-      <request>
-        <http url='/events/1' version='1.1' method='GET'></http>
+	  <setdynvars sourcetype="random_number" start="1" end="12">
+		  <var name="visit_event"/>
+	  </setdynvars>
+      <request subst="true">
+        <http url='/events/%%_visit_event%%' version='1.1' method='GET'></http>
       </request>
 	  
       <!-- wait for up to 2 seconds, user is looking at posts -->
       <thinktime value="2" random="true"></thinktime>	  
 	  
 	  <!-- visit the post, as a user would do -->
-      <request>
-         <http url='/posts/5' version='1.1' method='GET'></http>
+	  <setdynvars sourcetype="random_number" start="1" end="16">
+		  <var name="visit_post"/>
+	  </setdynvars>
+      <request subst="true">
+         <http url='/posts/%%_visit_post%%' version='1.1' method='GET'></http>
       </request>
-	   	  
-	  <!-- authenticity_token differ because we uncomment the csfy exception in application-controller -->
-      <!-- <request>
-		<dyn_variable name="authenticity_token"/>
-        <http url='/users/sign_up' version='1.1' method='GET'></http>
-      </request> -->
 	  
 	  <thinktime value="2" random="true"></thinktime>
 	  
@@ -140,7 +140,6 @@
          <http url='/events' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[title]&quot;%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[description]&quot;%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[tags]&quot;%%_nl%%%%_nl%%School%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Event%%_nl%%------FormBoundary--%%_nl%%%%_nl%%"></http>
      </request>
 	 
-	 
 	 <!-- user want to post to a event -->
 	 <request subst="true">
 		 <http url='/posts/new?post%5Bevent_id%5D=%%_created_event_id%%' version='1.1' method='GET'></http>
@@ -154,8 +153,9 @@
 	 
      <request subst="true">
 		 <dyn_variable name="created_post_url" re="[Ll]ocation: (http://.*)\r"/>
-		 <dyn_variable name="created_post_id" re="[Ll]ocation: http://.*/posts/(.*)\r"/>
-        <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[event_id]&quot;%%_nl%%%%_nl%%%%_created_event_id%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[text_content]&quot;%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Post%%_nl%%------FormBoundary--%%_nl%%%%_nl%%"></http>
+		 <dyn_variable name="created_post_id" re="[Ll]ocation: http://.*/(.*)\r"/>
+		 <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[event_id]&quot;%%_nl%%%%_nl%%%%_created_event_id%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[text_content]&quot;%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Post%%_nl%%------FormBoundary--%%_nl%%%%_nl%%">
+		 </http>
      </request>
 
 	 <!-- vote for a post -->
@@ -187,7 +187,7 @@
 	 <thinktime value="2" random="true"></thinktime>
 	 
 	 <request subst="true">
-	 	<http url="%%_created_post_url%%" method='DELETE'>
+	 	<http url="%%_created_post_url%%" version='1.1' method='DELETE'>
 	 	</http>
 	 </request>
 	 
@@ -195,7 +195,7 @@
 	 <thinktime value="2" random="true"></thinktime>
 	 
 	 <request subst="true">
-	 	<http url="%%_created_event_url%%" method='DELETE'>
+	 	<http url='%%_created_event_url%%' version='1.1' method='DELETE'>
 	 	</http>
 	 </request>
 	 
@@ -209,11 +209,11 @@
 	 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
 
-      <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) -&gt;
+      <!-- <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) -&gt;
         io:format([126, $p, 126, $n, 126, $n], [DynVars]),
         ok end.">
         <var name="dump" />
-      </setdynvars>
+      </setdynvars> -->
  	
 
     </session>

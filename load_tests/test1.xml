@@ -10,7 +10,7 @@
   <!-- Server side setup -->
   <!-- app server is a different instance from the one tsung located -->
   <servers>
-    <server host="ec2-52-25-216-220.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-26-95-63.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -73,8 +73,8 @@
 	  <setdynvars sourcetype="random_number" start="1" end="12">
 		  <var name="visit_event"/>
 	  </setdynvars>
-      <request>
-        <http url='/events/%%_visit_event%%' version='1.1' method='GET'></http>
+      <request subst="true">
+        <http url="/events/%%_visit_event%%" version='1.1' method='GET'></http>
       </request>
 	  
       <!-- wait for up to 2 seconds, user is looking at posts -->
@@ -84,8 +84,8 @@
 	  <setdynvars sourcetype="random_number" start="1" end="16">
 		  <var name="visit_post"/>
 	  </setdynvars>
-      <request>
-         <http url='/posts/%%_visit_post%%' version='1.1' method='GET'></http>
+      <request subst="true">
+         <http url="/posts/%%_visit_post%%" version='1.1' method='GET'></http>
       </request>
 	 
 	  <!-- search an event by keywords -->
