@@ -5,16 +5,15 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if params[:tag]
-      @events = Event.where(tags: params[:tag]).sort_by {|event| -event.post_count}
+      @events = Event.where(tags: params[:tag]).order(post_count: :desc)
       @tag = params[:tag]
     elsif params[:search]
-      # @events = Event.search(params[:search]).order("created_at DESC")
-      @events = Event.search(params[:search]).sort_by {|event| -event.post_count}
+      @events = Event.search(params[:search]).order(post_count: :desc)
     elsif params[:month]
-      @events = Event.timeline(params[:month]).sort_by {|event| - event.post_count}
+      @events = Event.timeline(params[:month]).order(post_count: :desc)
     else
-      # @events = Event.order("posts_count DESC")
-      @events = Event.all.sort_by {|event| -event.post_count}
+      @events = Event.order(post_count: :desc)
+      # @events = Event.all.sort_by {|event| -event.post_count}
     end
     
   end
@@ -23,7 +22,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     if @event != nil
-      @posts = @event.posts.sort_by {|p| -p.vote_count}
+      @posts = @event.posts.order(vote_count: :desc)
     end
   end
 
