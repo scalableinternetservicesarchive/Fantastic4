@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 user1 = User.create(
   email: 'a@gmail.com',
   password: '88888888',
@@ -20,7 +18,6 @@ user3 = User.create(
 
 # ==============================================
 
->>>>>>> f0bf552faa1339def12e5d7ac4342e515d6b2282
 event1 = Event.create(
   creator: user1,
   title: "Hot or Not",
