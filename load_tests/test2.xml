@@ -96,8 +96,8 @@
 		  <var name="random_user_email"/>
 	  </setdynvars>
 	  
+	  
 	 <request subst="true">
-	 <dyn_variable name="created_user_id" re="[Ll]ocation: http://.*/events/(.*)\r"/>
 	 <http
 	    url='/users'
 	    version='1.1'
@@ -106,6 +106,8 @@
 	 
      <!-- wait for up to 2 seconds after log in, user is thinking what he want to do -->
      <thinktime value="2" random="true"></thinktime>
+	 
+	 
 	 
 	 <request>
 		 <http url='/events/new' version='1.1' method='GET'></http>
@@ -127,6 +129,10 @@
 		 <var name="attached_file"/>
 	 </setdynvars>
 
+  	 <setdynvars sourcetype="random_number" start="1" end="3">
+	  	<var name="user_id"/>
+  	 </setdynvars>
+	 
 	 <setdynvars sourcetype="random_string" length="10">
 		 <var name="event_title"/>
 	 </setdynvars>
@@ -136,34 +142,34 @@
 	 </setdynvars>
 
      <request subst="true">
-		 <dyn_variable name="created_event_url" re="[Ll]ocation: (http://.*)\r"/>
-		 <dyn_variable name="created_event_id" re="[Ll]ocation: http://.*/events/(.*)\r"/>
-         <http url='/events' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[title]&quot;%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[description]&quot;%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[tags]&quot;%%_nl%%%%_nl%%School%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Event%%_nl%%------FormBoundary--%%_nl%%%%_nl%%"></http>
+		 <!-- <dyn_variable name="created_event_url" re="[Ll]ocation: (http://.*)\r"/> -->
+		 <dyn_variable name="created_event_id" jsonpath="id"/>
+         <http url='/events.json' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[user_id]&quot;%%_nl%%%%_nl%%%%_user_id%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[title]&quot;%%_nl%%%%_nl%%%%_event_title%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[description]&quot;%%_nl%%%%_nl%%%%_event_description%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[tags]&quot;%%_nl%%%%_nl%%School%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;event[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Event%%_nl%%------FormBoundary--%%_nl%%%%_nl%%"></http>
      </request>
 	 
 	 <!-- user want to post to a event -->
-	 <request subst="true">
+	 <!-- <request subst="true">
 		 <http url='/posts/new?post%5Bevent_id%5D=%%_created_event_id%%' version='1.1' method='GET'></http>
 	 </request>
-	 
+
 	 <thinktime value="2" random="true"></thinktime>
-	 
+
 	 <setdynvars sourcetype="random_string" length="10">
 		 <var name="post_content"/>
 	 </setdynvars>
-	 
+
      <request subst="true">
 		 <dyn_variable name="created_post_url" re="[Ll]ocation: (http://.*)\r"/>
 		 <dyn_variable name="created_post_id" re="[Ll]ocation: http://.*/posts/(.*)\r"/>
 		 <http url='/posts' version='1.1' method='POST' content_type='multipart/form-data; boundary=----FormBoundary' contents="------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[event_id]&quot;%%_nl%%%%_nl%%%%_created_event_id%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[text_content]&quot;%%_nl%%%%_nl%%%%_post_content%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;post[image]&quot;; filename=&quot;default.jpg&quot;%%_nl%%Content-Type: image/jpeg%%_nl%%%%_nl%%%%_attached_file%%%%_nl%%------FormBoundary%%_nl%%Content-Disposition: form-data; name=&quot;commit&quot;%%_nl%%%%_nl%%Create Post%%_nl%%------FormBoundary--%%_nl%%%%_nl%%">
 		 </http>
-     </request>
+     </request> -->
 
 	 <!-- vote for a post -->
-     <request subst="true">
+     <!-- <request subst="true">
         <http url='/posts/%%_created_post_id%%?click_page=post_show' version='1.1' method='POST'>
         </http>
-     </request>
+     </request> -->
 	 
 	 <!-- search an event by keywords -->
 	 <setdynvars sourcetype="random_string" length="5">
@@ -185,18 +191,18 @@
      </request>
 	 
   	 <!-- user delete the post it created -->
-	 <thinktime value="2" random="true"></thinktime>
-	 
+	 <!-- <thinktime value="2" random="true"></thinktime>
+
 	 <request subst="true">
 	 	<http url="%%_created_post_url%%" version='1.1' method='DELETE'>
 	 	</http>
-	 </request>
+	 </request> -->
 	 
      <!-- user delete the event it created -->
 	 <thinktime value="2" random="true"></thinktime>
 	 
 	 <request subst="true">
-	 	<http url='%%_created_event_url%%' version='1.1' method='DELETE'>
+	 	<http url='/events/%%_created_event_id%%' version='1.1' method='DELETE'>
 	 	</http>
 	 </request>
 	 
