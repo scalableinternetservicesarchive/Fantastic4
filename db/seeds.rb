@@ -45,6 +45,11 @@ num_of_users.times do |u|
       )
       post.created_at = (rand*100).days.ago
       # post.image = image_file
+
+      # increment post_count in the event it belongs to
+      post.event.post_count += 1
+      post.event.save!
+
       postArray.push(post)
       post.save!
     end

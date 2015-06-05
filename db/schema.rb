@@ -15,17 +15,19 @@ ActiveRecord::Schema.define(version: 20150515063510) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title",              null: false
+    t.string   "title",                          null: false
     t.text     "description"
     t.string   "tags"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "post_count",         default: 0, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
 
+  add_index "events", ["post_count"], name: "index_events_on_post_count"
   add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "posts", force: :cascade do |t|
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150515063510) do
 
   add_index "posts", ["event_id"], name: "index_posts_on_event_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+  add_index "posts", ["vote_count"], name: "index_posts_on_vote_count"
 
   create_table "user_organize_events", force: :cascade do |t|
     t.integer  "user_id",    null: false
