@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="sub-header">Events created by me</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <th>Title</th>
+			<th>Create Time</th>
+			<th>Total posts</th>
+			<th>Total votes</th>
+        </thead>
+        <tbody>
+            <% @created_events.each do |event| %>
+            <tr>
+                <td><%= link_to "#{event.title}", event%></td>
+				<td><%= event.created_at%></td>
+				<td><%= event.posts.count%></td>
+				<td><%= event.posts.map {|post| post.vote_count}.sum%></td>
+				<td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

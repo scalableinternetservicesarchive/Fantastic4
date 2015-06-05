@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'events#index'
   
-  get '/profile/events' => 'user#show_organized_events'
+  get '/profile/created_events' => 'user#show_created_events'
+  get '/profile/organized_events' => 'user#show_organized_events'
   get '/profile/posts' => 'user#show_created_posts'
   get '/profile/votes' => 'user#show_voted_events'
   get '/profile/votes/posts' => 'user#show_voted_posts'

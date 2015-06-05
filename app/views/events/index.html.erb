@@ -16,6 +16,7 @@
 						<% end %>
 						<p><strong><%= event.title %></strong></p>
 						<p><%= "#{event.posts.count} posts" %></p>
+						<!-- <p><%= "creator: #{event.creator.email}" %></p> -->
 						<hr>
 						<p>
 							<% if event.description.to_s.length > 200 %>
