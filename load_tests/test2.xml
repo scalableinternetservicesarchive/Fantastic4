@@ -97,6 +97,7 @@
 	  </setdynvars>
 	  
 	 <request subst="true">
+	 <dyn_variable name="created_user_id" re="[Ll]ocation: http://.*/events/(.*)\r"/>
 	 <http
 	    url='/users'
 	    version='1.1'
