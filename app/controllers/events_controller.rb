@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     elsif params[:month]
       @events = Event.timeline(params[:month]).paginate(:page => params[:page], :per_page => 3).includes(:posts)
     else
-      # @events = Event.order("posts_count DESC")
+      # @events = Event.order("posts_count DESC"
       @events =  Event.all.paginate(:page => params[:page], :per_page => 3).includes(:posts)
     end
   end
