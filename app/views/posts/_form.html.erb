@@ -14,8 +14,9 @@
 
   <div>
     On Event:
-    <%= @post.event.title %>
-    <%= f.hidden_field :event_id, value: @post.event.id %>
+    <%= @target_event.title %>
+    <%= f.hidden_field :event_id, value: @target_event.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
   <div class="field">
     <%= f.label :text_content %><br>
@@ -27,7 +28,7 @@
   </div>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-default'%>
   </div>
 <% end %>
 <% end %>

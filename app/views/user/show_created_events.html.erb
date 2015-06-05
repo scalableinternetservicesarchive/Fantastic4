@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="sub-header">Events organized by me</h1>
+<h1 class="sub-header">Events created by me</h1>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -11,7 +11,7 @@
 			<th>Total votes</th>
         </thead>
         <tbody>
-            <% @organized_events.each do |event| %>
+            <% @created_events.each do |event| %>
             <tr>
                 <td><%= link_to "#{event.title}", event%></td>
 				<td><%= event.created_at%></td>
