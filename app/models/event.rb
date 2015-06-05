@@ -1,11 +1,12 @@
 class Event < ActiveRecord::Base
   TAG_TYPES = ["School", "Movie", "Music", "Technology","Reading", "Health"]
   
+  belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   has_many :posts, dependent: :destroy
   has_many :user_organize_events
   has_many :organizers, through: :user_organize_events, source: :organizer
   
-  validates :title, :description, presence: true
+  validates :creator, :title, :description, presence: true
   validates :title, uniqueness: true
   
   has_attached_file :image, styles: {

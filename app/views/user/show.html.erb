@@ -1,97 +1,100 @@
 <!-- <h1 class="header">Hello! Welcome back!</h1> -->
 <div class="jumbotron">
 	<div class="container">
-        <h1><%=current_user.email%></h1>
-    </div> 
+		<h1><%=current_user.email%></h1>
+	</div> 
 </div>
-	
+
 <div role="tabpanel">
 	
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-	  <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Profile</a></li>
-	  <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">My Events</a></li>
-	  <li role="presentation"><a href="#posts" aria-controls="posts" role="tab" data-toggle="tab">My Posts</a></li>
-	  <li role="presentation"><a href="#votes" aria-controls="votes" role="tab" data-toggle="tab">My Votes</a></li>
-  </ul>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Profile</a></li>
+		<li role="presentation"><a href="#created_events" aria-controls="created_events" role="tab" data-toggle="tab">Created Events</a></li>
+		<li role="presentation"><a href="#posts" aria-controls="posts" role="tab" data-toggle="tab">Posts</a></li>
+		<li role="presentation"><a href="#votes" aria-controls="votes" role="tab" data-toggle="tab">Votes</a></li>
+	</ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
-		<div class="container">
-			<br>
-			<div class="row">
-				<div class="col-md-4 col-md-offset-1"><a href="users/edit">Edit Account?</a></div>
-				 
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="home">
+			<div class="container">
+				<br>
+				<div class="row">
+					<div class="col-md-4 col-md-offset-1"><a href="users/edit">Edit Account?</a></div>
+					
+				</div>
 			</div>
 		</div>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="events">
-		<div class="table-responsive">
-		    <table class="table table-striped">
-		        <thead>
-		            <th>Title</th>
-					<th>Create Time</th>
-					<th>Total posts</th>
-					<th>Total vosts</th>
-		        </thead>
-		        <tbody>
-		            <% @organized_events.each do |event| %>
-		            <tr>
-		                <td><%= link_to "#{event.title}", event%></td>
-						<td><%= event.created_at%></td>
-						<td><%= event.posts.count%></td>
-						<td><%= event.posts.map {|post| post.vote_count}.sum%></td>
-						<td><%= link_to 'Destroy', event, method: :delete %></td>
-		            </tr>
-		            <% end %>
-		        </tbody>
-		    </table>
+		<div role="tabpanel" class="tab-pane" id="created_events">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<th>Title</th>
+						<th>Create Time</th>
+						<th>Total posts</th>
+						<th>Total votes</th>
+					</thead>
+					<tbody>
+						<% @created_events.each do |event| %>
+						<tr>
+							<td><%= link_to "#{event.title}", event%></td>
+							<td><%= event.created_at%></td>
+							<td><%= event.posts.count%></td>
+							<td><%= event.posts.map {|post| post.vote_count}.sum%></td>
+							<td><%= link_to 'Destroy', event, method: :delete %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
 		</div>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="posts">
-		<div class="table-responsive">
-		    <table class="table table-striped">
-		        <thead>
-		            <th>Title</th>
-					<th>Event</th>
-					<th>Total vosts</th>
-					<th>Create Time</th>
-		        </thead>
-		        <tbody>
-		            <% @created_posts.each do |post| %>
-		            <tr>
-		                <td><%= link_to "#{post.text_content}", post%></td>
-						<td><%= link_to "#{post.event.title}", post.event%></td>
-						<td><%= post.vote_count%></td>
-						<td><%= post.created_at%></td>
-						<td><%= link_to 'Destroy', post, method: :delete%></td>
-		            </tr>
-		            <% end %>
-		        </tbody>
-		    </table>
+		
+		<div role="tabpanel" class="tab-pane" id="posts">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<th>Post content</th>
+						<th>Event</th>
+						<th>Total votes</th>
+						<th>Create Time</th>
+					</thead>
+					<tbody>
+						<% @created_posts.each do |post| %>
+						<tr>
+							<td><%= link_to "#{post.text_content}", post%></td>
+							<td><%= link_to "#{post.event.title}", post.event%></td>
+							<td><%= post.vote_count%></td>
+							<td><%= post.created_at%></td>
+							<td><%= link_to 'Destroy', post, method: :delete%></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="votes">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<th>Post content</th>
+						<th>Event</th>
+						<th>Total votes</th>
+					</thead>
+					<tbody>
+						<% @voted_posts.each do |post| %>
+						<tr>
+							<td><%= link_to "#{post.text_content}", post%></td>
+							<td><%= link_to "#{post.event.title}", post.event%></td>
+							<td><%= post.vote_count%></td>
+							
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-    <div role="tabpanel" class="tab-pane" id="votes">
-		<div class="table-responsive">
-		    <table class="table table-striped">
-		        <thead>
-					<th>Post content</th>
-					<th>Current vote</th>
-		        </thead>
-		        <tbody>
-					<% @posts.each do |post| %>
-							<tr>
-								<td><%= link_to "#{post.text_content}", post%></td>
-								<td><%= post.vote_count%></td>
-						
-							</tr>
-					<% end %>
-		        </tbody>
-		    </table>
-		</div>
-    </div>
-  </div>
 
 </div>
 
