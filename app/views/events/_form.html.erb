@@ -12,6 +12,7 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -37,5 +38,6 @@
   <div class="actions">
     <%= f.submit class: 'btn btn-default' %>
   </div>
+  
 <% end %>
 <%end%>

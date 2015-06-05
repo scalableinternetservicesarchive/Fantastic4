@@ -6,25 +6,27 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    num_per_page = 18
     if params[:tag]
-      @events = Event.where(tags: params[:tag]).paginate(:page => params[:page], :per_page => 3).includes(:posts)
+      @events = Event.where(tags: params[:tag]).paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
       @tag = params[:tag]
     elsif params[:search]
       # @events = Event.search(params[:search]).order("created_at DESC")
-      @events = Event.search(params[:search]).paginate(:page => params[:page], :per_page => 3).includes(:posts)
+      @events = Event.search(params[:search]).paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
     elsif params[:month]
-      @events = Event.timeline(params[:month]).paginate(:page => params[:page], :per_page => 3).includes(:posts)
+      @events = Event.timeline(params[:month]).paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
     else
       # @events = Event.order("posts_count DESC"
-      @events =  Event.all.paginate(:page => params[:page], :per_page => 3).includes(:posts)
+      @events =  Event.all.paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
     end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    num_per_page = 12
     if @event != nil
-      @posts = @event.posts.paginate(:page => params[:page], :per_page => 3)
+      @posts = @event.posts.paginate(:page => params[:page], :per_page => num_per_page).order(vote_count: :desc)
     end
   end
 
@@ -46,7 +48,7 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
       if @event.save
         success = true
-        current_user.organized_events << @event
+        # current_user.organized_events << @event
         notice = "Event was successfully created"
       end
     end
@@ -97,6 +99,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :tags, :image)
+      params.require(:event).permit(:user_id, :title, :description, :tags, :image)
     end
 end

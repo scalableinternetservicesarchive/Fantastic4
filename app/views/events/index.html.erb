@@ -11,18 +11,18 @@
 	<% @marker =  "search " + params[:search] %>
 <% end %>
 
-
 		<ul class="thumbnails">
 			<% @events.each do |event| %>
 					<li class="span2">
 						<div class="thumbnail" style="background-color: rgba(255,255,255,0.5);">
 							<% if event.image.present? %>
 							<p><%= link_to(image_tag(event.image.url(:medium)), event) %></p>
+
 							<% else %>
 							<p><%= link_to(image_tag("default.jpg"), event) %></p>
 							<% end %>
 							<p><strong><%= event.title %></strong></p>
-							<p><%= "#{event.posts.count} posts" %></p>
+							<p><%= "#{event.post_count} posts" %></p>
 							<hr>
 							<p>
 								<% if event.description.to_s.length > 200 %>

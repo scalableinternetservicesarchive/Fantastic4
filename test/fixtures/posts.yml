@@ -1,23 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 post1:
+  creator: user1
   event: event1
   text_content: 'Emma'
-  vote_count: 3
 
 
 post2:
+  creator: user2
   event: event1
   text_content: 'Julia'
-  vote_count: 2
 
 
 post3:
+  creator: user2
   event: event2
   text_content: 'Harry Potter'
-  vote_count: 2
 
 post4:
+  creator: user3
   event: event3
   text_content: 'Adele'
-  vote_count: 1
