@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @voters = @post.voters
+    fresh_when(:etag => @post, :last_modified => @post.vote_count, :public => true)
   end
   
   

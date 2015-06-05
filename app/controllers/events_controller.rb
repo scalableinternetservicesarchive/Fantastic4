@@ -24,12 +24,13 @@ class EventsController < ApplicationController
   def show
     if @event != nil
       @posts = @event.posts.sort_by {|p| -p.vote_count}
+      # fresh_when(:etag => @posts, :last_modified => @posts.)
     end
   end
 
   # GET /events/new
   def new
-    @event = Event.new
+    @event = Event.new if stale?
   end
 
   # GET /events/1/edit
