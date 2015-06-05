@@ -17,7 +17,8 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new(post_params)
+    @post = Post.new
+    @target_event = Event.find(post_params[:event_id])
   end
 
   # GET /posts/1/edit
@@ -33,7 +34,6 @@ class PostsController < ApplicationController
       @post = Post.new(post_params)
       if @post.save
         success = true
-        current_user.created_posts << @post
         notice = "Post was successfully created"
       end
     end
@@ -103,6 +103,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:event_id, :text_content, :vote_count, :click_page, :image)
+      params.require(:post).permit(:user_id, :event_id, :text_content, :vote_count, :click_page, :image)
     end
 end

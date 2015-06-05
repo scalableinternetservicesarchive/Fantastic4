@@ -45,7 +45,7 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
       if @event.save
         success = true
-        current_user.organized_events << @event
+        # current_user.organized_events << @event
         notice = "Event was successfully created"
       end
     end
@@ -96,6 +96,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :tags, :image)
+      params.require(:event).permit(:user_id, :title, :description, :tags, :image)
     end
 end

@@ -8,10 +8,11 @@
 <p id="notice"><%= notice %></p>
 <hr>
 
+
 <% cache(cache_key_for_post_table(@posts,@event)) do%>
 	<ul class="thumbnails">
 		<% @posts.each do |post|%> 
-			<% cache(cache_key_for_post_row(post)) do %>
+			<% cache(cache_key_for_post_row(post)) do%>
 				<li class="span2">
 					<div class="thumbnail">
 						<p><%=post.text_content%></p>
