@@ -1,35 +1,48 @@
-
+<% @marker = "" %>
 <% unless params[:search] %>
-<p><%= link_to 'Create Your Own Event?', new_event_path(tag: @tag),class: "btn btn-default" if user_signed_in?%></p>
+	<p><%= link_to 'Create Your Own Event?', new_event_path(tag: @tag),class: "btn btn-default" if user_signed_in?%></p>
+	<% if params[:month]%>
+		<% @marker =  "month " + params[:month] %>
+	<% else %>
+		<% @marker =  "tag " + @tag.to_s %>
+	<% end %>
 <% else %>
-<h1>Search Result</h1>
+	<h1>Search Result</h1>
+	<% @marker =  "search " + params[:search] %>
 <% end %>
 
-	<ul class="thumbnails">
-		<% @events.each do |event| %>
-				<li class="span2">
-					<div class="thumbnail" style="background-color: rgba(255,255,255,0.5);">
-						<% if event.image.present? %>
-						<p><%= link_to(image_tag(event.image.url(:medium)), event) %></p>
-						<% else %>
-						<p><%= link_to(image_tag("default.jpg"), event) %></p>
-						<% end %>
-						<p><strong><%= event.title %></strong></p>
-						<p><%= "#{event.post_count} posts" %></p>
-						<!-- <p><%= "creator: #{event.creator.email}" %></p> -->
-						<hr>
-						<p>
-							<% if event.description.to_s.length > 200 %>
-								<%= event.description.to_s[0,200] + "..."  %>
-							<% else %>
-								<%= event.description.to_s  %>
-							<% end %>
-						</p>
-					</div>
-				</li>
-		<% end %>
-	</ul>
 
+<% cache(cache_key_for_event_table(@events,@marker)) do %>
+		<ul class="thumbnails">
+			<% @events.each do |event| %>
+				<% cache(cache_key_for_event_row(event)) do %>
+					<li class="span2">
+						<div class="thumbnail" style="background-color: rgba(255,255,255,0.5);">
+							<% if event.image.present? %>
+							<p><%= link_to(image_tag(event.image.url(:medium)), event) %></p>
+							<% else %>
+							<p><%= link_to(image_tag("default.jpg"), event) %></p>
+							<% end %>
+							<p><strong><%= event.title %></strong></p>
+							<p><%= "#{event.post_count} posts" %></p>
+							<hr>
+							<p>
+								<% if event.description.to_s.length > 200 %>
+									<%= event.description.to_s[0,200] + "..."  %>
+								<% else %>
+									<%= event.description.to_s  %>
+								<% end %>
+							</p>
+						</div>
+					</li>
+				<% end %>
+			<% end %>
+		</ul>
+<% end %>
+
+<br>
+	<%= will_paginate @events,:class =>"pager", :page_links => false%>
+							
 <!-- <p id="notice"><%= notice %></p> -->
 
 

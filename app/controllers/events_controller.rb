@@ -1,19 +1,23 @@
+require 'will_paginate/array'
+
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
   def index
+    num_per_page = 18
     if params[:tag]
-      @events = Event.where(tags: params[:tag]).order(post_count: :desc)
+      @events = Event.where(tags: params[:tag]).paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
       @tag = params[:tag]
     elsif params[:search]
-      @events = Event.search(params[:search]).order(post_count: :desc)
+      # @events = Event.search(params[:search]).order("created_at DESC")
+      @events = Event.search(params[:search]).paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
     elsif params[:month]
-      @events = Event.timeline(params[:month]).order(post_count: :desc)
+      @events = Event.timeline(params[:month]).paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
     else
-      @events = Event.order(post_count: :desc)
-      # @events = Event.all.sort_by {|event| -event.post_count}
+      # @events = Event.order("posts_count DESC"
+      @events =  Event.all.paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
     end
     fresh_when([@events, @events.count, @events.maximum(:updated_at)])
   end
@@ -21,8 +25,9 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    num_per_page = 12
     if @event != nil
-      @posts = @event.posts.order(vote_count: :desc)
+      @posts = @event.posts.paginate(:page => params[:page], :per_page => num_per_page).order(vote_count: :desc)
       fresh_when last_modified: @posts.maximum(:updated_at)
     end
   end

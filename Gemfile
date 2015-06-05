@@ -31,6 +31,10 @@ gem 'paperclip', '~> 4.2'
 gem 'aws-sdk', '~> 2.0'
 gem 'fog', '~> 1.30'
 
+#Use pager
+gem 'will_paginate', '~> 3.0.6'
+
+
 gem 'multi_json', '1.7.8'
 
 # Use ActiveModel has_secure_password
