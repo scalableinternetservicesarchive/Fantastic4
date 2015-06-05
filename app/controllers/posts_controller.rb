@@ -32,6 +32,8 @@ class PostsController < ApplicationController
     notice = ""
     if current_user != nil
       @post = Post.new(post_params)
+      @post.event.post_count += 1
+      @post.event.save!
       if @post.save
         success = true
         notice = "Post was successfully created"
@@ -68,6 +70,9 @@ class PostsController < ApplicationController
   
   # only called on user's profile page
   def destroy
+    @post.event.post_count -= 1
+    @post.event.save!
+    
     @post.destroy
     respond_to do |format|
       format.html { redirect_to profile_path, notice: 'Post was successfully destroyed.' }

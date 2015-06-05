@@ -11,6 +11,7 @@
 	<% @marker =  "search " + params[:search] %>
 <% end %>
 
+
 <% cache(cache_key_for_event_table(@events,@marker)) do %>
 		<ul class="thumbnails">
 			<% @events.each do |event| %>
@@ -23,7 +24,7 @@
 							<p><%= link_to(image_tag("default.jpg"), event) %></p>
 							<% end %>
 							<p><strong><%= event.title %></strong></p>
-							<p><%= "#{event.posts.count} posts" %></p>
+							<p><%= "#{event.post_count} posts" %></p>
 							<hr>
 							<p>
 								<% if event.description.to_s.length > 200 %>
@@ -39,9 +40,9 @@
 		</ul>
 <% end %>
 
-
-
-
+<br>
+	<%= will_paginate @events,:class =>"pager", :page_links => false%>
+							
 <!-- <p id="notice"><%= notice %></p> -->
 
 
