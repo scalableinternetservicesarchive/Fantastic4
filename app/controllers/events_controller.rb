@@ -1,9 +1,12 @@
+require 'will_paginate/array'
+
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
   def index
+    
     if params[:tag]
       @events = Event.where(tags: params[:tag]).sort_by {|event| -event.posts.count}
       @tag = params[:tag]
@@ -14,9 +17,10 @@ class EventsController < ApplicationController
       @events = Event.timeline(params[:month]).sort_by {|event| - event.posts.count}
     else
       # @events = Event.order("posts_count DESC")
-      @events = Event.all.sort_by {|event| -event.posts.count}
+      @events =  Event.all.sort_by {|event| -event.posts.count}
+      end
     end
-    
+    @events = @events.paginate(:page => params[:page], :per_page => 18)
   end
 
   # GET /events/1
@@ -24,6 +28,7 @@ class EventsController < ApplicationController
   def show
     if @event != nil
       @posts = @event.posts.sort_by {|p| -p.vote_count}
+      @posts = @posts.paginate(:page => params[:page], :per_page => 18)
     end
   end
 
