@@ -34,8 +34,6 @@ gem 'fog', '~> 1.30'
 #Use pager
 gem 'will_paginate', '~> 3.0.6'
 
-#Use faker to generate seed data
-gem 'faker'
 
 gem 'multi_json', '1.7.8'
 
