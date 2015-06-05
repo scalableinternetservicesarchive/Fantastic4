@@ -13,7 +13,6 @@
     <server host="ec2-52-26-95-63.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
-
   <load>
     <arrivalphase phase="1" duration="30" unit="second">
 		<users arrivalrate="1" unit="second"></users>
@@ -24,17 +23,16 @@
     <arrivalphase phase="3" duration="30" unit="second">
     	<users arrivalrate="4" unit="second"></users>
    	</arrivalphase>
-<!--
-   <arrivalphase phase="4" duration="30" unit="second">
-     <users arrivalrate="8" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="5" duration="30" unit="second">
-     <users arrivalrate="16" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="6" duration="30" unit="second">
-     <users arrivalrate="32" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="7" duration="30" unit="second">
+	<arrivalphase phase="4" duration="30" unit="second">
+		<users arrivalrate="8" unit="second"></users>
+	</arrivalphase>
+	<arrivalphase phase="5" duration="30" unit="second">
+		<users arrivalrate="16" unit="second"></users>
+	</arrivalphase>
+	<arrivalphase phase="6" duration="30" unit="second">
+		<users arrivalrate="32" unit="second"></users>
+	</arrivalphase>
+   <!-- <arrivalphase phase="7" duration="30" unit="second">
      <users arrivalrate="64" unit="second"></users>
    </arrivalphase>
    <arrivalphase phase="8" duration="30" unit="second">
@@ -45,8 +43,7 @@
    </arrivalphase>
    <arrivalphase phase="10" duration="30" unit="second">
      <users arrivalrate="512" unit="second"></users>
-   </arrivalphase>
--->
+   </arrivalphase> -->
   </load>
 
   <options>
@@ -60,34 +57,14 @@
 
   <!-- read version load test -->
   <sessions>
-    <session name="guest test" probability="100" type="ts_http">
+    <session name="guest search" probability="50" type="ts_http">
       <!-- start out at the dashboard. -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
-
-      <!-- wait for up to 2 seconds, user is looking at events -->
-      <thinktime value="2" random="true"></thinktime>
 	  
-	  <!-- visit one event, as a user would do.  -->
-	  <setdynvars sourcetype="random_number" start="1" end="12">
-		  <var name="visit_event"/>
-	  </setdynvars>
-      <request subst="true">
-        <http url="/events/%%_visit_event%%" version='1.1' method='GET'></http>
-      </request>
+	  <thinktime value="2" random="true"></thinktime>
 	  
-      <!-- wait for up to 2 seconds, user is looking at posts -->
-      <thinktime value="2" random="true"></thinktime>	  
-	  
-	  <!-- visit the post, as a user would do -->
-	  <setdynvars sourcetype="random_number" start="1" end="16">
-		  <var name="visit_post"/>
-	  </setdynvars>
-      <request subst="true">
-         <http url="/posts/%%_visit_post%%" version='1.1' method='GET'></http>
-      </request>
-	 
 	  <!-- search an event by keywords -->
 	  <setdynvars sourcetype="random_string" length="5">
 		  <var name="keywords"/>
@@ -97,9 +74,18 @@
 		  </http>
 	  </request>
 	 
-	 <!-- user is checking search result -->
-	 <thinktime value="2" random="true"></thinktime>
-	 
+	  <!-- user is checking search result -->
+	  <thinktime value="2" random="true"></thinktime>
+    </session>
+    <session name="guest browse" probability="50" type="ts_http">
+      <!-- start out at the dashboard. -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user is looking at events -->
+      <thinktime value="2" random="true"></thinktime>
+	  
 	 <!-- search an event by timeline -->
 	 <setdynvars sourcetype="random_number" start="1" end="6">
 		 <var name="search_time"/>
@@ -108,6 +94,7 @@
         <http url='/timeline/%%_search_time%%' version='1.1' method='GET'></http>
      </request>
 	 
+	 <thinktime value="2" random="true"></thinktime>
       <!-- Uncomment the following to debug print your dynamic variables  --> 
       <!--
       <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->

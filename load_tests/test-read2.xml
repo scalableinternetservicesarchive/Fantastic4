@@ -24,17 +24,16 @@
     <arrivalphase phase="3" duration="30" unit="second">
     	<users arrivalrate="4" unit="second"></users>
    	</arrivalphase>
-<!--
-   <arrivalphase phase="4" duration="30" unit="second">
-     <users arrivalrate="8" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="5" duration="30" unit="second">
-     <users arrivalrate="16" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="6" duration="30" unit="second">
-     <users arrivalrate="32" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="7" duration="30" unit="second">
+	<arrivalphase phase="4" duration="30" unit="second">
+		<users arrivalrate="8" unit="second"></users>
+	</arrivalphase>
+	<arrivalphase phase="5" duration="30" unit="second">
+		<users arrivalrate="16" unit="second"></users>
+	</arrivalphase>
+	<arrivalphase phase="6" duration="30" unit="second">
+		<users arrivalrate="32" unit="second"></users>
+	</arrivalphase>
+   <!-- <arrivalphase phase="7" duration="30" unit="second">
      <users arrivalrate="64" unit="second"></users>
    </arrivalphase>
    <arrivalphase phase="8" duration="30" unit="second">
@@ -45,8 +44,8 @@
    </arrivalphase>
    <arrivalphase phase="10" duration="30" unit="second">
      <users arrivalrate="512" unit="second"></users>
-   </arrivalphase>
--->
+   </arrivalphase> -->
+
   </load>
 
   <options>
@@ -60,7 +59,7 @@
 
   <!-- read version load test -->
   <sessions>
-    <session name="vote test" probability="100" type="ts_http">
+    <session name="guest test" probability="100" type="ts_http">
       <!-- start out at the dashboard. -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
@@ -68,36 +67,50 @@
 
       <!-- wait for up to 2 seconds, user is looking at events -->
       <thinktime value="2" random="true"></thinktime>
-
-	  <!-- user sign up, when they notice they can't vote as a guest -->
-	  <setdynvars sourcetype="random_string" length="5">
-		  <var name="random_user_email"/>
-	  </setdynvars>
-	  <request subst="true">
-		  <http
-	    url='/users'
-	    version='1.1'
-	    method='POST' 	       contents='utf8=%E2%9C%93&amp;authenticity_token=YiCOqjy%2FSzTcVrgWXNbMHS4N7%2B3WEcl2RJ%2FEDv5EHFy1XdUO4JBO%2FTmAfBHOisDOv%2B2g7tB%2Be7jybqOu8FQ5MQ%3D%3D&amp;user%5Bemail%5D=user%%_random_user_email%%%40gmail.com&amp;user%5Bpassword%5D=12345678&amp;user%5Bpassword_confirmation%5D=12345678&amp;commit=Sign+up'/>
-	  </request>
 	  
-	  <!-- vote for a post -->
+	  <!-- visit one event, as a user would do.  -->
+	  <setdynvars sourcetype="random_number" start="1" end="12">
+		  <var name="visit_event"/>
+	  </setdynvars>
+      <request subst="true">
+        <http url="/events/%%_visit_event%%" version='1.1' method='GET'></http>
+      </request>
+	  
+      <!-- wait for up to 2 seconds, user is looking at posts -->
+      <thinktime value="2" random="true"></thinktime>	  
+	  
+	  <!-- visit the post, as a user would do -->
 	  <setdynvars sourcetype="random_number" start="1" end="16">
-		  <var name="vote_post"/>
+		  <var name="visit_post"/>
+	  </setdynvars>
+      <request subst="true">
+         <http url="/posts/%%_visit_post%%" version='1.1' method='GET'></http>
+      </request>
+	 
+	  <!-- user back to homepage -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+	  
+	  <!-- search an event by keywords -->
+	  <setdynvars sourcetype="random_string" length="5">
+		  <var name="keywords"/>
 	  </setdynvars>
 	  <request subst="true">
-		  <http url='/posts/%%_vote_post%%?click_page=post_show' version='1.1' method='POST'>
+		  <http url='/events?utf8=%E2%9C%93&amp;search=%%_keywords%%' version='1.1' method='GET'>
 		  </http>
 	  </request>
 	 
-	  <thinktime value="2" random="true"></thinktime>
-	  
-	  <!-- user log out -->
-	  <request>
-		  <http
-	    url='/users/sign_out'
-	    version='1.1'
-	    method='DELETE'/>
-	  </request>
+	 <!-- user is checking search result -->
+	 <thinktime value="2" random="true"></thinktime>
+	 
+	 <!-- search an event by timeline -->
+	 <setdynvars sourcetype="random_number" start="1" end="6">
+		 <var name="search_time"/>
+	 </setdynvars>
+     <request subst="true">
+        <http url='/timeline/%%_search_time%%' version='1.1' method='GET'></http>
+     </request>
 	 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
       <!--
