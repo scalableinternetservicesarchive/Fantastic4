@@ -11,14 +11,14 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @voters = @post.voters
-    fresh_when(:etag => @post, :last_modified => @post.vote_count, :public => true)
   end
   
   
 
   # GET /posts/new
   def new
-    @post = Post.new(post_params)
+    @post = Post.new
+    @target_event = Event.find(post_params[:event_id])
   end
 
   # GET /posts/1/edit
@@ -32,9 +32,10 @@ class PostsController < ApplicationController
     notice = ""
     if current_user != nil
       @post = Post.new(post_params)
+      @post.event.post_count += 1
+      @post.event.save!
       if @post.save
         success = true
-        current_user.created_posts << @post
         notice = "Post was successfully created"
       end
     end
@@ -69,6 +70,9 @@ class PostsController < ApplicationController
   
   # only called on user's profile page
   def destroy
+    @post.event.post_count -= 1
+    @post.event.save!
+    
     @post.destroy
     respond_to do |format|
       format.html { redirect_to profile_path, notice: 'Post was successfully destroyed.' }
@@ -104,6 +108,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:event_id, :text_content, :vote_count, :click_page, :image)
+      params.require(:post).permit(:user_id, :event_id, :text_content, :vote_count, :click_page, :image)
     end
 end

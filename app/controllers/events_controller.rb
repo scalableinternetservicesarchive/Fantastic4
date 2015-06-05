@@ -5,32 +5,31 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if params[:tag]
-      @events = Event.where(tags: params[:tag]).sort_by {|event| -event.posts.count}
+      @events = Event.where(tags: params[:tag]).order(post_count: :desc)
       @tag = params[:tag]
     elsif params[:search]
-      # @events = Event.search(params[:search]).order("created_at DESC")
-      @events = Event.search(params[:search]).sort_by {|event| -event.posts.count}
+      @events = Event.search(params[:search]).order(post_count: :desc)
     elsif params[:month]
-      @events = Event.timeline(params[:month]).sort_by {|event| - event.posts.count}
+      @events = Event.timeline(params[:month]).order(post_count: :desc)
     else
-      # @events = Event.order("posts_count DESC")
-      @events = Event.all.sort_by {|event| -event.posts.count}
+      @events = Event.order(post_count: :desc)
+      # @events = Event.all.sort_by {|event| -event.post_count}
     end
-    
+    fresh_when([@events, @events.count, @events.maximum(:updated_at)])
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
     if @event != nil
-      @posts = @event.posts.sort_by {|p| -p.vote_count}
-      # fresh_when(:etag => @posts, :last_modified => @posts.)
+      @posts = @event.posts.order(vote_count: :desc)
+      fresh_when last_modified: @posts.maximum(:updated_at)
     end
   end
 
   # GET /events/new
   def new
-    @event = Event.new if stale?
+    @event = Event.new
   end
 
   # GET /events/1/edit
@@ -46,7 +45,7 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
       if @event.save
         success = true
-        current_user.organized_events << @event
+        # current_user.organized_events << @event
         notice = "Event was successfully created"
       end
     end
@@ -97,6 +96,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :tags, :image)
+      params.require(:event).permit(:user_id, :title, :description, :tags, :image)
     end
 end

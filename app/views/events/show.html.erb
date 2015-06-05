@@ -1,5 +1,4 @@
 <h1><%= @event.title %></h1>
-				<!-- <p><a href="../tagevent/<%=@event.tags%>" class="badge"><%= @event.tags %> </a></p> -->
 <p> <%= "Created at #{@event.created_at}" %></p>
 <p><%= @event.description %></p>
 <% if user_signed_in? %>
@@ -8,10 +7,8 @@
 <p id="notice"><%= notice %></p>
 <hr>
 
-<% cache(cache_key_for_post_table) do %>
 	<ul class="thumbnails">
 		<% @posts.each do |post|%> 
-			<% cache(cache_key_for_post_row(post)) do %>
 				<li class="span2">
 					<div class="thumbnail">
 						<p><%=post.text_content%></p>
@@ -33,10 +30,8 @@
 						</div>
 					</div>
 				</li>
-			<% end %>
 		<% end %>
 	</ul>
-<% end %>
 <!-- <p><button onclick="window.history.back()">Back</button></p> -->
 
 				

@@ -16,7 +16,7 @@
 		</div>
 		<div class="row">
 			<p>
-		  	<% if @post.creaters.include?(current_user)%>
+		  	<% if @post.creator.equal? current_user%>
 		  	<%= link_to 'Want to Edit the post?', edit_post_path(@post) %>
 		  	<% end %>
 			</p>

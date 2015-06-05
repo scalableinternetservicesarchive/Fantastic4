@@ -5,10 +5,8 @@
 <h1>Search Result</h1>
 <% end %>
 
-<% cache(cache_key_for_event_table) do %>
 	<ul class="thumbnails">
 		<% @events.each do |event| %>
-			<% cache(cache_key_for_event_row(event)) do %>
 				<li class="span2">
 					<div class="thumbnail" style="background-color: rgba(255,255,255,0.5);">
 						<% if event.image.present? %>
@@ -17,7 +15,8 @@
 						<p><%= link_to(image_tag("default.jpg"), event) %></p>
 						<% end %>
 						<p><strong><%= event.title %></strong></p>
-						<p><%= "#{event.posts.count} posts" %></p>
+						<p><%= "#{event.post_count} posts" %></p>
+						<!-- <p><%= "creator: #{event.creator.email}" %></p> -->
 						<hr>
 						<p>
 							<% if event.description.to_s.length > 200 %>
@@ -28,10 +27,8 @@
 						</p>
 					</div>
 				</li>
-			<% end %>
 		<% end %>
 	</ul>
-<% end %>
 
 <!-- <p id="notice"><%= notice %></p> -->
 
