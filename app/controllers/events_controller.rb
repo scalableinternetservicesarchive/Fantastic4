@@ -19,7 +19,7 @@ class EventsController < ApplicationController
       # @events = Event.order("posts_count DESC"
       @events =  Event.all.paginate(:page => params[:page], :per_page => num_per_page).order(post_count: :desc)
     end
-    fresh_when([@events, @events.count, @events.maximum(:updated_at)])
+    fresh_when([@events, @events.count, @events.maximum(:updated_at), current_user])
   end
 
   # GET /events/1
@@ -28,7 +28,7 @@ class EventsController < ApplicationController
     num_per_page = 12
     if @event != nil
       @posts = @event.posts.paginate(:page => params[:page], :per_page => num_per_page).order(vote_count: :desc)
-      fresh_when last_modified: @posts.maximum(:updated_at)
+      fresh_when([@posts, @posts.maximum(:updated_at), current_user])
     end
   end
 
